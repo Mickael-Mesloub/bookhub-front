@@ -8,13 +8,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './header.scss',
 })
 export class Header {
-  // TODO: style + router
-
   links = [
-    { label: 'Home', path: '/' },
-    { label: 'About', path: '/about' },
-    { label: 'Services', path: '/services' },
-    { label: 'Contact', path: '/contact' },
+    { label: 'Catalogue', path: '/', exact: true },
   ];
 
   isMenuOpen = signal(false);
