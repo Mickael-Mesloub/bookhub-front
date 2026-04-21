@@ -4,7 +4,7 @@
       <!-- Logo -->
       <a routerLink="/" class="text-lg font-semibold text-white">BookHub</a>
 
-      <!-- Liens desktop -->
+      <!-- Menu desktop -->
       <ul class="hidden md:flex md:items-center md:gap-1">
         @for (link of links; track link.path) {
           <li>
@@ -26,9 +26,8 @@
         [attr.aria-expanded]="isMenuOpen()"
         aria-controls="mobile-menu"
         aria-label="Toggle menu"
-        class="inline-flex h-10 w-10 items-center justify-center rounded-full text-gray-300 transition hover:bg-white/10 hover:text-white focus:ring-2 focus:ring-white focus:outline-none md:hidden"
+        class="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full text-gray-300 transition hover:bg-white/10 hover:text-white focus:ring-2 focus:ring-white focus:outline-none md:hidden"
       >
-        <!-- Icône burger → croix animée -->
         <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             stroke="currentColor"
