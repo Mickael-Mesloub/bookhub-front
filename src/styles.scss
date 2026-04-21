@@ -1,6 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+@use 'app/scss/_variables' as *;
 
 body {
   background-color: oklch(0.141 0.005 285.823);
   color: oklch(0.985 0 0);
+}
+
+main {
+  height: calc(100dvh - $header-height - $footer-height);
 }

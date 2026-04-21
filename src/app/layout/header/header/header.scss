@@ -1,0 +1,6 @@
+@use '../../../scss//_variables' as *;
+
+header {
+  background-color: $header-bg;
+  height: $header-height;
+}

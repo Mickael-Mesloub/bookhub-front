@@ -2,10 +2,11 @@ import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Button } from './components/shared/button/button';
 import { TextInput } from "./components/shared/inputs/text-input/text-input";
+import { AppLayout } from "./layout/app-layout/app-layout/app-layout";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Button, TextInput],
+  imports: [RouterOutlet, Button, TextInput, AppLayout],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
