@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { API_BASE_URL, ApiResponse } from '../../config/api/api';
-import { Book, PageOfBooks } from './book-models';
+import { Book, BookDTO, PageOfBooks } from './book-models';
 
 @Injectable({
   providedIn: 'root',
@@ -11,32 +11,33 @@ export class BookService {
   private readonly http = inject(HttpClient);
 
   getAllBooks(page?: number, size?: number, sort?: string): Observable<ApiResponse<PageOfBooks>> {
-    let response: string = ""
-    if(page){
-      if(response == ""){
-        response += '?page=' + page
-      }
-      else{
-        response += '&page=' + page
-      }
-    }
-    if(size){
-      if(response == ""){
-        response += '?size=' + size
-      }
-      else{
-        response += '&size=' + size
+    let response: string = '';
+    if (page) {
+      if (response == '') {
+        response += '?page=' + page;
+      } else {
+        response += '&page=' + page;
       }
     }
-    if(sort){
-      if(response == ""){
-        response += '?sort=' + sort
+    if (size) {
+      if (response == '') {
+        response += '?size=' + size;
+      } else {
+        response += '&size=' + size;
       }
-      else{
-        response += '&sort=' + sort
+    }
+    if (sort) {
+      if (response == '') {
+        response += '?sort=' + sort;
+      } else {
+        response += '&sort=' + sort;
       }
     }
 
     return this.http.get<ApiResponse<PageOfBooks>>(`${API_BASE_URL}/books` + response);
+  }
+
+  createBook(bookDTO: BookDTO): Observable<ApiResponse<Book>> {
+    return this.http.post<ApiResponse<Book>>(`${API_BASE_URL}/books/new`, bookDTO);
   }
 }

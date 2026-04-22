@@ -1,6 +1,7 @@
 import { User } from '../users/user-models';
 
 export interface Book {
+  id: number;
   isbn: string;
   author: string;
   coverUrl: string;
@@ -16,21 +17,21 @@ export interface BookCopy {
   id: number;
   isAvailable: boolean;
   state: BookState;
-  isbn: Book['isbn'];
+  bookId: Book['id'];
 }
 
 export interface Review {
   id: number;
   comment: string;
   score: number;
-  bookIsbn: Book['isbn'];
+  bookId: Book['id'];
   userId: User['id'];
 }
 
 export interface WaitingList {
   id: number;
   dateAdded: Date;
-  bookIsbn: Book['isbn'];
+  bookId: Book['id'];
 }
 
 export enum BookCategory {
@@ -58,34 +59,39 @@ export enum BookState {
 }
 
 export interface PageOfBooks {
-  content: Book[]
-  pageable: Pageable
-  last: boolean
-  totalPages: number
-  totalElements: number
-  size: number
-  number: number
-  sort: Sort
-  numberOfElements: number
-  first: boolean
-  empty: boolean
+  content: Book[];
+  pageable: Pageable;
+  last: boolean;
+  totalPages: number;
+  totalElements: number;
+  size: number;
+  number: number;
+  sort: Sort;
+  numberOfElements: number;
+  first: boolean;
+  empty: boolean;
 }
 
 export interface Category {
-  category: string
+  category: string;
 }
 
 export interface Pageable {
-  pageNumber: number
-  pageSize: number
-  sort: Sort
-  offset: number
-  paged: boolean
-  unpaged: boolean
+  pageNumber: number;
+  pageSize: number;
+  sort: Sort;
+  offset: number;
+  paged: boolean;
+  unpaged: boolean;
 }
 
 export interface Sort {
-  empty: boolean
-  sorted: boolean
-  unsorted: boolean
+  empty: boolean;
+  sorted: boolean;
+  unsorted: boolean;
 }
+
+export type BookDTO = Pick<
+  Book,
+  'title' | 'author' | 'category' | 'coverUrl' | 'description' | 'isbn'
+>;

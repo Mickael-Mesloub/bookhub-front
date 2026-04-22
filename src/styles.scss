@@ -7,7 +7,7 @@ body {
 }
 
 main {
-  height: calc(100dvh - $header-height - $footer-height);
+  min-height: calc(100dvh - $header-height - $footer-height);
 }
 
 h1,
