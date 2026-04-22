@@ -2,10 +2,11 @@ import { Component, inject, OnInit } from '@angular/core';
 import { BookService } from '../book-service';
 import { Book } from '../book-models';
 import { ApiResponse } from '../../../config/api/api';
+import { Button } from "../../../components/shared/button/button";
 
 @Component({
   selector: 'app-catalog',
-  imports: [],
+  imports: [Button],
   templateUrl: './catalog.html',
   styleUrl: './catalog.scss',
 })
