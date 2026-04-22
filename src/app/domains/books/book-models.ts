@@ -5,6 +5,7 @@ export interface Book {
   author: string;
   coverUrl: string;
   title: string;
+  description: string;
   category: BookCategory;
   copies: BookCopy[];
   reviews: Review[];
