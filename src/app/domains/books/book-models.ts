@@ -7,7 +7,7 @@ export interface Book {
   coverUrl: string;
   title: string;
   description: string;
-  category: BookCategory;
+  category: Category;
   copies: BookCopy[];
   reviews: Review[];
   waitingList: WaitingList[];
@@ -35,18 +35,18 @@ export interface WaitingList {
 }
 
 export enum BookCategory {
-  ACTION,
-  ADVENTURE,
-  ANIMATION,
-  COMEDY,
-  CRIME,
-  DOCUMENTARY,
-  DRAMA,
-  MUSICAL,
-  ROMANCE,
-  SCI_FI,
-  THRILLER,
-  WAR,
+  ACTION = "Action",
+  ADVENTURE = "Aventure",
+  ANIMATION = "Animation",
+  COMEDY = "Comédie",
+  CRIME = "Crime",
+  DOCUMENTARY = "Documentaire",
+  DRAMA = "Drame",
+  MUSICAL = "Musical",
+  ROMANCE = "Romance",
+  SCI_FI = "Science-Fiction",
+  THRILLER = "Thriller",
+  WAR = "Guerre",
 }
 
 export enum BookState {
@@ -73,7 +73,7 @@ export interface PageOfBooks {
 }
 
 export interface Category {
-  category: string;
+  category: BookCategory;
 }
 
 export interface Pageable {
@@ -93,5 +93,7 @@ export interface Sort {
 
 export type BookDTO = Pick<
   Book,
-  'title' | 'author' | 'category' | 'coverUrl' | 'description' | 'isbn'
->;
+  'title' | 'author' | 'coverUrl' | 'description' | 'isbn'
+>& {
+  category: BookCategory | ''
+};

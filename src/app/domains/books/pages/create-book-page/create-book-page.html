@@ -1,28 +1,122 @@
 <section class="flex w-full flex-col items-center justify-center">
   <article class="w-full rounded-2xl bg-gray-800/80 p-6 md:max-w-120">
-    <h2>Créer un livre</h2>
+    <h2 class="mb-6">Créer un livre</h2>
 
-    <form>
-      <div class="input-wrapper">
-        <label for="title">Titre</label>
+    <form class="flex flex-col gap-6">
+      <!-- TODO : Handle asterisk symbol dynamically (for required inputs) -->
+      <!-- TODO : Refactor validation state and errors dynamically (reusable functions / component) -->
+
+      <!------- TITLE ------->
+      <div class="flex flex-col gap-2">
+        <label for="title" class="font-bold"
+          >Titre
+          <span class="text-red-400">&#42;</span>
+        </label>
         <input
-          class="block w-full rounded-xl border border-gray-700 bg-gray-700 px-3 py-2.5 text-sm text-gray-50 shadow-xs placeholder:text-gray-400 focus:border-gray-50 focus:ring-gray-50"
+          [formField]="form.title"
+          class="block w-full rounded-lg border border-gray-700 bg-gray-700 px-3 py-2.5 text-base text-gray-50 shadow-xs placeholder:text-gray-400 focus:border-gray-50 focus:ring-gray-50"
           type="text"
           id="title"
-          name="title"
           placeholder="Titre du livre"
         />
+        @if (form.title().touched() && form.title().invalid()) {
+          <ul>
+            @for (error of form.title().errors(); track error.kind) {
+              <li class="pl-2 text-sm text-red-400">{{ error.message }}</li>
+            }
+          </ul>
+        }
       </div>
-      <div class="input-wrapper">
-        <label for="author">Auteur</label>
+
+      <!------- AUTHOR ------->
+      <div class="flex flex-col gap-2">
+        <label for="author" class="font-bold"
+          >Auteur
+          <span class="text-red-400">&#42;</span>
+        </label>
         <input
-          class="block w-full rounded-xl border border-gray-700 bg-gray-700 px-3 py-2.5 text-sm text-gray-50 shadow-xs placeholder:text-gray-400 focus:border-gray-50 focus:ring-gray-50"
+          [formField]="form.author"
+          class="block w-full rounded-lg border border-gray-700 bg-gray-700 px-3 py-2.5 text-base text-gray-50 shadow-xs placeholder:text-gray-400 focus:border-gray-50 focus:ring-gray-50"
           type="text"
           id="author"
-          name="author"
           placeholder="Auteur du livre"
         />
+        @if (form.author().touched() && form.author().invalid()) {
+          <ul>
+            @for (error of form.author().errors(); track error.kind) {
+              <li class="pl-2 text-sm text-red-400">{{ error.message }}</li>
+            }
+          </ul>
+        }
       </div>
+
+      <!------- DESCRIPTION ------->
+      <div class="flex flex-col gap-2">
+        <label for="description" class="font-bold">Description</label>
+        <textarea
+          [formField]="form.description"
+          class="block w-full rounded-lg border border-gray-700 bg-gray-700 p-3.5 text-base text-gray-50 shadow-xs placeholder:text-gray-400 focus:border-gray-50 focus:ring-gray-50"
+          type="text"
+          id="description"
+          placeholder="De quoi parle ce livre..."
+          rows="6"
+        ></textarea>
+        @if (form.description().touched() && form.description().invalid()) {
+          <ul>
+            @for (error of form.description().errors(); track error.kind) {
+              <li class="pl-2 text-sm text-red-400">{{ error.message }}</li>
+            }
+          </ul>
+        }
+      </div>
+
+      <!------- CATEGORY ------->
+      <div class="flex flex-col gap-2">
+        <label for="category" class="font-bold"
+          >Catégorie
+          <span class="text-red-400">&#42;</span>
+        </label>
+        <select
+          [formField]="form.category"
+          id="category"
+          class="block w-full rounded-lg border border-gray-700 bg-gray-700 p-3.5 text-base text-gray-50 shadow-xs placeholder:text-gray-400 focus:border-gray-50 focus:ring-gray-50"
+        >
+          <option disabled selected value="">Choisissez une catégorie</option>
+          @for (c of categoryOptions; track c.key) {
+            <option [value]="c.value">{{ c.value }}</option>
+          }
+        </select>
+        @if (form.category().touched() && form.category().invalid()) {
+          <ul>
+            @for (error of form.category().errors(); track error.kind) {
+              <li class="pl-2 text-sm text-red-400">{{ error.message }}</li>
+            }
+          </ul>
+        }
+      </div>
+
+      <!------- ISBN ------->
+      <div class="flex flex-col gap-2">
+        <label for="isbn" class="font-bold"
+          >ISBN
+          <span class="text-red-400">&#42;</span>
+        </label>
+        <input
+          [formField]="form.isbn"
+          class="block w-full rounded-lg border border-gray-700 bg-gray-700 px-3 py-2.5 text-base text-gray-50 shadow-xs placeholder:text-gray-400 focus:border-gray-50 focus:ring-gray-50"
+          type="text"
+          id="isbn"
+          placeholder="ISBN"
+        />
+        @if (form.isbn().touched() && form.isbn().invalid()) {
+          <ul>
+            @for (error of form.isbn().errors(); track error.kind) {
+              <li class="pl-2 text-sm text-red-400">{{ error.message }}</li>
+            }
+          </ul>
+        }
+      </div>
+      <app-button label="Ajouter un livre" (clickAction)="onSubmit()" />
     </form>
   </article>
 </section>
