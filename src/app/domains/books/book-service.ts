@@ -40,4 +40,9 @@ export class BookService {
   createBook(bookDTO: BookDTO): Observable<ApiResponse<Book>> {
     return this.http.post<ApiResponse<Book>>(`${API_BASE_URL}/books/new`, bookDTO);
   }
+
+  // getBookDetail(isbn: string): Observable<ApiResponse<Book>> {
+
+  //   return this.http.get<ApiResponse<Book>>(`${API_BASE_URL}/books` + "/" + isbn);
+  // }
 }

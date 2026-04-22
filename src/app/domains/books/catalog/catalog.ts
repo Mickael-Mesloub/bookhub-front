@@ -2,10 +2,11 @@ import { Component, inject, OnInit } from '@angular/core';
 import { BookService } from '../book-service';
 import { Book, PageOfBooks } from '../book-models';
 import { ApiResponse } from '../../../config/api/api';
+import { BookCard } from './book-card/book-card';
 
 @Component({
   selector: 'app-catalog',
-  imports: [],
+  imports: [BookCard],
   templateUrl: './catalog.html',
   styleUrl: './catalog.scss',
 })
