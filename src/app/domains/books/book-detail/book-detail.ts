@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { BookDescription } from './book-description/book-description';
+import { Book } from '../book-models';
 
 @Component({
   selector: 'app-book-detail',
@@ -7,4 +8,6 @@ import { BookDescription } from './book-description/book-description';
   templateUrl: './book-detail.html',
   styleUrl: './book-detail.scss',
 })
-export class BookDetail {}
+export class BookDetail {
+  book!: Book;
+}

@@ -39,4 +39,9 @@ export class BookService {
 
     return this.http.get<ApiResponse<PageOfBooks>>(`${API_BASE_URL}/books` + response);
   }
+
+  // getBookDetail(isbn: string): Observable<ApiResponse<Book>> {
+
+  //   return this.http.get<ApiResponse<Book>>(`${API_BASE_URL}/books` + "/" + isbn);
+  // }
 }

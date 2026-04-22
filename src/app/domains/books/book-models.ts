@@ -1,6 +1,7 @@
 import { User } from '../users/user-models';
 
 export interface Book {
+  id: number
   isbn: string;
   author: string;
   coverUrl: string;
