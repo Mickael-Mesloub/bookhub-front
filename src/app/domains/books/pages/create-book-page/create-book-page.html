@@ -9,7 +9,11 @@
       <!-- *********** TEST CUSTOM INPUT ************  -->
       <!-- docs: https://angular.love/signal-forms-in-angular-21-complete-guide -->
 
-      <app-custom-input label="Test input" [required]="false" placeholder="On teste un input" />
+      <app-custom-input
+        label="Test input"
+        [formField]="form.title"
+        placeholder="On teste un input"
+      />
 
       <!-- *********** TEST CUSTOM INPUT ************  -->
 

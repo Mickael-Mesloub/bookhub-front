@@ -10,7 +10,20 @@
 
   <input
     type="text"
-    class="block w-full rounded-xl border border-gray-700 bg-gray-700 px-3 py-2.5 text-sm text-gray-50 shadow-xs placeholder:text-gray-400 focus:border-gray-50 focus:ring-gray-50"
+    class="block w-full rounded-lg border border-gray-700 bg-gray-700 px-3 py-2.5 text-base text-gray-50 shadow-xs placeholder:text-gray-400 focus:border-gray-50 focus:ring-gray-50"
     placeholder="{{ placeholder() }}"
+    [value]="value()"
+    (input)="value.set($any($event.target).value)"
+    (blur)="touched.set(true)"
+    [class.border-red-500]="invalid() && (dirty() || touched())"
+    [class.border-green-700]="!invalid() && touched()"
+    [class.border-gray-700]="pristine() || !touched()"
   />
+  @if (touched() && invalid()) {
+    <ul>
+      @for (error of errors(); track error.kind) {
+        <li class="pl-2 text-sm text-red-400">{{ error.message }}</li>
+      }
+    </ul>
+  }
 </div>

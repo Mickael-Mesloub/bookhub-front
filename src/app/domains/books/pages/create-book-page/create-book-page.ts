@@ -1,6 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
 import { BookService } from '../../book-service';
-import { TextFieldModule } from '@angular/cdk/text-field';
 import { BookCategory, BookDTO } from '../../book-models';
 import { form, required, FormField } from '@angular/forms/signals';
 import { Button } from '../../../../components/shared/button/button';
@@ -8,7 +7,7 @@ import { CustomInput } from "../../../../components/shared/custom-input/custom-i
 
 @Component({
   selector: 'app-create-book-page',
-  imports: [TextFieldModule, FormField, Button, CustomInput],
+  imports: [FormField, Button, CustomInput],
   templateUrl: './create-book-page.html',
   styleUrl: './create-book-page.scss',
 })

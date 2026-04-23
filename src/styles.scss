@@ -1,7 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 @use 'app/scss/_variables' as *;
-@use '@angular/cdk';
-@include cdk.text-field-autosize;
 
 body {
   background-color: oklch(0.141 0.005 285.823);
