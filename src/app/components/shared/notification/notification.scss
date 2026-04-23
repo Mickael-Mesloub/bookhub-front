@@ -1,0 +1,135 @@
+/* Base notification */
+.alert {
+  padding: 16px 20px;
+  border-radius: 6px;
+  margin: 12px 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-left: 4px solid transparent;
+  background: #f8f9fa;
+  color: #333;
+}
+
+/* Icône (optionnelle) */
+.alert::before {
+  font-size: 16px;
+}
+
+/* SUCCESS */
+.alert-success {
+  background: #edfbf0;
+  border-left-color: #32d296;
+  color: #1e6f4c;
+}
+
+.alert-success::before {
+  content: "✔";
+  color: #32d296;
+}
+
+/* INFO */
+.alert-info {
+  background: #eef7ff;
+  border-left-color: #1e87f0;
+  color: #1a4f8b;
+}
+
+.alert-info::before {
+  content: "ℹ";
+  color: #1e87f0;
+}
+
+/* ERROR */
+.alert-error {
+  background: #fff1f0;
+  border-left-color: #f0506e;
+  color: #842029;
+}
+
+.alert-error::before {
+  content: "⚠";
+  color: #f0506e;
+}
+
+/* Option hover léger */
+.alert:hover {
+  opacity: 0.95;
+}
+
+.alert {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border-left-width: 3px;
+}
+
+
+/* Overlay plein écran */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* Modale centrée */
+.loading-modal {
+  background: #ffffff;
+  padding: 30px 40px;
+  border-radius: 10px;
+  text-align: center;
+  min-width: 260px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Texte */
+.loading-text {
+  font-size: 15px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Spinner style UIKit */
+.spinner {
+  width: 36px;
+  height: 36px;
+  margin: 0 auto;
+  border: 3px solid #e5e5e5;
+  border-top-color: #1e87f0;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* Animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-overlay {
+  animation: fadeIn 0.2s ease;
+}
+
+.loading-modal {
+  animation: scaleIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}

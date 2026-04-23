@@ -1,5 +1,18 @@
-@if (notifMsg()) {
-  <div class="notification" [class]="notifMsg()!.type">
-    {{ notifMsg()!.message }}
-  </div>
+@if (notifMsg(); as notif) {
+
+  @if (notif.type === 'loading') {
+    <div class="loading-overlay">
+      <div class="loading-modal">
+        <div class="loading-text">
+          <p>En cours de chargement...</p>
+        </div>
+        <div class="spinner">
+        </div>
+      </div>
+    </div>
+  } @else {
+    <div class="alert" [class]="notifMsg()!.type">
+      {{ notifMsg()!.message }}
+    </div>
+  }
 }

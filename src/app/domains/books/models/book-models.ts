@@ -16,7 +16,7 @@ export interface Book {
 
 export interface BookCopy {
   id: number;
-  isAvailable: boolean;
+  available: boolean;
   state: BookState;
   bookId: Book['id'];
 }

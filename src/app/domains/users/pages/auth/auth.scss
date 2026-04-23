@@ -5,8 +5,16 @@
 
 .auth-card {
   padding: 30px;
-  width: 35vw;
-  margin-top: 2vh;
+  width: 80vw;
+  margin: 2vh auto 0 auto; /* centre horizontalement */
+}
+
+.auth-last-row {
+  margin-top: 10px;
+}
+
+.auth-last-row a {
+  text-decoration: underline;
 }
 
 .form-item {
@@ -19,6 +27,10 @@
 
 .form-item button {
   margin-top: 10px;
+}
+
+.mt-btn-auth {
+  margin-top: 30px;
 }
 
 h2 {

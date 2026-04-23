@@ -1,13 +1,22 @@
-<h1>DESCRIPTION DU LIVRE ICI</h1>
-
 <div class="bg-neutral-primary-soft border-default rounded-base block max-w-sm border shadow-xs">
-  <p>{{ book().title }}</p>
   <a>
     <img class="rounded-t-base" [src]="book().coverUrl" alt="book cover" />
   </a>
   <div class="p-6 text-center">
-    <h5 class="text-heading mt-3 mb-6 text-2xl font-semibold tracking-tight">
-      {{ book().author }} - {{ book().title }}
-    </h5>
+    <p class="text-heading mt-3 mb-6 text-2xl font-semibold tracking-tight">
+      Category: {{ book().category.category }}
+    </p>
+    <p class="text-heading mt-3 mb-6 text-2xl font-semibold tracking-tight">
+      Auteur: {{ book().author }}
+    </p>
+    <p class="text-heading mt-3 mb-6 text-2xl font-semibold tracking-tight">
+      Titre: {{ book().title }}
+    </p>
+    <p class="text-heading mt-3 mb-6 text-2xl font-semibold tracking-tight">
+      Description: {{ book().description }}
+    </p>
+        <p class="text-heading mt-3 mb-6 text-2xl font-semibold tracking-tight">
+      ISBN: {{ book().isbn }}
+        </p>
   </div>
 </div>

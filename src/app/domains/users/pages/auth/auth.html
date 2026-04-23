@@ -6,7 +6,7 @@
     <form [formGroup]="authForm()" (ngSubmit)="onSubmit()">
       <div class="form-item">
         <div>
-          <label for="username">Pseudo</label>
+          <label for="username">Pseudo *</label>
         </div>
         <span>
             <input id="username" type="text" formControlName="username" required minlength="3" placeholder=""/>
@@ -72,8 +72,7 @@
           <label for="password">Mot de passe *</label>
         </div>
         <span>
-            <input id="password" type="password" formControlName="password" required minlength="6"
-                   placeholder=""/>
+            <input id="password" type="password" formControlName="password" required minlength="6" placeholder=""/>
         </span>
         <span [class.form-error]="isInvalid(password)">
             @if(isInvalid(password)) {
@@ -83,37 +82,36 @@
         </span>
       </div>
 
-      @if (isLoginMode){
+      @if (!isLoginMode){
       <div class="form-item">
-        <!-- <div>
+        <div>
           <label for="passwordConfirmation">Confirmation du mot de passe *</label>
         </div>
         <span>
-            <input id="passwordConfirmation" type="password" formControlName="password" required minlength="6"
-                   placeholder=""/>
+            <input id="passwordConfirmation" type="password" formControlName="passwordConfirmation" required minlength="6" placeholder=""/>
         </span>
         <span [class.form-error]="isInvalid(passwordConfirmation)">
             @if(isInvalid(passwordConfirmation)) {
               @if(passwordConfirmation?.errors?.['required']) { Le mot de passe est requis }
               @if(passwordConfirmation?.errors?.['minlength']) { Le mot de passe doit contenir au moins 6 caractères }
             }
-        </span> -->
+        </span>
       </div>
       }
 
       @if (isLoginMode) {
-        <div class="form-item">
+        <div class="form-item mt-btn-auth">
           <app-button label="Se connecter" (clickAction)="onSubmit()" />
         </div>
       } @else {
-        <div class="form-item">
+        <div class="form-item mt-btn-auth">
             <app-button label="S'inscrire" (clickAction)="onSubmit()" [disabled]="authForm().invalid" />
         </div>
       }
     </form>
 
     <!-- pas de html à l'int d'une interpolation ! -->
-    <p>
+    <p class="auth-last-row">
       @if (isLoginMode) {
         Pas encore de compte ?
         <a routerLink="/auth/signup">S'inscrire</a>
