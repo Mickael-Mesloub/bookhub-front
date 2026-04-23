@@ -1,9 +1,9 @@
 import { Component, inject, signal } from '@angular/core';
-import { BookService } from '../../book-service';
-import { BookCategory, BookDTO } from '../../book-models';
 import { form, required, FormField } from '@angular/forms/signals';
 import { Button } from '../../../../components/shared/button/button';
 import { CustomInput } from "../../../../components/shared/custom-input/custom-input";
+import { BookService } from '../../services/book-service';
+import { BookCategory, BookDTO } from '../../models/book-models';
 
 @Component({
   selector: 'app-create-book-page',
