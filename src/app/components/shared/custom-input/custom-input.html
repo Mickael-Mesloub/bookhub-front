@@ -8,7 +8,6 @@
     </label>
   }
 
-  <!-- TODO: GREEN BORDER IF FIELD IS VALID -->
   <input
     [type]="type()"
     [id]="id()"
@@ -22,7 +21,6 @@
       'border-2 border-green-700': !invalid() && dirty(),
     }"
   />
-  <!-- [class.border-red-500]="invalid() && (dirty() || touched())" -->
 
   @if (touched() && invalid()) {
     <ul>
