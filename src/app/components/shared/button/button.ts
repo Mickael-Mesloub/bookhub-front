@@ -1,9 +1,9 @@
-import { Location } from '@angular/common';
+import { Location, NgClass } from '@angular/common';
 import { Component, inject, input, output } from '@angular/core';
 
 @Component({
   selector: 'app-button',
-  imports: [],
+  imports: [NgClass],
   templateUrl: './button.html',
   styleUrl: './button.scss',
 })
