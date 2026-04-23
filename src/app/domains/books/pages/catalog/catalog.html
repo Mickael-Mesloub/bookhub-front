@@ -2,7 +2,7 @@
 
 @defer (on timer(1000)) {
   <ul class="w-full">
-    @for (book of books; track book.isbn) {
+    @for (book of books; track book.isbn) {      
       <app-book-card [book]= book></app-book-card>
     }
   </ul>

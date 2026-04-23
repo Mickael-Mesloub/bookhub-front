@@ -1,8 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { BookService } from '../book-service';
-import { Book, PageOfBooks } from '../book-models';
-import { ApiResponse } from '../../../config/api/api';
-import { BookCard } from './book-card/book-card';
+import { BookCard } from '../../components/book-card/book-card';
+import { BookService } from '../../services/book-service';
+import { Book, PageOfBooks } from '../../models/book-models';
+import { ApiResponse } from '../../../../config/api/api';
+
 
 @Component({
   selector: 'app-catalog',

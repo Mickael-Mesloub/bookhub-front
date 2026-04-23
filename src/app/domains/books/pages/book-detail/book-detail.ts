@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
-import { BookDescription } from './book-description/book-description';
-import { Book } from '../book-models';
+import { Component, inject, OnInit } from '@angular/core';
+import { BookDescription } from '../../components/book-description/book-description';
+import { Book } from '../../models/book-models';
+import { BookService } from '../../services/book-service';
+
 
 @Component({
   selector: 'app-book-detail',
@@ -8,6 +10,13 @@ import { Book } from '../book-models';
   templateUrl: './book-detail.html',
   styleUrl: './book-detail.scss',
 })
-export class BookDetail {
+
+export class BookDetail implements OnInit {
+  isbn!: string
   book!: Book;
+  bookService = inject(BookService)
+
+  ngOnInit(){
+     console.log(this.bookService.getBookDetail(this.isbn))
+  }
 }

@@ -1,4 +1,4 @@
-import { Loan } from '../loans/loan-models';
+import { Loan } from "../../loans/loan-models";
 
 export enum UserRole {
     USER,
