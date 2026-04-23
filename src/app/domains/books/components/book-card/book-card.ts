@@ -16,6 +16,6 @@ export class BookCard {
   bookService: BookService = inject(BookService);
 
   goToDetail(){
-       this.router.navigate(['/detail'])
+       this.router.navigate(['/detail/{isbn}'])
  }
 }
