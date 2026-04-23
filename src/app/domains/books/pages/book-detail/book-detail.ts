@@ -1,7 +1,7 @@
-import { Component, input, InputSignal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { BookDescription } from '../../components/book-description/book-description';
 import { Book } from '../../models/book-models';
-
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-book-detail',
@@ -9,8 +9,11 @@ import { Book } from '../../models/book-models';
   templateUrl: './book-detail.html',
   styleUrl: './book-detail.scss',
 })
-
 export class BookDetail {
-  book: InputSignal<Book> = input.required() 
+  private readonly router: Router = inject(Router);
+  book!: Book;
 
+  constructor(activatedRoute: ActivatedRoute) {
+    this.book = this.router.currentNavigation()?.extras.state as Book;
+  }
 }

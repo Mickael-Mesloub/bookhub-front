@@ -8,5 +8,5 @@ import { Book } from '../../models/book-models';
   styleUrl: './book-description.scss',
 })
 export class BookDescription {
-  book: InputSignal<Book> = input.required() 
+  book: InputSignal<Book> = input.required<Book>();
 }
