@@ -91,10 +91,3 @@ export interface Sort {
   sorted: boolean;
   unsorted: boolean;
 }
-
-export type BookDTO = Pick<
-  Book,
-  'title' | 'author' | 'coverUrl' | 'description' | 'isbn'
->& {
-  category: BookCategory | ''
-};

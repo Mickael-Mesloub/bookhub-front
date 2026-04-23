@@ -1,9 +1,10 @@
-import { Component, inject, signal } from '@angular/core';
-import { form, required, FormField } from '@angular/forms/signals';
+import { Component, inject } from '@angular/core';
+import { form, FormField } from '@angular/forms/signals';
 import { Button } from '../../../../components/shared/button/button';
-import { CustomInput } from "../../../../components/shared/custom-input/custom-input";
+import { CustomInput } from '../../../../components/shared/custom-input/custom-input';
 import { BookService } from '../../services/book-service';
-import { BookCategory, BookDTO } from '../../models/book-models';
+import { BookCategory } from '../../models/book-models';
+import { createBookFormSchema, createBookModel } from '../../models/book-form-model';
 
 @Component({
   selector: 'app-create-book-page',
@@ -18,21 +19,10 @@ export class CreateBookPage {
     value,
   }));
 
-  protected readonly model = signal<BookDTO>({
-    title: '',
-    author: '',
-    category: '',
-    coverUrl: '',
-    description: '',
-    isbn: '',
-  });
+  protected readonly model = createBookModel();
 
-  // TODO : Add validations
   protected readonly form = form(this.model, (schema) => {
-    required(schema.title, { message: 'Le titre est obligatoire' });
-    required(schema.author, { message: "L'auteur est obligatoire" });
-    required(schema.isbn, { message: "L'ISBN est obligatoire" });
-    required(schema.category, { message: 'Veuillez sélectionner une catégorie' });
+    createBookFormSchema(schema);
   });
 
   protected onSubmit(): void {

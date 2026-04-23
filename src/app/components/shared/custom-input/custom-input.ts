@@ -1,4 +1,4 @@
-import { Component, input, model, OnInit } from '@angular/core';
+import { Component, input, model } from '@angular/core';
 import { FormField, FormValueControl, ValidationError } from '@angular/forms/signals';
 
 @Component({
@@ -7,7 +7,7 @@ import { FormField, FormValueControl, ValidationError } from '@angular/forms/sig
   templateUrl: './custom-input.html',
   styleUrl: './custom-input.scss',
 })
-export class CustomInput implements FormValueControl<string>, OnInit {
+export class CustomInput implements FormValueControl<string> {
   readonly value = model<string>('');
   readonly required = input<boolean>(false);
   readonly disabled = input<boolean>(false);
@@ -19,8 +19,5 @@ export class CustomInput implements FormValueControl<string>, OnInit {
 
   readonly label = input<string>();
   readonly placeholder = input<string>();
-
-  ngOnInit(): void {
-    console.log(this.value());
-  }
+  readonly id = input.required<string>();
 }
