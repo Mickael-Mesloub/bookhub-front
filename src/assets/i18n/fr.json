@@ -1,0 +1,30 @@
+{
+  "user": {
+    "id": {
+      "format-error": "L'identifiant utilisateur doit être un entier"
+    },
+    "username": {
+      "error": "Le nom d'utilisateur est obligatoire",
+      "size-error": "L'email doit contenir au maximum {max} caractères"
+    },
+    "email": {
+      "blank-error": "L'email est obligatoire",
+      "size-error": "L'email doit contenir au maximum {max} caractères",
+      "pattern-error": "L'email n'est pas reconnu en tant que email"
+    },
+    "firstname": {
+      "blank-error": "Le prénom est obligatoire",
+      "size-error": "Le prénom de doit pas dépasser {max} caractères"
+    },
+    "lastname": {
+      "blank-error": "Le nom est obligatoire",
+      "size-error": "Le nom de doit pas dépasser {max} caractères"
+    },
+    "created": "L'utilisateur a été créé avec succès",
+    "found": "L'utilisateur a été récupéré avec succès"
+  },
+  "users": {
+    "found": "La liste des utilisateurs a été récupérée avec succès"
+  },
+  "notvalidexception": "Erreur(s) :"
+}

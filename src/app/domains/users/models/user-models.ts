@@ -1,3 +1,5 @@
+import { Loan } from "../../loans/loan-models";
+
 export enum UserRole {
     USER,
     LIBRARIAN,
@@ -12,4 +14,5 @@ export interface User {
     lastName: string;
     password: string;
     role: UserRole;
+    loans: Loan[];
 }

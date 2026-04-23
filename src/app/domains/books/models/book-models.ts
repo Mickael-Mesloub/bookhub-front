@@ -1,4 +1,5 @@
-import { User } from '../users/user-models';
+import { User } from "../../users/models/user-models";
+
 
 export interface Book {
   id: number;

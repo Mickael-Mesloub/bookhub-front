@@ -1,0 +1,5 @@
+@if (notifMsg()) {
+  <div class="notification" [class]="notifMsg()!.type">
+    {{ notifMsg()!.message }}
+  </div>
+}

@@ -1,13 +1,11 @@
 import { Component, inject, input, InputSignal } from '@angular/core';
-import { Book } from '../../book-models';
-import { BookService } from '../../book-service';
-import { ApiResponse } from '../../../../config/api/api';
-import { Router } from '@angular/router';
-import { Button } from "../../../../components/shared/button/button";
+import { BookService } from '../../services/book-service';
+import { Router, RouterLink } from '@angular/router';
+import { Book } from '../../models/book-models';
 
 @Component({
   selector: 'app-book-card',
-  imports: [Button],
+  imports: [RouterLink],
   templateUrl: './book-card.html',
   styleUrl: './book-card.scss',
 })
@@ -16,7 +14,7 @@ export class BookCard {
   book: InputSignal<Book> = input.required() 
   bookService: BookService = inject(BookService);
 
-  goToDetail(){
-       this.router.navigate(['/detail'])
- }
+//   goToDetail(){
+//        this.router.navigate(['/detail/{isbn}'])
+//  }
 }

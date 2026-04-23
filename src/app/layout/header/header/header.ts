@@ -8,8 +8,11 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './header.scss',
 })
 export class Header {
+
   links = [
     { label: 'Catalogue', path: '/', exact: true },
+    { label: "S'inscrire", path: '/auth/signup', exact: true },
+    { label: "Se connecter", path: '/auth/login', exact: true }
   ];
 
   isMenuOpen = signal(false);
