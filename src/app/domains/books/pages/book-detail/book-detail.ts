@@ -1,7 +1,6 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, input, InputSignal } from '@angular/core';
 import { BookDescription } from '../../components/book-description/book-description';
 import { Book } from '../../models/book-models';
-import { BookService } from '../../services/book-service';
 
 
 @Component({
@@ -11,12 +10,7 @@ import { BookService } from '../../services/book-service';
   styleUrl: './book-detail.scss',
 })
 
-export class BookDetail implements OnInit {
-  isbn!: string
-  book!: Book;
-  bookService = inject(BookService)
+export class BookDetail {
+  book: InputSignal<Book> = input.required() 
 
-  ngOnInit(){
-     console.log(this.bookService.getBookDetail(this.isbn))
-  }
 }
