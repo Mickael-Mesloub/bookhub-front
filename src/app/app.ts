@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AppLayout } from './layout/app-layout/app-layout/app-layout';
+import { AuthService } from './domains/users/auth/services/auth-service';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,14 @@ import { AppLayout } from './layout/app-layout/app-layout/app-layout';
   styleUrl: './app.scss',
 })
 export class App {
+
+  private readonly authService = inject(AuthService); // injecter mon service
+
   clickBtn(): void {
     console.log('Button clicked!');
+  }
+
+  ngOnInit() {
+    this.authService.loadCurrentUser();
   }
 }

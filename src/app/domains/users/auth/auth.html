@@ -1,0 +1,126 @@
+<div class="auth-card">
+  <div>
+    <h2>{{ isLoginMode ? "Se connecter" : "S'inscrire" }}</h2>
+  </div>
+  <div>
+    <form [formGroup]="authForm()" (ngSubmit)="onSubmit()">
+      <div class="form-item">
+        <div>
+          <label for="username">Pseudo</label>
+        </div>
+        <span>
+            <input id="username" type="text" formControlName="username" required minlength="3" placeholder=""/>
+        </span>
+        <span [class.form-error]="isInvalid(username)">
+            @if(isInvalid(username)) {
+              @if(username?.errors?.['required']) { Un pseudo est requis }
+              @if(username?.errors?.['minlength']) { Le pseudo doit contenir au moins 3 caractères }
+            }
+        </span>
+      </div>
+
+      @if (!isLoginMode){
+
+        <div class="form-item">
+          <div>
+            <label for="lastname">Nom</label>
+          </div>
+          <span>
+            <input id="lastname" type="text" formControlName="lastname" required placeholder=""/>
+          </span>
+          <span [class.form-error]="isInvalid(lastname)">
+              @if(isInvalid(lastname)) {
+                @if(lastname?.errors?.['required']) { Le nom est requis }
+                <!--              @if(lastname?.errors?.['minlength']) { Le nom doit contenir au moins 3 caractères }-->
+              }
+          </span>
+        </div>
+
+        <div class="form-item">
+          <div>
+            <label for="firstname">Prénom</label>
+          </div>
+          <span>
+            <input id="firstname" type="text" formControlName="firstname" required placeholder=""/>
+          </span>
+            <span [class.form-error]="isInvalid(firstname)">
+              @if(isInvalid(firstname)) {
+                @if(firstname?.errors?.['required']) { Le prénom est requis }
+  <!--              @if(firstname?.errors?.['minlength']) { Le prénom doit contenir au moins 3 caractères }-->
+              }
+          </span>
+        </div>
+
+        <div class="form-item">
+          <div>
+            <label for="email">Email</label>
+          </div>
+          <span>
+              <input id="email" type="email" formControlName="email" required email placeholder=""/>
+          </span>
+          <span [class.form-error]="isInvalid(email)">
+              @if(isInvalid(email)) {
+                @if(email?.errors?.['required']) { L'adresse email est requise }
+                @if(email?.errors?.['email']) { Veuillez entrer une adresse email valide }
+              }
+          </span>
+        </div>
+      }
+
+      <div class="form-item">
+        <div>
+          <label for="password">Mot de passe *</label>
+        </div>
+        <span>
+            <input id="password" type="password" formControlName="password" required minlength="6"
+                   placeholder=""/>
+        </span>
+        <span [class.form-error]="isInvalid(password)">
+            @if(isInvalid(password)) {
+              @if(password?.errors?.['required']) { Le mot de passe est requis }
+              @if(password?.errors?.['minlength']) { Le mot de passe doit contenir au moins 6 caractères }
+            }
+        </span>
+      </div>
+
+      @if (isLoginMode){
+      <div class="form-item">
+        <div>
+          <label for="passwordConfirmation">Confirmation du mot de passe *</label>
+        </div>
+        <span>
+            <input id="passwordConfirmation" type="password" formControlName="password" required minlength="6"
+                   placeholder=""/>
+        </span>
+        <span [class.form-error]="isInvalid(passwordConfirmation)">
+            @if(isInvalid(passwordConfirmation)) {
+              @if(passwordConfirmation?.errors?.['required']) { Le mot de passe est requis }
+              @if(passwordConfirmation?.errors?.['minlength']) { Le mot de passe doit contenir au moins 6 caractères }
+            }
+        </span>
+      </div>
+      }
+
+      @if (isLoginMode) {
+        <div class="form-item">
+          <app-button label="Se connecter" (clickAction)="onSubmit()" />
+        </div>
+      } @else {
+        <div class="form-item">
+            <app-button label="S'inscrire" (clickAction)="onSubmit()" [disabled]="authForm().invalid" />
+        </div>
+      }
+    </form>
+
+    <!-- pas de html à l'int d'une interpolation ! -->
+    <p>
+      @if (isLoginMode) {
+        Pas encore de compte ?
+        <a routerLink="/auth/signup">S'inscrire</a>
+      } @else {
+        Déjà inscrit ?
+        <a routerLink="/auth/login">Se connecter</a>
+      }
+    </p>
+  </div>
+</div>

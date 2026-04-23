@@ -1,0 +1,30 @@
+{
+  "user": {
+    "id": {
+      "format-error": "User identifier must be an integer"
+    },
+    "username": {
+      "error": "Username is required",
+      "size-error": "Email must contain at most {max} characters"
+    },
+    "email": {
+      "blank-error": "Email is required",
+      "size-error": "Email must contain at most {max} characters",
+      "pattern-error": "Email is not recognized as a valid email"
+    },
+    "firstname": {
+      "blank-error": "Firstname is required",
+      "size-error": "Firstname must not exceed {max} characters"
+    },
+    "lastname": {
+      "blank-error": "Lastname is required",
+      "size-error": "Lastname must not exceed {max} characters"
+    },
+    "created": "The user has been successfully created",
+    "found": "The user has been successfully retrieved"
+  },
+  "users": {
+    "found": "The list of users has been successfully retrieved"
+  },
+  "notvalidexception": "Error(s):"
+}

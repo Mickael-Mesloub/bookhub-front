@@ -1,0 +1,38 @@
+.form-error {
+  color: red;
+  font-size: 12px;
+}
+
+.auth-card {
+  padding: 30px;
+  width: 35vw;
+  margin-top: 2vh;
+}
+
+.form-item {
+  margin-top: 10px;
+}
+
+.form-item div {
+  margin-bottom: 5px;
+}
+
+.form-item button {
+  margin-top: 10px;
+}
+
+h2 {
+  margin-bottom: 30px;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+}
+
+input {
+  border: 1px solid #e4e4e4;
+  border-radius: 2px;
+  padding: 7px;
+  width: 100%;
+}
