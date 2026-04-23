@@ -4,10 +4,11 @@ import { TextFieldModule } from '@angular/cdk/text-field';
 import { BookCategory, BookDTO } from '../../book-models';
 import { form, required, FormField } from '@angular/forms/signals';
 import { Button } from '../../../../components/shared/button/button';
+import { CustomInput } from "../../../../components/shared/custom-input/custom-input";
 
 @Component({
   selector: 'app-create-book-page',
-  imports: [TextFieldModule, FormField, Button],
+  imports: [TextFieldModule, FormField, Button, CustomInput],
   templateUrl: './create-book-page.html',
   styleUrl: './create-book-page.scss',
 })

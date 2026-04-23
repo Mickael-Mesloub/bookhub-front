@@ -1,10 +1,17 @@
 <section class="flex w-full flex-col items-center justify-center">
-  <article class="w-full rounded-2xl bg-gray-800/80 p-6 md:max-w-120">
+  <article class="w-full rounded-2xl bg-gray-800/80 p-8 md:max-w-140 md:p-12">
     <h2 class="mb-6">Créer un livre</h2>
 
     <form class="flex flex-col gap-6">
       <!-- TODO : Handle asterisk symbol dynamically (for required inputs) -->
       <!-- TODO : Refactor validation state and errors dynamically (reusable functions / component) -->
+
+      <!-- *********** TEST CUSTOM INPUT ************  -->
+      <!-- docs: https://angular.love/signal-forms-in-angular-21-complete-guide -->
+
+      <app-custom-input label="Test input" [required]="false" placeholder="On teste un input" />
+
+      <!-- *********** TEST CUSTOM INPUT ************  -->
 
       <!------- TITLE ------->
       <div class="flex flex-col gap-2">
