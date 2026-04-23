@@ -1,7 +1,7 @@
 <button
   type="button"
   (click)="onClick()"
-  disabled="{{ disabled() }}"
+  [disabled]="disabled()"
   class="box-border w-full cursor-pointer rounded-lg border border-transparent bg-violet-800 px-4 py-2.5 text-base leading-5 font-semibold text-white shadow-xs hover:bg-violet-700 focus:outline-none disabled:bg-gray-500 disabled:text-gray-700"
 >
   {{ label() }}

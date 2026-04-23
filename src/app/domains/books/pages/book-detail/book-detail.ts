@@ -2,10 +2,11 @@ import { Component, inject } from '@angular/core';
 import { BookDescription } from '../../components/book-description/book-description';
 import { Book } from '../../models/book-models';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LoanBook } from '../../../loans/components/loan-book/loan-book';
 
 @Component({
   selector: 'app-book-detail',
-  imports: [BookDescription],
+  imports: [BookDescription, LoanBook],
   templateUrl: './book-detail.html',
   styleUrl: './book-detail.scss',
 })
