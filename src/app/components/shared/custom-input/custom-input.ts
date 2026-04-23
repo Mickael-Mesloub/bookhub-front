@@ -1,6 +1,8 @@
 import { Component, input, model } from '@angular/core';
 import { FormField, FormValueControl, ValidationError } from '@angular/forms/signals';
 
+type TextInputType = "text" | "email" | "password";
+
 @Component({
   selector: 'app-custom-input',
   imports: [FormField],
@@ -20,4 +22,5 @@ export class CustomInput implements FormValueControl<string> {
   readonly label = input<string>();
   readonly placeholder = input<string>();
   readonly id = input.required<string>();
+  readonly type = input<TextInputType>("text");
 }

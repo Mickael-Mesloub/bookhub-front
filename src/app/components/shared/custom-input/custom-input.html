@@ -10,7 +10,7 @@
 
   <!-- TODO: GREEN BORDER IF FIELD IS VALID -->
   <input
-    type="text"
+    [type]="type()"
     [id]="id()"
     class="block w-full rounded-lg border border-gray-700 bg-gray-700 px-3 py-2.5 text-base text-gray-50 shadow-xs placeholder:text-gray-400 focus:border-gray-50 focus:ring-gray-50"
     placeholder="{{ placeholder() }}"
@@ -18,8 +18,6 @@
     (input)="value.set($any($event.target).value)"
     (blur)="touched.set(true)"
     [class.border-red-500]="invalid() && (dirty() || touched())"
-    [class.border-green-700]="!invalid() && !touched()"
-    [class.border-gray-700]="pristine() || !touched()"
   />
 
   @if (touched() && invalid()) {

@@ -14,6 +14,7 @@ import { createBookFormSchema, createBookModel } from '../../models/book-form-mo
 })
 export class CreateBookPage {
   bookService: BookService = inject(BookService);
+
   categoryOptions = Object.entries(BookCategory).map(([key, value]) => ({
     key,
     value,

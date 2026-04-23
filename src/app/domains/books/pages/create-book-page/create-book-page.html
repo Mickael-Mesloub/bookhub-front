@@ -6,63 +6,34 @@
       <!-- TODO : Handle asterisk symbol dynamically (for required inputs) -->
       <!-- TODO : Refactor validation state and errors dynamically (reusable functions / component) -->
 
-      <!-- *********** TEST CUSTOM INPUT ************  -->
       <!-- docs: https://angular.love/signal-forms-in-angular-21-complete-guide -->
+
+      <!------- ISBN ------->
+      <app-custom-input
+        id="isbn"
+        label="ISBN"
+        [formField]="form.isbn"
+        placeholder="ISBN du livre"
+      />
 
       <!------- TITLE ------->
       <app-custom-input
         id="title"
-        label="Test input"
+        label="Titre"
         [formField]="form.title"
-        placeholder="On teste un input"
+        placeholder="Titre du livre"
       />
 
-      <!-- *********** TEST CUSTOM INPUT ************  -->
-
-      <!-- <div class="flex flex-col gap-2">
-        <label for="title" class="font-bold"
-          >Titre
-          <span class="text-red-400">&#42;</span>
-        </label>
-        <input
-          [formField]="form.title"
-          class="block w-full rounded-lg border border-gray-700 bg-gray-700 px-3 py-2.5 text-base text-gray-50 shadow-xs placeholder:text-gray-400 focus:border-gray-50 focus:ring-gray-50"
-          type="text"
-          id="title"
-          placeholder="Titre du livre"
-        />
-        @if (form.title().touched() && form.title().invalid()) {
-          <ul>
-            @for (error of form.title().errors(); track error.kind) {
-              <li class="pl-2 text-sm text-red-400">{{ error.message }}</li>
-            }
-          </ul>
-        }
-      </div> -->
-
       <!------- AUTHOR ------->
-      <div class="flex flex-col gap-2">
-        <label for="author" class="font-bold"
-          >Auteur
-          <span class="text-red-400">&#42;</span>
-        </label>
-        <input
-          [formField]="form.author"
-          class="block w-full rounded-lg border border-gray-700 bg-gray-700 px-3 py-2.5 text-base text-gray-50 shadow-xs placeholder:text-gray-400 focus:border-gray-50 focus:ring-gray-50"
-          type="text"
-          id="author"
-          placeholder="Auteur du livre"
-        />
-        @if (form.author().touched() && form.author().invalid()) {
-          <ul>
-            @for (error of form.author().errors(); track error.kind) {
-              <li class="pl-2 text-sm text-red-400">{{ error.message }}</li>
-            }
-          </ul>
-        }
-      </div>
+      <app-custom-input
+        id="author"
+        label="Auteur"
+        [formField]="form.author"
+        placeholder="Auteur du livre"
+      />
 
       <!------- DESCRIPTION ------->
+      <!-- TODO : Custom textarea -->
       <div class="flex flex-col gap-2">
         <label for="description" class="font-bold">Description</label>
         <textarea
@@ -83,6 +54,7 @@
       </div>
 
       <!------- CATEGORY ------->
+      <!-- TODO : Custom Select -->
       <div class="flex flex-col gap-2">
         <label for="category" class="font-bold"
           >Catégorie
@@ -107,32 +79,12 @@
         }
       </div>
 
-      <!------- ISBN ------->
-      <div class="flex flex-col gap-2">
-        <label for="isbn" class="font-bold"
-          >ISBN
-          <span class="text-red-400">&#42;</span>
-        </label>
-        <input
-          [formField]="form.isbn"
-          class="block w-full rounded-lg border border-gray-700 bg-gray-700 px-3 py-2.5 text-base text-gray-50 shadow-xs placeholder:text-gray-400 focus:border-gray-50 focus:ring-gray-50"
-          type="text"
-          id="isbn"
-          placeholder="ISBN"
-        />
-        @if (form.isbn().touched() && form.isbn().invalid()) {
-          <ul>
-            @for (error of form.isbn().errors(); track error.kind) {
-              <li class="pl-2 text-sm text-red-400">{{ error.message }}</li>
-            }
-          </ul>
-        }
-      </div>
-      <app-button
-        label="Ajouter un livre"
-        (clickAction)="onSubmit()"
-        [disabled]="form().invalid()"
-      />
+      <!-- TODO : responsive -->
+      <!------- BACK BUTTON ------->
+      <app-button label="Retour" [goBackButton]="true" />
+
+      <!------- SUBMIT BUTTON ------->
+      <app-button label="Enregistrer" (clickAction)="onSubmit()" [disabled]="form().invalid()" />
     </form>
   </article>
 </section>
