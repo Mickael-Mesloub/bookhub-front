@@ -1,13 +1,12 @@
-import { Component } from '@angular/core';
-import { BookDetail } from "../../pages/book-detail/book-detail";
+import { Component, input, InputSignal } from '@angular/core';
 import { Book } from '../../models/book-models';
 
 @Component({
   selector: 'app-book-description',
-  imports: [BookDetail],
+  imports: [],
   templateUrl: './book-description.html',
   styleUrl: './book-description.scss',
 })
 export class BookDescription {
-  book!: Book
+  book: InputSignal<Book> = input.required() 
 }

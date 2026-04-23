@@ -14,7 +14,5 @@ export class BookCard {
   book: InputSignal<Book> = input.required() 
   bookService: BookService = inject(BookService);
 
-//   goToDetail(){
-//        this.router.navigate(['/detail/{isbn}'])
-//  }
+
 }
