@@ -41,25 +41,25 @@ export class Auth {
   private login(data: RegisterForm) {
     this.authService.login(data.username, data.password).subscribe({
       next: (response) => {
-        this.notificationService.show({type: 'success', message: 'Connexion réussie'});
+        this.notificationService.show({type: 'alert-success', message: 'Connexion réussie' });
         // localStorage.setItem('token', response.token);
         this.router.navigate(['/books']);
       },
       error: (err) => {
-        this.notificationService.show({type: 'error', message: 'Erreur de login'});
+        this.notificationService.show({type: 'alert-error', message: 'Erreur de login' });
       },
     });
   }
 
-  private register(data: RegisterForm){
+  private register(data: RegisterForm) {
     this.authService.register(data).subscribe({
       next: () => {
-        this.notificationService.show({type: 'success', message: 'Compte créé avec succès'});
+        this.notificationService.show({type: 'alert-success', message: 'Compte créé avec succès'});
         this.router.navigate(['/auth/login']);
       },
       error: () => {
-        this.notificationService.show({type: 'error', message: 'Erreur lors de l\'inscription'});
-      }
+        this.notificationService.show({type: 'alert-error', message: "Erreur lors de l'inscription"});
+      },
     });
   }
 
@@ -75,6 +75,9 @@ export class Auth {
   }
   get email() {
     return this.authForm().get('email');
+  }
+  get passwordConfirmation() {
+    return this.authForm().get('passwordConfirmation');
   }
   get password() {
     return this.authForm().get('password');
@@ -108,5 +111,4 @@ export class Auth {
   //     }),
   //   );
   // }
-
 }

@@ -3,4 +3,4 @@ export interface NotificationModel {
   message: string;
 }
 
-export type NotificationType = 'success' | 'error' | 'info';
+export type NotificationType = 'alert-success' | 'alert-error' | 'alert-info' | 'loading' ;
