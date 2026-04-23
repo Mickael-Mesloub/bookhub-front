@@ -1,7 +1,7 @@
 import { Injectable, signal, computed, WritableSignal, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthUser, LoginResponse, RegisterForm } from '../models/auth-models';
-import { API_BASE_URL, ApiResponse } from '../../../../config/api/api';
+import { API_BASE_URL, ApiResponse } from '../../../config/api/api';
 import { Observable } from 'rxjs';
 
 // stockage token dans le local storage (en session c'est perdu à la fermeture de page)

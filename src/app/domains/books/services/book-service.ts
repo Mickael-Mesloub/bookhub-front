@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { API_BASE_URL, ApiResponse } from '../../config/api/api';
+import { API_BASE_URL, ApiResponse } from '../../../config/api/api';
 import { Book, PageOfBooks } from './book-models';
 
 @Injectable({

@@ -1,10 +1,10 @@
 import { Component, inject, signal } from '@angular/core';
-import { AuthService } from './services/auth-service';
+import { AuthService } from '../../services/auth-service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Button } from '../../../components/shared/button/button';
-import { NotificationService } from '../../../layout/notification/service/notification-service';
-import { RegisterForm } from './models/auth-models';
+import { Button } from '../../../../components/shared/button/button';
+import { RegisterForm } from '../../models/auth-models';
+import { NotificationService } from '../../../../components/shared/notification/service/notification-service';
 
 @Component({
   selector: 'app-auth',

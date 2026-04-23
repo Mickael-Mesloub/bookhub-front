@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { AppLayout } from './layout/app-layout/app-layout/app-layout';
-import { AuthService } from './domains/users/auth/services/auth-service';
+import { AuthService } from './domains/users/services/auth-service';
 
 @Component({
   selector: 'app-root',

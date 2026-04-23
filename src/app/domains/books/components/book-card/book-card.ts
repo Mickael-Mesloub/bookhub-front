@@ -1,9 +1,8 @@
 import { Component, inject, input, InputSignal } from '@angular/core';
-import { Book } from '../../book-models';
-import { BookService } from '../../book-service';
-import { ApiResponse } from '../../../../config/api/api';
+import { BookService } from '../../services/book-service';
 import { Router } from '@angular/router';
 import { Button } from "../../../../components/shared/button/button";
+import { Book } from '../../models/book-models';
 
 @Component({
   selector: 'app-book-card',
