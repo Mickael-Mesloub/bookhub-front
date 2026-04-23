@@ -1,7 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { BookDescription } from '../../components/book-description/book-description';
 import { Book } from '../../models/book-models';
-import { BookService } from '../../services/book-service';
 
 
 @Component({
