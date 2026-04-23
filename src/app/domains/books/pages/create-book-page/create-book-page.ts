@@ -5,10 +5,11 @@ import { CustomInput } from '../../../../components/shared/custom-input/custom-i
 import { BookService } from '../../services/book-service';
 import { BookCategory } from '../../models/book-models';
 import { createBookFormSchema, createBookModel } from '../../models/book-form-model';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-create-book-page',
-  imports: [FormField, Button, CustomInput],
+  imports: [FormField, Button, CustomInput, NgClass],
   templateUrl: './create-book-page.html',
   styleUrl: './create-book-page.scss',
 })
