@@ -1,5 +1,4 @@
 import { inject, Injectable } from '@angular/core';
-import { Review } from '../../books/models/book-models';
 import { API_BASE_URL, ApiResponse } from '../../../config/api/api';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';

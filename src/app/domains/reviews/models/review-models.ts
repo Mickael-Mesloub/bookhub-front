@@ -1,4 +1,5 @@
-import { Pageable, Review, Sort } from "../../books/models/book-models";
+import { Book, Pageable, Sort } from "../../books/models/book-models";
+import { User } from "../../users/models/user-models";
 
 export interface ReviewModels {
 
@@ -16,4 +17,13 @@ export interface PageOfReviews {
       numberOfElements: number;
       first: boolean;
       empty: boolean;
+}
+
+export interface Review {
+  id: number;
+  comment: string;
+  score: number;
+  book: Book;
+  user: User;
+  datePublished: Date
 }

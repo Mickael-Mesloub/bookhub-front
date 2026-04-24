@@ -1,1 +1,8 @@
-<p>review-card works!</p>
+<div class="bg-neutral-primary-soft block max-w-sm p-6 border border-default rounded-base shadow-xs">
+        <h5 class="mt-6 mb-2 font-semibold tracking-tight text-heading">
+           {{ review()?.datePublished | date:'dd/MM/yyyy' }} - {{ review()?.user?.username }} :
+        </h5>
+    <p class="mt-6 mb-2 font-semibold tracking-tight text-heading">Commentaire: </p>
+      <p class="mb-6 text-body">{{ review()?.comment }}</p>
+    <p class="mt-6 mb-2 font-semibold tracking-tight text-heading">Note: {{ review()?.score }} / 10</p>
+</div>

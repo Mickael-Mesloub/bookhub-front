@@ -1,12 +1,13 @@
+<div class="bg-neutral-primary-soft block max-w-sm p-6 border border-default rounded-base shadow-xs">
+<div class="bg-neutral-primary-soft block max-w-sm p-6 border border-default rounded-base shadow-xs">
+  <h6>TODO: AJOUTER COMMENTAIRE IF CONNECTE</h6>
+</div>
+
 @defer (on timer(1000)) {
 @if(bookReviews.length > 0){
-  <ul class="w-full">
-    @for (review of bookReviews; track review.id) {      
-      <li>User: {{ review.userId }} :</li>
-      <li>Review: {{ review.comment }}</li>
-      <li>Score: {{ review.score }}</li>
+    @for (review of bookReviews; track review.id) {
+      <app-review-card [review]="review"></app-review-card>
     }
-  </ul>
 }
 @else {
     <div>Il n'y a pas encore de reviews pour ce livre</div>
@@ -15,3 +16,4 @@
  @placeholder {
   <p class="text-gray-50">LOADING...</p>
 }
+</div>

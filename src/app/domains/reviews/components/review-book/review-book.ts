@@ -1,12 +1,13 @@
 import { Component, inject, input, InputSignal } from '@angular/core';
-import { Book, Review } from '../../../books/models/book-models';
+import { Book } from '../../../books/models/book-models';
 import { ReviewService } from '../../services/review-service';
 import { ApiResponse } from '../../../../config/api/api';
-import { PageOfReviews } from '../../models/review-models';
+import { PageOfReviews, Review } from '../../models/review-models';
+import { ReviewCard } from '../review-card/review-card';
 
 @Component({
   selector: 'app-review-book',
-  imports: [],
+  imports: [ReviewCard],
   templateUrl: './review-book.html',
   styleUrl: './review-book.scss',
 })
