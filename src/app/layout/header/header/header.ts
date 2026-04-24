@@ -54,7 +54,7 @@ export class Header {
     this.isMenuOpen.set(false);
   }
 
-  private logout() {
+  logout() {
     const success = this.authService.logout();
     this.notificationService.show({
       type: success ? 'alert-success' : 'alert-error',
