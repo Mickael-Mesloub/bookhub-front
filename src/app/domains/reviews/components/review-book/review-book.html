@@ -2,6 +2,13 @@
 <div class="bg-neutral-primary-soft block max-w-sm p-6 border border-default rounded-base shadow-xs">
   <h6>TODO: AJOUTER COMMENTAIRE IF CONNECTE</h6>
 </div>
+@if(reviewPage.totalElements > reviewPage.size){
+<div class="grid grid-cols-3 p-8 gap-8">
+    <p (click)="previousPage()" class="text-center underline">Page Précédente</p>
+    <p class="text-center">{{ currentPage + 1 }} / {{ reviewPage.totalPages }}</p>
+    <p class="text-center underline" (click)="nextPage()">Page Suivante</p>
+</div>
+}
 
 @defer (on timer(1000)) {
 @if(bookReviews.length > 0){
@@ -17,3 +24,10 @@
   <p class="text-gray-50">LOADING...</p>
 }
 </div>
+@if(reviewPage.totalElements > reviewPage.size){
+<div class="grid grid-cols-3 p-8 gap-8">
+    <p (click)="previousPage()" class="text-center underline">Page Précédente</p>
+    <p class="text-center">{{ currentPage + 1 }} / {{ reviewPage.totalPages }}</p>
+    <p class="text-center underline" (click)="nextPage()">Page Suivante</p>
+</div>
+}
