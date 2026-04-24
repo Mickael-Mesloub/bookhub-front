@@ -1,19 +1,32 @@
 <div class="bg-neutral-primary-soft border-default rounded-base block max-w-sm border shadow-xs">
   <div class="p-6 text-center">
-  @defer (on timer(1000)) {
-  <ul class="w-full">
-      @if(checkAvailable(bookCopies)){
-    <app-button label="Réserver ce livre" [disabled]="false" (clickAction)="loanBook()"></app-button>
+    @if (isAuthenticated()) {
+      @defer (on timer(1000)) {
+        <ul class="w-full">
+          @if (loanService.checkAvailable(bookCopies)) {
+            <app-button
+              label="Réserver ce livre"
+              [disabled]="false"
+              (clickAction)="loanBook()"
+            ></app-button>
+          } @else {
+            <p>Désolé il n'y a pas de copies disponibles pour le moment.</p>
+            <p>
+              Voulez vous être notifié quand il sera disponible? Mettez vous sur la liste d'attente!
+            </p>
+            <app-button
+              label="Liste dattente"
+              [disabled]="false"
+              (clickAction)="addToWishlist()"
+            ></app-button>
+          }
+        </ul>
+      } @placeholder {
+        <p class="text-gray-50">LOADING...</p>
       }
-      @else {
-    <p>Désolé il n'y a pas de copies disponibles pour le moment.</p>
-    <p>Voulez vous être notifié quand il sera disponible? Mettez vous sur la liste d'attente!</p>
-    <app-button label="Liste dattente" [disabled]="false" (clickAction)="addToWishlist()"></app-button>
-      }
-  </ul>
+    } @else {
+      <p>Veuillez vous connecter pour emprunter ce livre.</p>
+      <app-button label="Se Connecter" (clickAction)="goToLogin()" [disabled]="false"></app-button>
     }
- @placeholder {
-  <p class="text-gray-50">LOADING...</p>
-}
   </div>
 </div>

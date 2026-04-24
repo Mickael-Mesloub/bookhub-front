@@ -22,7 +22,6 @@ export class ReviewBook {
 
    ngOnInit(){
      this.fetchAllReviews(this.book().isbn)
-     console.log(this.book().isbn)
    }
 
   fetchAllReviews(isbn: string, page?: number): void {
