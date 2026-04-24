@@ -57,7 +57,7 @@ export class Header {
   logout() {
     const success = this.authService.logout();
     this.notificationService.show({
-      type: success ? 'alert-success' : 'alert-error',
+      type: success ? 'alert-success' : 'alert-info',
       message: success ? 'Déconnexion réussie' : 'Aucun utilisateur connecté',
     });
     if (success) {
