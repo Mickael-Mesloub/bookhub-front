@@ -1,6 +1,5 @@
 import { Component, input, InputSignal } from '@angular/core';
 import { Book } from '../../models/book-models';
-import { LoanBook } from "../../../loans/components/loan-book/loan-book";
 
 @Component({
   selector: 'app-book-description',
