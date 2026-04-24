@@ -1,7 +1,15 @@
 import { Component, inject, signal } from '@angular/core';
 import { AuthService } from '../../services/auth-service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { Button } from '../../../../components/shared/button/button';
 import { RegisterForm } from '../../models/auth-models';
 import { NotificationService } from '../../../../components/shared/notification/service/notification-service';
@@ -20,19 +28,60 @@ export class Auth {
 
   readonly authForm = signal<FormGroup>(
     new FormGroup({
-      username: new FormControl('', [Validators.required]), // mettre le tableau de validators
-      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+        ...(this.isLoginMode
+          ? {
+            username: new FormControl('', [Validators.required]),
+            password: new FormControl('', [Validators.required]),
+          }
+          : {
+            username: new FormControl('', [
+              Validators.required,
+              Validators.minLength(3),
+            ]),
+            password: new FormControl('', [
+              Validators.required,
+              Validators.minLength(12),
+              Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).+$/),
+            ]),
+          }),
       // Ajout conditionnel du champ email avec le spread operator
       ...(this.isLoginMode
         ? {}
         : {
-            passwordConfirmation: new FormControl('', [Validators.required, Validators.minLength(6)]),
-            email: new FormControl('', [Validators.required, Validators.email]),
-            firstname: new FormControl('', [Validators.required]),
-            lastname: new FormControl('', [Validators.required]),
+            passwordConfirmation: new FormControl('', [
+              Validators.required,
+              Validators.minLength(12),
+              Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).+$/),
+            ]),
+            email: new FormControl('', [
+              Validators.required,
+              Validators.email
+            ]),
+            firstname: new FormControl('', [
+              Validators.required,
+              Validators.minLength(3),
+            ]),
+            lastname: new FormControl('', [
+              Validators.required,
+              Validators.minLength(3),
+            ]),
           }),
-    }),
+    },
+      // call the custom validator
+      this.isLoginMode ? {} : { validators: this.passwordMatchValidator() }
+    ),
   );
+
+  passwordMatchValidator(): ValidatorFn {
+    return (group: AbstractControl): ValidationErrors | null => {
+      const password = group.get('password')?.value;
+      const confirmation = group.get('passwordConfirmation')?.value;
+
+      return (password || confirmation) && password !== confirmation
+        ? { passwordMismatch: true }
+        : null;
+    };
+  }
 
   get isLoginMode() {
     return this.route.snapshot.routeConfig?.path === 'auth/login';
@@ -41,12 +90,12 @@ export class Auth {
   private login(data: RegisterForm) {
     this.authService.login(data.username, data.password).subscribe({
       next: (response) => {
-        this.notificationService.show({type: 'alert-success', message: 'Connexion réussie' });
+        this.notificationService.show({ type: 'alert-success', message: 'Connexion réussie' });
         // localStorage.setItem('token', response.token);
         this.router.navigate(['/books']);
       },
       error: (err) => {
-        this.notificationService.show({type: 'alert-error', message: 'Erreur de login' });
+        this.notificationService.show({ type: 'alert-error', message: 'Erreur de login' });
       },
     });
   }
@@ -54,11 +103,17 @@ export class Auth {
   private register(data: RegisterForm) {
     this.authService.register(data).subscribe({
       next: () => {
-        this.notificationService.show({type: 'alert-success', message: 'Compte créé avec succès'});
+        this.notificationService.show({
+          type: 'alert-success',
+          message: 'Compte créé avec succès',
+        });
         this.router.navigate(['/auth/login']);
       },
       error: () => {
-        this.notificationService.show({type: 'alert-error', message: "Erreur lors de l'inscription"});
+        this.notificationService.show({
+          type: 'alert-error',
+          message: "Erreur lors de l'inscription",
+        });
       },
     });
   }
@@ -111,4 +166,29 @@ export class Auth {
   //     }),
   //   );
   // }
+
+
+  isLowerCaseValid(control: AbstractControl | null): boolean {
+    return /[a-z]/.test(control?.value); // Vérifie s'il y a au moins une lettre minuscule
+  }
+
+  isUpperCaseValid(control: AbstractControl | null): boolean {
+    return /[A-Z]/.test(control?.value); // Vérifie s'il y a au moins une lettre majuscule
+  }
+
+  isDigitValid(control: AbstractControl | null): boolean {
+    return /\d/.test(control?.value); // Vérifie s'il y a au moins un chiffre
+  }
+
+  isSpecialCharValid(control: AbstractControl | null): boolean {
+    return /[^A-Za-z\d]/.test(control?.value); // Vérifie s'il y a au moins un caractère spécial
+  }
+
+  isMinLengthValid(control: AbstractControl | null): boolean {
+    return /^.{12,}$/.test(control?.value || '');
+  }
+
+  isPasswordMatch(): boolean {
+    return !this.authForm().hasError('passwordMismatch');
+  }
 }
