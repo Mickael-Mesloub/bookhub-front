@@ -1,12 +1,6 @@
 .form-error {
-  color: red;
+  color: rgb(255,100,103);
   font-size: 12px;
-}
-
-.auth-card {
-  padding: 30px;
-  width: 80vw;
-  margin: 2vh auto 0 auto; /* centre horizontalement */
 }
 
 .auth-last-row {
@@ -17,14 +11,6 @@
   text-decoration: underline;
 }
 
-.form-item {
-  margin-top: 10px;
-}
-
-.form-item div {
-  margin-bottom: 5px;
-}
-
 .form-item button {
   margin-top: 10px;
 }
@@ -33,13 +19,21 @@
   margin-top: 30px;
 }
 
-h2 {
-  margin-bottom: 30px;
-}
-
 main {
   display: flex;
   flex-direction: row;
+}
+
+.form-ok {
+  color: #22c55e;
+}
+
+.msg-validation {
+  font-size: 12px;
+}
+
+li {
+  color: #999;
 }
 
 input {

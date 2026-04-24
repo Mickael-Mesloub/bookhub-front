@@ -3,9 +3,13 @@ import { Auth } from './domains/users/pages/auth/auth';
 import { Dashboard } from './domains/users/pages/dashboard/dashboard';
 
 export const routes: Routes = [
-  { path: '', loadChildren: () => import('./domains/books/books.routes').then((c) => c.BOOK_ROUTES), },
+  {
+    path: '',
+    loadChildren: () => import('./domains/books/books.routes').then((c) => c.BOOK_ROUTES),
+  },
   { path: 'auth/signup', component: Auth },
   { path: 'auth/login', component: Auth },
+  { path: 'auth/logout', component: Auth },
   { path: 'dashboard', component: Dashboard },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

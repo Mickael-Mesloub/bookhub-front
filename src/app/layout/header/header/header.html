@@ -4,19 +4,34 @@
       <!-- Logo -->
       <a routerLink="/" class="text-lg font-semibold text-white">BookHub</a>
 
+      @if(isAuthenticated()){
+        <p>
+          Bonjour
+          {{ currentUser()?.firstname }}
+          {{ currentUser()?.lastname?.charAt(0)?.toUpperCase() }} !
+        </p>
+      }
+      <p>
+        {{ isAuthenticated() }}
+        {{ currentUser() }}
+      </p>
+
       <!-- Menu desktop -->
       <ul class="hidden md:flex md:items-center md:gap-1">
         @for (link of links; track link.path) {
-          <li>
-            <a
-              [routerLink]="link.path"
-              routerLinkActive="bg-white/10 text-white font-bold"
-              [routerLinkActiveOptions]="{ exact: !!link.exact }"
-              class="block rounded-md px-3 py-2 text-sm text-gray-300 transition hover:bg-white/10 hover:text-white"
-            >
-              {{ link.label }}
-            </a>
-          </li>
+          @if(link.restricted === false || (link.restricted === true && link.isAuthenticated === isAuthenticated())){
+            <li>
+              <a
+                [routerLink]="link.path"
+                routerLinkActive="bg-white/10 text-white font-bold"
+                [routerLinkActiveOptions]="{ exact: !!link.exact }"
+                class="block rounded-md px-3 py-2 text-sm text-gray-300 transition hover:bg-white/10 hover:text-white"
+                (click)="link.path === '/auth/logout' ? logout() : null"
+              >
+                {{ link.label }}
+              </a>
+            </li>
+          }
         }
       </ul>
 

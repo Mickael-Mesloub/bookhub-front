@@ -1,5 +1,4 @@
-import { User } from "../../users/models/user-models";
-
+import { Review } from "../../reviews/models/review-models";
 
 export interface Book {
   id: number;
@@ -18,21 +17,15 @@ export interface BookCopy {
   id: number;
   available: boolean;
   state: BookState;
-  bookId: Book['id'];
+  book: Book;
 }
 
-export interface Review {
-  id: number;
-  comment: string;
-  score: number;
-  bookId: Book['id'];
-  userId: User['id'];
-}
+
 
 export interface WaitingList {
   id: number;
   dateAdded: Date;
-  bookId: Book['id'];
+  book: Book;
 }
 
 export enum BookCategory {
@@ -91,3 +84,4 @@ export interface Sort {
   sorted: boolean;
   unsorted: boolean;
 }
+

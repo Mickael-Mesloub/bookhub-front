@@ -3,10 +3,11 @@ import { BookDescription } from '../../components/book-description/book-descript
 import { Book } from '../../models/book-models';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoanBook } from '../../../loans/components/loan-book/loan-book';
+import { ReviewBook } from "../../../reviews/components/review-book/review-book";
 
 @Component({
   selector: 'app-book-detail',
-  imports: [BookDescription, LoanBook],
+  imports: [BookDescription, LoanBook, ReviewBook],
   templateUrl: './book-detail.html',
   styleUrl: './book-detail.scss',
 })
