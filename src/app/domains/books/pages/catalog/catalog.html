@@ -1,11 +1,23 @@
 <h2>Notre Catalogue</h2>
+  
+<div class="grid grid-cols-3 p-8 gap-8">
+    <p (click)="previousPage()" class="text-center underline">Page Précédente</p>
+    <p class="text-center">{{ currentPage + 1 }} / {{ bookPage.totalPages }}</p>
+    <p class="text-center underline" (click)="nextPage()">Page Suivante</p>
+</div>
 
 @defer (on timer(1000)) {
   <div class="grid grid-cols-1 p-8 gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
     @for (book of books; track book.isbn) {      
       <app-book-card class="transition-transform transform hover:scale-105 cursor-pointer duration-300 ease-in-out" [book]="book"></app-book-card>
     }
-</div>
+  </div>
 } @placeholder {
   <p class="text-gray-50">LOADING...</p>
 }
+
+<div class="grid grid-cols-3 p-8 gap-8">
+    <p (click)="previousPage()" class="text-center underline">Page Précédente</p>
+    <p class="text-center">{{ currentPage + 1 }} / {{ bookPage.totalPages }}</p>
+    <p class="text-center underline" (click)="nextPage()">Page Suivante</p>
+</div>

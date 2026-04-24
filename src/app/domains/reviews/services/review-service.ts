@@ -10,7 +10,11 @@ import { PageOfReviews } from '../models/review-models';
 export class ReviewService {
   private readonly http = inject(HttpClient);
 
-  getReviews(isbn: string): Observable<ApiResponse<PageOfReviews>> {
-     return this.http.get<ApiResponse<PageOfReviews>>(`${API_BASE_URL}/books/reviews?isbn=` + isbn);
+  getReviews(isbn: string, currentPage?: number): Observable<ApiResponse<PageOfReviews>> {
+    let response: string = ""
+    if(currentPage){
+      response = "&page=" + currentPage
+    }
+     return this.http.get<ApiResponse<PageOfReviews>>(`${API_BASE_URL}/books/reviews?isbn=` + isbn + response);
    }
 }

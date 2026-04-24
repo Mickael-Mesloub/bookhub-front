@@ -16,21 +16,36 @@ export class ReviewBook {
   
   reviewService: ReviewService = inject(ReviewService)
   bookReviews: Review[] = []
+  reviewPage!: PageOfReviews
+  currentPage: number = 0
+
 
    ngOnInit(){
      this.fetchAllReviews(this.book().isbn)
      console.log(this.book().isbn)
    }
 
-  fetchAllReviews(isbn: string): void {
+  fetchAllReviews(isbn: string, page?: number): void {
     this.reviewService.getReviews(isbn).subscribe({
       next: (response: ApiResponse<PageOfReviews>) => {
         this.bookReviews = response.data.content
-        console.log(response.data)
+        this.reviewPage = response.data
       },
       error: (err) => console.error('Failed to fetch copies: ', err),
     });
   }
 
+  nextPage(): void{
+    if(this.currentPage < this.reviewPage.totalPages){
+      this.currentPage ++
+      this.fetchAllReviews(this.book().isbn, this.currentPage);
+    }
+  }
 
+  previousPage(): void{
+    if(this.currentPage > 0){
+      this.currentPage --
+      this.fetchAllReviews(this.book().isbn, this.currentPage);
+    }
+  }
 }
