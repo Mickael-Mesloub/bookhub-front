@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject, input, InputSignal } from '@angular/core';
 import { BookService } from '../../../../books/services/book-service';
 import { NotificationService } from '../../../../../components/shared/notification/service/notification-service';
 import { Router } from '@angular/router';
@@ -25,17 +25,20 @@ export class SaveBookForm {
   private readonly notificationService = inject(NotificationService);
   private readonly router = inject(Router);
 
+  pageTitle: InputSignal<string> = input<string>('');
+  book: InputSignal<Book | undefined> = input<Book | undefined>(undefined);
+  bookData = computed(() => this.book());
+
   categoryOptions = Object.entries(BookCategory).map(([key, value]) => ({
     key,
     value,
   }));
 
-  protected readonly model = saveBookModel();
+  protected readonly model = saveBookModel(this.bookData() ?? undefined);
 
   protected readonly form = form(this.model, (schema) => {
     saveBookFormSchema(schema);
   });
-
   protected saveBook(bookData: BookFormData): void {
     this.bookService.saveBook(bookData).subscribe({
       next: (response: ApiResponse<Book>) => {
@@ -58,4 +61,13 @@ export class SaveBookForm {
   protected onSubmit(): void {
     this.saveBook(this.form().value());
   }
+
+  /*
+      - Ajouter route books/:id/edit
+      - Récupérer saveForm()
+      - Pré-remplir les champs avec les infos du book
+      
+
+
+  */
 }

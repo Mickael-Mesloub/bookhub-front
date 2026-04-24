@@ -4,7 +4,7 @@ import { BookService } from '../../services/book-service';
 import { Book, PageOfBooks } from '../../models/book-models';
 import { ApiResponse } from '../../../../config/api/api';
 import { Button } from '../../../../components/shared/button/button';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-catalog',
@@ -14,9 +14,10 @@ import { Button } from '../../../../components/shared/button/button';
 })
 export class Catalog implements OnInit {
   bookService: BookService = inject(BookService);
+  router: Router = inject(Router);
   books: Book[] = [];
-  bookPage!: PageOfBooks
-  currentPage: number = 0
+  bookPage!: PageOfBooks;
+  currentPage: number = 0;
 
   ngOnInit() {
     this.fetchAllBooks();
@@ -25,27 +26,30 @@ export class Catalog implements OnInit {
   fetchAllBooks(page?: number, size?: number, sort?: string): void {
     this.bookService.getAllBooks(page, size, sort).subscribe({
       next: (response: ApiResponse<PageOfBooks>) => {
-        this.bookPage = response.data
-        this.books = response.data.content
-        this.currentPage = this.bookPage.number
+        this.bookPage = response.data;
+        this.books = response.data.content;
+        this.currentPage = this.bookPage.number;
       },
       error: (err) => console.error('Failed to fetch books: ', err),
     });
   }
 
-
-  nextPage(): void{
-    if(this.currentPage < this.bookPage.totalPages){
-      this.currentPage ++
+  nextPage(): void {
+    if (this.currentPage < this.bookPage.totalPages) {
+      this.currentPage++;
       this.fetchAllBooks(this.currentPage);
     }
   }
 
-  previousPage(): void{
-    if(this.currentPage > 0){
-      this.currentPage --
+  previousPage(): void {
+    if (this.currentPage > 0) {
+      this.currentPage--;
       this.fetchAllBooks(this.currentPage);
     }
+  }
+
+  goToEditBook(book: Book): void {
+    console.log('THIS BOOK IS AWESOME : ', book);
+    this.router.navigate([`/detail/${book.isbn}/edit`, { state: book }]);
   }
 }
-
