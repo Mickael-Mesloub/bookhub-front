@@ -27,48 +27,37 @@ export class Auth {
   private readonly notificationService = inject(NotificationService);
 
   readonly authForm = signal<FormGroup>(
-    new FormGroup({
+    new FormGroup(
+      {
         ...(this.isLoginMode
           ? {
-            username: new FormControl('', [Validators.required]),
-            password: new FormControl('', [Validators.required]),
-          }
+              username: new FormControl('', [Validators.required]),
+              password: new FormControl('', [Validators.required]),
+            }
           : {
-            username: new FormControl('', [
-              Validators.required,
-              Validators.minLength(3),
-            ]),
-            password: new FormControl('', [
-              Validators.required,
-              Validators.minLength(12),
-              Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).+$/),
-            ]),
-          }),
-      // Ajout conditionnel du champ email avec le spread operator
-      ...(this.isLoginMode
-        ? {}
-        : {
-            passwordConfirmation: new FormControl('', [
-              Validators.required,
-              Validators.minLength(12),
-              Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).+$/),
-            ]),
-            email: new FormControl('', [
-              Validators.required,
-              Validators.email
-            ]),
-            firstname: new FormControl('', [
-              Validators.required,
-              Validators.minLength(3),
-            ]),
-            lastname: new FormControl('', [
-              Validators.required,
-              Validators.minLength(3),
-            ]),
-          }),
-    },
+              username: new FormControl('', [Validators.required, Validators.minLength(3)]),
+              password: new FormControl('', [
+                Validators.required,
+                Validators.minLength(12),
+                Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).+$/),
+              ]),
+            }),
+        // Ajout conditionnel du champ email avec le spread operator
+        ...(this.isLoginMode
+          ? {}
+          : {
+              passwordConfirmation: new FormControl('', [
+                Validators.required,
+                Validators.minLength(12),
+                Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).+$/),
+              ]),
+              email: new FormControl('', [Validators.required, Validators.email]),
+              firstname: new FormControl('', [Validators.required, Validators.minLength(3)]),
+              lastname: new FormControl('', [Validators.required, Validators.minLength(3)]),
+            }),
+      },
       // call the custom validator
-      this.isLoginMode ? {} : { validators: this.passwordMatchValidator() }
+      this.isLoginMode ? {} : { validators: this.passwordMatchValidator() },
     ),
   );
 
@@ -90,12 +79,17 @@ export class Auth {
   private login(data: RegisterForm) {
     this.authService.login(data.username, data.password).subscribe({
       next: (response) => {
-        this.notificationService.show({ type: 'alert-success', message: 'Connexion réussie' });
-        // localStorage.setItem('token', response.token);
+        this.notificationService.show({
+          type: 'alert-success',
+          message: 'Connexion réussie',
+        });
         this.router.navigate(['/books']);
       },
       error: (err) => {
-        this.notificationService.show({ type: 'alert-error', message: 'Erreur de login' });
+        this.notificationService.show({
+          type: 'alert-error',
+          message: 'Erreur de login',
+        });
       },
     });
   }
@@ -166,7 +160,6 @@ export class Auth {
   //     }),
   //   );
   // }
-
 
   isLowerCaseValid(control: AbstractControl | null): boolean {
     return /[a-z]/.test(control?.value); // Vérifie s'il y a au moins une lettre minuscule
