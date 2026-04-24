@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateBookPage } from './create-book-page';
+import { SaveBookForm } from './save-book-form';
 
-describe('CreateBookPage', () => {
-  let component: CreateBookPage;
-  let fixture: ComponentFixture<CreateBookPage>;
+describe('SaveBookForm', () => {
+  let component: SaveBookForm;
+  let fixture: ComponentFixture<SaveBookForm>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CreateBookPage],
+      imports: [SaveBookForm],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CreateBookPage);
+    fixture = TestBed.createComponent(SaveBookForm);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

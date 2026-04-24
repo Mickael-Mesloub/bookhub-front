@@ -38,7 +38,7 @@ export class BookService {
     return this.http.get<ApiResponse<PageOfBooks>>(`${API_BASE_URL}/books` + response);
   }
 
-  createBook(bookFormData: BookFormData): Observable<ApiResponse<Book>> {
+  saveBook(bookFormData: BookFormData): Observable<ApiResponse<Book>> {
     return this.http.post<ApiResponse<Book>>(`${API_BASE_URL}/books/new`, bookFormData);
   }
 

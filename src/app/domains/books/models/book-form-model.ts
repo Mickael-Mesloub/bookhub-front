@@ -18,7 +18,7 @@ export type BookFormData = Pick<Book, 'title' | 'author' | 'description' | 'isbn
 };
 
 // ********** MODEL ********** \\ 
-export function createBookModel(): WritableSignal<BookFormData> {
+export function saveBookModel(): WritableSignal<BookFormData> {
   return signal<BookFormData>({
     title: '',
     author: '',
@@ -29,7 +29,7 @@ export function createBookModel(): WritableSignal<BookFormData> {
 }
 
 // ********** SCHEMA FOR FORM VALIDATION ********** \\ 
-export function createBookFormSchema(schema: SchemaPathTree<BookFormData>) {
+export function saveBookFormSchema(schema: SchemaPathTree<BookFormData>) {
   required(schema.title, { message: 'Le titre est obligatoire' });
   minLength(schema.title,TITLE_MIN_LENGTH, { message: `Le titre doit contenir ${TITLE_MIN_LENGTH} caractères minimum` });
   maxLength(schema.title, TITLE_MAX_LENGTH, { message: `Le titre doit contenir ${TITLE_MAX_LENGTH} caractères maximum` });

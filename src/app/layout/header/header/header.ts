@@ -13,7 +13,7 @@ export class Header {
     { label: 'Catalogue', path: '/', exact: true },
     { label: "S'inscrire", path: '/auth/signup', exact: true },
     { label: "Se connecter", path: '/auth/login', exact: true },
-    { label: 'Créer un livre', path: '/books/new' }
+    { label: 'Dashboard', path: '/dashboard' }
   ];
 
   isMenuOpen = signal(false);

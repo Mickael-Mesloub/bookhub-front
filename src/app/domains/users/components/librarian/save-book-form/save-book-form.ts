@@ -1,22 +1,26 @@
 import { Component, inject } from '@angular/core';
-import { form, FormField } from '@angular/forms/signals';
-import { Button } from '../../../../components/shared/button/button';
-import { CustomInput } from '../../../../components/shared/custom-input/custom-input';
-import { BookService } from '../../services/book-service';
-import { Book, BookCategory } from '../../models/book-models';
-import { BookFormData, createBookFormSchema, createBookModel } from '../../models/book-form-model';
-import { NgClass } from '@angular/common';
-import { NotificationService } from '../../../../components/shared/notification/service/notification-service';
+import { BookService } from '../../../../books/services/book-service';
+import { NotificationService } from '../../../../../components/shared/notification/service/notification-service';
 import { Router } from '@angular/router';
-import { ApiErrorResponse, ApiResponse } from '../../../../config/api/api';
+import { Book, BookCategory } from '../../../../books/models/book-models';
+import {
+  BookFormData,
+  saveBookFormSchema,
+  saveBookModel,
+} from '../../../../books/models/book-form-model';
+import { form, FormField } from '@angular/forms/signals';
+import { ApiErrorResponse, ApiResponse } from '../../../../../config/api/api';
+import { NgClass } from '@angular/common';
+import { CustomInput } from '../../../../../components/shared/custom-input/custom-input';
+import { Button } from '../../../../../components/shared/button/button';
 
 @Component({
-  selector: 'app-create-book-page',
+  selector: 'app-save-book-form',
   imports: [FormField, Button, CustomInput, NgClass],
-  templateUrl: './create-book-page.html',
-  styleUrl: './create-book-page.scss',
+  templateUrl: './save-book-form.html',
+  styleUrl: './save-book-form.scss',
 })
-export class CreateBookPage {
+export class SaveBookForm {
   private readonly bookService: BookService = inject(BookService);
   private readonly notificationService = inject(NotificationService);
   private readonly router = inject(Router);
@@ -26,23 +30,23 @@ export class CreateBookPage {
     value,
   }));
 
-  protected readonly model = createBookModel();
+  protected readonly model = saveBookModel();
 
   protected readonly form = form(this.model, (schema) => {
-    createBookFormSchema(schema);
+    saveBookFormSchema(schema);
   });
 
   protected saveBook(bookData: BookFormData): void {
-    this.bookService.createBook(bookData).subscribe({
+    this.bookService.saveBook(bookData).subscribe({
       next: (response: ApiResponse<Book>) => {
         this.notificationService.show({
           type: 'alert-success',
           message: response.message,
         });
-        this.router.navigate(['/auth/login']);
+        this.router.navigate(['/dashboard']);
       },
       error: (response: ApiErrorResponse) => {
-        console.error("ERROR IN saveBook() : ", response);
+        console.error('ERROR IN saveBook() : ', response);
         this.notificationService.show({
           type: 'alert-error',
           message: response.error.message,
@@ -52,7 +56,6 @@ export class CreateBookPage {
   }
 
   protected onSubmit(): void {
-    console.log('Form value :', this.form().value());
     this.saveBook(this.form().value());
   }
 }
