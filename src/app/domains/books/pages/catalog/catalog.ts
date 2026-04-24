@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { BookCard } from '../../components/book-card/book-card';
 import { BookService } from '../../services/book-service';
 import { Book, PageOfBooks } from '../../models/book-models';
@@ -18,6 +18,7 @@ export class Catalog implements OnInit {
   books: Book[] = [];
   bookPage!: PageOfBooks;
   currentPage: number = 0;
+  isLoading = signal<boolean>(true);
 
   ngOnInit() {
     this.fetchAllBooks();
@@ -29,6 +30,7 @@ export class Catalog implements OnInit {
         this.bookPage = response.data;
         this.books = response.data.content;
         this.currentPage = this.bookPage.number;
+        this.isLoading.set(false);
       },
       error: (err) => console.error('Failed to fetch books: ', err),
     });
@@ -49,7 +51,6 @@ export class Catalog implements OnInit {
   }
 
   goToEditBook(book: Book): void {
-    console.log('THIS BOOK IS AWESOME : ', book);
-    this.router.navigate([`/detail/${book.isbn}/edit`, { state: book }]);
+    this.router.navigateByUrl(`/detail/${book.isbn}/edit`);
   }
 }
