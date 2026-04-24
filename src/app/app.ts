@@ -16,7 +16,4 @@ export class App {
     console.log('Button clicked!');
   }
 
-  ngOnInit() {
-    this.authService.loadCurrentUser();
-  }
 }
