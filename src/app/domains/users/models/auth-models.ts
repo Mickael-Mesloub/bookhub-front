@@ -1,3 +1,5 @@
+import { UserRole } from './user-models';
+
 export interface RegisterForm {
   username: string;
   email: string;
@@ -9,11 +11,13 @@ export interface RegisterForm {
 
 export interface LoginResponse {
   token: string;
+  currUser: LimitedUserData;
 }
 
-export interface AuthUser {
+export interface LimitedUserData {
   username: string;
   email: string;
   firstname: string;
   lastname: string;
+  role: UserRole;
 }
