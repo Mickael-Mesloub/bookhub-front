@@ -1,1 +1,12 @@
-<p>profile works!</p>
+@if (isAuthenticated()) {
+  <div>
+    <h2>Profil</h2>
+    <p>Username : {{ currentUser()?.username }}</p>
+    <p>Email : {{ currentUser()?.email }}</p>
+    <p>Nom : {{ currentUser()?.lastname }}</p>
+    <p>Prénom : {{ currentUser()?.firstname }}</p>
+    <p>Role : {{ currentUser()?.role }}</p>
+  </div>
+} @else {
+  <p>Chargement...</p>
+}

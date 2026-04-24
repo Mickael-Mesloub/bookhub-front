@@ -35,6 +35,13 @@ export class Header {
       isAuthenticated: false,
     },
     {
+      label: 'Mon profil',
+      path: '/profile',
+      exact: true,
+      restricted: true,
+      isAuthenticated: true
+    },
+    {
       label: 'Se déconnecter',
       path: '/auth/logout',
       exact: true,
