@@ -71,8 +71,7 @@
           id="category"
           class="block w-full rounded-lg bg-gray-700 p-3.5 text-base text-gray-50 shadow-xs placeholder:text-gray-400 focus:border-gray-50 focus:ring-gray-50"
           [ngClass]="{
-            'border-2 border-red-500':
-              form.category().invalid() && (form.category().dirty() || form.category().touched()),
+            'border-2 border-red-500': form.category().invalid() && (form.category().dirty() || form.category().touched()),
             'border-2 border-green-700': !form.category().invalid() && form.category().dirty(),
           }"
         >

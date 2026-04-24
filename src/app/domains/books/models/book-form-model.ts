@@ -13,7 +13,7 @@ const ISBN_MIN_LENGTH: number = 10;
 const ISBN_MAX_LENGTH: number = 13;
 
 // ********** TYPE FOR BOOK FORM DATA ********** \\ 
-export type BookFormData = Pick<Book, 'title' | 'author' | 'coverUrl' | 'description' | 'isbn'> & {
+export type BookFormData = Pick<Book, 'title' | 'author' | 'description' | 'isbn'> & {
   category: BookCategory | '';
 };
 
@@ -23,7 +23,6 @@ export function createBookModel(): WritableSignal<BookFormData> {
     title: '',
     author: '',
     category: '',
-    coverUrl: '',
     description: '',
     isbn: '',
   });
@@ -40,7 +39,7 @@ export function createBookFormSchema(schema: SchemaPathTree<BookFormData>) {
   maxLength(schema.author, AUTHOR_MAX_LENGTH, { message: `Le nom de l'auteur doit contenir ${AUTHOR_MAX_LENGTH} caractères minimum` });
 
   required(schema.isbn, { message: "L'ISBN est obligatoire" });
-  minLength(schema.isbn, ISBN_MIN_LENGTH, { message: `L'ISBN doit contenir ${ISBN_MIN_LENGTH} caractères minimum` });
+  //minLength(schema.isbn, ISBN_MIN_LENGTH, { message: `L'ISBN doit contenir ${ISBN_MIN_LENGTH} caractères minimum` });
   maxLength(schema.isbn, ISBN_MAX_LENGTH, { message: `L'ISBN doit contenir ${ISBN_MAX_LENGTH} caractères minimum` });
 
   required(schema.category, { message: 'Veuillez sélectionner une catégorie' });
