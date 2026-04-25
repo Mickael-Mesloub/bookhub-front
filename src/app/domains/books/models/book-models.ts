@@ -28,26 +28,41 @@ export interface WaitingList {
 
 export enum BookCategory {
   ACTION = 'Action',
-  ADVENTURE = 'Aventure',
+  ADVENTURE = 'Adventure',
   ANIMATION = 'Animation',
-  COMEDY = 'Comédie',
+  COMEDY = 'Comedy',
   CRIME = 'Crime',
-  DOCUMENTARY = 'Documentaire',
-  DRAMA = 'Drame',
+  DOCUMENTARY = 'Documentary',
+  DRAMA = 'Drama',
   MUSICAL = 'Musical',
   ROMANCE = 'Romance',
-  SCI_FI = 'Science-Fiction',
+  SCI_FI = 'Sci-Fi',
   THRILLER = 'Thriller',
-  WAR = 'Guerre',
+  WAR = 'War',
 }
 
+export const BookCategoryOptionLabels: Record<BookCategory, string> = {
+  [BookCategory.ACTION]: 'Action',
+  [BookCategory.ADVENTURE]: 'Aventure',
+  [BookCategory.ANIMATION]: 'Animation',
+  [BookCategory.COMEDY]: 'Comédie',
+  [BookCategory.CRIME]: 'Crime',
+  [BookCategory.DOCUMENTARY]: 'Documentaire',
+  [BookCategory.DRAMA]: 'Drame',
+  [BookCategory.MUSICAL]: 'Musical',
+  [BookCategory.ROMANCE]: 'Romance',
+  [BookCategory.SCI_FI]: 'Science-Fiction',
+  [BookCategory.THRILLER]: 'Thriller',
+  [BookCategory.WAR]: 'Guerre',
+};
+
 export enum BookState {
-  NEW,
-  GOOD,
-  ACCEPTABLE,
-  USED,
-  MISSING,
-  RETIRED,
+  NEW = 'Neuf',
+  GOOD = 'Bon',
+  ACCEPTABLE = 'Acceptable',
+  USED = 'Usé',
+  MISSING = 'Perdu',
+  RETIRED = 'Retiré',
 }
 
 export interface PageOfBooks {

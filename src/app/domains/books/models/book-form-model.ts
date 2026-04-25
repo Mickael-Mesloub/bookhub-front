@@ -18,15 +18,13 @@ export type CreateBookFormData = Pick<Book, 'title' | 'author' | 'description' |
 };
 
 // ********** MODEL ********** \\
-export function createBookModel(book?: Book): WritableSignal<CreateBookFormData> {
-  console.log('BOOK DANS SAVE BOOK MODEL', book);
-
+export function createBookModel(): WritableSignal<CreateBookFormData> {
   return signal<CreateBookFormData>({
-    title: book?.title ?? '',
-    author: book?.author ?? '',
-    category: book?.category.category ?? '',
-    description: book?.description ?? '',
-    isbn: book?.isbn ?? '',
+    title: '',
+    author: '',
+    category: '',
+    description: '',
+    isbn: '',
   });
 }
 
