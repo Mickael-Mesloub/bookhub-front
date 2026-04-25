@@ -1,10 +1,10 @@
-import { Component, inject, signal } from '@angular/core';
-import { BookDescription } from '../../components/book-description/book-description';
-import { Book } from '../../models/book-models';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Button } from '../../../../components/shared/button/button';
 import { LoanBook } from '../../../loans/components/loan-book/loan-book';
 import { ReviewBook } from '../../../reviews/components/review-book/review-book';
-import { Button } from '../../../../components/shared/button/button';
+import { BookDescription } from '../../components/book-description/book-description';
+import { Book } from '../../models/book-models';
 
 @Component({
   selector: 'app-book-detail',

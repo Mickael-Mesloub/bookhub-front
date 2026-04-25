@@ -1,4 +1,4 @@
-import { Review } from "../../reviews/models/review-models";
+import { Review } from '../../reviews/models/review-models';
 
 export interface Book {
   id: number;
@@ -20,8 +20,6 @@ export interface BookCopy {
   book: Book;
 }
 
-
-
 export interface WaitingList {
   id: number;
   dateAdded: Date;
@@ -29,18 +27,18 @@ export interface WaitingList {
 }
 
 export enum BookCategory {
-  ACTION = "Action",
-  ADVENTURE = "Aventure",
-  ANIMATION = "Animation",
-  COMEDY = "Comédie",
-  CRIME = "Crime",
-  DOCUMENTARY = "Documentaire",
-  DRAMA = "Drame",
-  MUSICAL = "Musical",
-  ROMANCE = "Romance",
-  SCI_FI = "Science-Fiction",
-  THRILLER = "Thriller",
-  WAR = "Guerre",
+  ACTION = 'Action',
+  ADVENTURE = 'Aventure',
+  ANIMATION = 'Animation',
+  COMEDY = 'Comédie',
+  CRIME = 'Crime',
+  DOCUMENTARY = 'Documentaire',
+  DRAMA = 'Drame',
+  MUSICAL = 'Musical',
+  ROMANCE = 'Romance',
+  SCI_FI = 'Science-Fiction',
+  THRILLER = 'Thriller',
+  WAR = 'Guerre',
 }
 
 export enum BookState {
@@ -84,4 +82,3 @@ export interface Sort {
   sorted: boolean;
   unsorted: boolean;
 }
-

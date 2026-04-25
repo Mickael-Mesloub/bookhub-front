@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { API_BASE_URL, ApiResponse } from '../../../config/api/api';
+import { CreateBookFormData } from '../models/book-form-model';
 import { Book, PageOfBooks } from '../models/book-models';
-import { BookFormData } from '../models/book-form-model';
 
 @Injectable({
   providedIn: 'root',
@@ -38,8 +38,8 @@ export class BookService {
     return this.http.get<ApiResponse<PageOfBooks>>(`${API_BASE_URL}/books` + response);
   }
 
-  saveBook(bookFormData: BookFormData): Observable<ApiResponse<Book>> {
-    return this.http.post<ApiResponse<Book>>(`${API_BASE_URL}/books/new`, bookFormData);
+  createBook(createBookFormData: CreateBookFormData): Observable<ApiResponse<Book>> {
+    return this.http.post<ApiResponse<Book>>(`${API_BASE_URL}/books/new`, createBookFormData);
   }
 
   getBookDetail(isbn: string): Observable<ApiResponse<Book>> {

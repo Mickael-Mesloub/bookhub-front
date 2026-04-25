@@ -1,10 +1,10 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { BookCard } from '../../components/book-card/book-card';
-import { BookService } from '../../services/book-service';
-import { Book, PageOfBooks } from '../../models/book-models';
-import { ApiResponse } from '../../../../config/api/api';
-import { Button } from '../../../../components/shared/button/button';
 import { Router } from '@angular/router';
+import { Button } from '../../../../components/shared/button/button';
+import { ApiResponse } from '../../../../config/api/api';
+import { BookCard } from '../../components/book-card/book-card';
+import { Book, PageOfBooks } from '../../models/book-models';
+import { BookService } from '../../services/book-service';
 
 @Component({
   selector: 'app-catalog',

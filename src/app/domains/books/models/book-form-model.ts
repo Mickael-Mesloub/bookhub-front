@@ -1,6 +1,6 @@
 import { signal, WritableSignal } from '@angular/core';
-import { Book, BookCategory } from './book-models';
 import { maxLength, minLength, required, SchemaPathTree } from '@angular/forms/signals';
+import { Book, BookCategory } from './book-models';
 
 // ********** VALIDATION RULES ********** \\
 const TITLE_MIN_LENGTH: number = 4;
@@ -13,15 +13,15 @@ const ISBN_MIN_LENGTH: number = 10;
 const ISBN_MAX_LENGTH: number = 13;
 
 // ********** TYPE FOR BOOK FORM DATA ********** \\
-export type BookFormData = Pick<Book, 'title' | 'author' | 'description' | 'isbn'> & {
+export type CreateBookFormData = Pick<Book, 'title' | 'author' | 'description' | 'isbn'> & {
   category: BookCategory | '';
 };
 
 // ********** MODEL ********** \\
-export function saveBookModel(book?: Book): WritableSignal<BookFormData> {
+export function createBookModel(book?: Book): WritableSignal<CreateBookFormData> {
   console.log('BOOK DANS SAVE BOOK MODEL', book);
 
-  return signal<BookFormData>({
+  return signal<CreateBookFormData>({
     title: book?.title ?? '',
     author: book?.author ?? '',
     category: book?.category.category ?? '',
@@ -31,7 +31,7 @@ export function saveBookModel(book?: Book): WritableSignal<BookFormData> {
 }
 
 // ********** SCHEMA FOR FORM VALIDATION ********** \\
-export function saveBookFormSchema(schema: SchemaPathTree<BookFormData>) {
+export function createBookFormSchema(schema: SchemaPathTree<CreateBookFormData>) {
   required(schema.title, { message: 'Le titre est obligatoire' });
   minLength(schema.title, TITLE_MIN_LENGTH, {
     message: `Le titre doit contenir ${TITLE_MIN_LENGTH} caractères minimum`,
