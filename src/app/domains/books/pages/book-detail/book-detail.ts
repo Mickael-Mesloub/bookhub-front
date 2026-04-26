@@ -21,7 +21,6 @@ export class BookDetail {
   }
 
   goToEditBook(): void {
-    console.log('THIS BOOK IS AWESOME : ', this.book);
-    this.router.navigate([`/detail/${this.book.isbn}/edit`]);
+    this.router.navigateByUrl(`/books/${this.book.id}/update`);
   }
 }

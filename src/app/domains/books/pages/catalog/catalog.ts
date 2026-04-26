@@ -3,12 +3,13 @@ import { Router } from '@angular/router';
 import { Button } from '../../../../components/shared/button/button';
 import { ApiResponse } from '../../../../config/api/api';
 import { BookCard } from '../../components/book-card/book-card';
+import { BookSearch } from '../../components/book-search/book-search';
 import { Book, PageOfBooks } from '../../models/book-models';
 import { BookService } from '../../services/book-service';
 
 @Component({
   selector: 'app-catalog',
-  imports: [BookCard, Button],
+  imports: [BookCard, Button, BookSearch],
   templateUrl: './catalog.html',
   styleUrl: './catalog.scss',
 })

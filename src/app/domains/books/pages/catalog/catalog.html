@@ -1,14 +1,29 @@
 <h2>Notre Catalogue</h2>
 
+<app-book-search />
+<!-- 
+@if (bookPage.totalElements > bookPage.size) {
+  <div class="grid grid-cols-3 gap-8 p-8">
+    @if (currentPage != 0) {
+      <p (click)="previousPage()" class="text-center underline">Page Précédente</p>
+    } @else {
+      <p></p>
+    }
+  } -->
+
 @if (isLoading()) {
   <div class="grid grid-cols-3 gap-8 p-8">
     <p (click)="previousPage()" class="text-center underline">Page Précédente</p>
     <p class="text-center">{{ currentPage + 1 }} / {{ bookPage.totalPages }}</p>
-    <p class="text-center underline" (click)="nextPage()">Page Suivante</p>
+    @if (currentPage != bookPage.totalPages) {
+      <p class="text-center underline" (click)="nextPage()">Page Suivante</p>
+    } @else {
+      <p></p>
+    }
   </div>
+}
 
-  <p class="text-gray-50">LOADING...</p>
-} @else {
+@defer (on timer(1000)) {
   <div
     class="grid grid-cols-1 gap-8 p-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
   >
@@ -19,14 +34,28 @@
           [book]="book"
         />
         <!-- TODO : Afficher le bouton si rôle currentUser == Librarian -->
-        <app-button label="Modifier ce livre" (clickAction)="goToEditBook(book)" />
+        <div class="px-7">
+          <app-button label="Modifier ce livre" (clickAction)="goToEditBook(book)" />
+        </div>
       }
     </div>
   </div>
+} @placeholder {
+  <p class="text-gray-50">LOADING...</p>
+}
 
+@if (bookPage.totalElements > bookPage.size) {
   <div class="grid grid-cols-3 gap-8 p-8">
-    <p (click)="previousPage()" class="text-center underline">Page Précédente</p>
+    @if (currentPage != 0) {
+      <p (click)="previousPage()" class="text-center underline">Page Précédente</p>
+    } @else {
+      <p></p>
+    }
     <p class="text-center">{{ currentPage + 1 }} / {{ bookPage.totalPages }}</p>
-    <p class="text-center underline" (click)="nextPage()">Page Suivante</p>
+    @if (currentPage != bookPage.totalPages) {
+      <p class="text-center underline" (click)="nextPage()">Page Suivante</p>
+    } @else {
+      <p></p>
+    }
   </div>
 }

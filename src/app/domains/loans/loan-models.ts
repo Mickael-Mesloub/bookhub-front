@@ -1,5 +1,5 @@
-import { BookCopy } from "../books/models/book-models";
-import { User } from "../users/models/user-models";
+import { BookCopy } from '../books/models/book-models';
+import { User } from '../users/models/user-models';
 
 export interface Loan {
   id: number;
@@ -7,4 +7,9 @@ export interface Loan {
   dateReturned: Date;
   copyId: BookCopy['id'];
   userId: User['id'];
+}
+
+export interface LoanDTO {
+  username: string;
+  isbn: string;
 }
