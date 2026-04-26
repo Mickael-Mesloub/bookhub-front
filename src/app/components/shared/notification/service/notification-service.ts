@@ -8,12 +8,21 @@ export class NotificationService {
   readonly notifMsg = this.notifSignal.asReadonly();
   private timeout?: any;
 
-  show(notif: NotificationModel) {
+  openNotification(notif: NotificationModel) {
     this.notifSignal.set(notif);
     clearTimeout(this.timeout);
-    this.timeout = setTimeout(() => {
-      this.notifSignal.set(null);
-    }, 60000);
+
+    // le timeout automatique uniquement pour les notifications non-loading
+    if (notif.type !== 'loading') {
+      this.timeout = setTimeout(() => {
+        this.notifSignal.set(null);
+      }, 3000);
+    }
+    // pour 'loading' → closeNotification() sera appelé manuellement
+  }
+
+  closeNotification(): void {
+    this.notifSignal.set(null);
   }
 }
 

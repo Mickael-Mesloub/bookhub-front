@@ -39,7 +39,7 @@ export class SaveBookForm {
   protected saveBook(bookData: BookFormData): void {
     this.bookService.saveBook(bookData).subscribe({
       next: (response: ApiResponse<Book>) => {
-        this.notificationService.show({
+        this.notificationService.openNotification({
           type: 'alert-success',
           message: response.message,
         });
@@ -47,7 +47,7 @@ export class SaveBookForm {
       },
       error: (response: ApiErrorResponse) => {
         console.error('ERROR IN saveBook() : ', response);
-        this.notificationService.show({
+        this.notificationService.openNotification({
           type: 'alert-error',
           message: response.error.message,
         });

@@ -4,15 +4,15 @@
     <div class="loading-overlay">
       <div class="loading-modal">
         <div class="loading-text">
-          <p>En cours de chargement...</p>
+          <p>{{ notif.message }}</p>
         </div>
-        <div class="spinner">
-        </div>
+        <div class="spinner"></div>
       </div>
     </div>
+
   } @else {
-    <div class="alert" [class]="notifMsg()!.type">
-      {{ notifMsg()!.message }}
+    <div class="alert" [class]="notif.type">
+      {{ notif.message }}
     </div>
   }
 }
