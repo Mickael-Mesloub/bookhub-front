@@ -1,12 +1,12 @@
 import { Component, inject, signal } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../../domains/users/services/auth-service';
-import { RegisterForm } from '../../../domains/users/models/auth-models';
 import { NotificationService } from '../../../components/shared/notification/service/notification-service';
+import { SlicePipe, UpperCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, SlicePipe, UpperCasePipe],
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
@@ -19,6 +19,7 @@ export class Header {
   readonly currentUser = this.authService.currentUser;
 
   links = [
+    // le simple fait d'aller sur la page Catalog déclenche this.fetchAllBooks(); qui est dans ngOnInit
     { label: 'Catalogue', path: '/', exact: true, restricted: false },
     {
       label: "S'inscrire",
@@ -39,7 +40,7 @@ export class Header {
       path: '/profile',
       exact: true,
       restricted: true,
-      isAuthenticated: true
+      isAuthenticated: true,
     },
     {
       label: 'Se déconnecter',
@@ -48,7 +49,7 @@ export class Header {
       restricted: true,
       isAuthenticated: true,
     },
-    { label: 'Dashboard', path: '/dashboard' }
+    { label: 'Dashboard', path: '/dashboard' },
   ];
 
   isMenuOpen = signal(false);
@@ -63,7 +64,7 @@ export class Header {
 
   logout() {
     const success = this.authService.logout();
-    this.notificationService.show({
+    this.notificationService.openNotification({
       type: success ? 'alert-success' : 'alert-info',
       message: success ? 'Déconnexion réussie' : 'Aucun utilisateur connecté',
     });
