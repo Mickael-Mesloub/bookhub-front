@@ -8,7 +8,7 @@
         <p>
           Bonjour
           {{ currentUser()?.firstname }}
-          {{ currentUser()?.lastname?.charAt(0)?.toUpperCase() }} !
+          {{ currentUser()?.lastname | slice:0:1 | uppercase }} !
         </p>
       }
 
