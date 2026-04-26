@@ -43,6 +43,31 @@ export enum BookCategory {
   WAR = "Guerre",
 }
 
+export enum AvailabilityCategory{
+  NOW = "Actuellement disponible",
+  RESA = "Disponible à la réservation"
+}
+
+// -------------------------------------------------------------------------------------------
+// Création d'un MAPPED TYPE - clés dynamiques, calculées depuis E
+// -------------------------------------------------------------------------------------------
+// les [] : les clés ne sont pas fixes — elles sont calculées dynamiquement à partir de keyof E
+// on crée un objet dynamiquement grace aux [] en indiquant q les clés sont les clé de E et la valeur est boolean
+// pour chaque clé K de E (mon Enum) la valeur est booléenne
+// -------------------------------------------------------------------------------------------
+export type TypeCreatedFromEnum<E> = {
+  [K in keyof E]: boolean;
+}
+// On ajoute ALL par dessus -> TS interdit de mélanger les clés fixes et un mapped type dans le mm objet
+export type TypeCreatedFromEnumWithALL<E> = { ALL: boolean; } & TypeCreatedFromEnum<E>;
+
+export enum SortCategory{
+  TITLE_ATOZ       = "Titre A->Z",
+  TITLE_ZTOA       = "Titre Z->A",
+  BEST_NOTE        = "Mieux notés",
+  MOST_RECENT_DATE = "Date de parution récente",
+}
+
 export enum BookState {
   NEW,
   GOOD,

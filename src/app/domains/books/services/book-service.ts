@@ -11,9 +11,12 @@ import { BookFormData } from '../models/book-form-model';
 export class BookService {
   private readonly http = inject(HttpClient);
 
-  getAllBooks(page?: number, size?: number, sort?: string): Observable<ApiResponse<PageOfBooks>> {
+  // Autre possibilité : HttpParams permet de construire des URLs en Angular — il gère l'encodage et le formatage automatiquement
+
+  // Rôle : construire l'URL et faire la requête HTTP
+  getAllBooks(page?: number, size?: number, sort?: string, search?: string, categories?: string[], availability?: string): Observable<ApiResponse<PageOfBooks>> {
     let response: string = '';
-    if (page) {
+    if (page != null) { // != null car sinon page=0 ne rentrera pas dans la condition
       if (response == '') {
         response += '?page=' + page;
       } else {
@@ -32,6 +35,30 @@ export class BookService {
         response += '?sort=' + sort;
       } else {
         response += '&sort=' + sort;
+      }
+    }
+    if (search) {
+      if (response == '') {
+        response += '?search=' + search;
+      } else {
+        response += '&search=' + search;
+      }
+    }
+    // & Spring voit plusieurs paramètres avec le même nom et les regroupe automatiquement dans la liste :
+    if (categories !== null && categories !== undefined && !categories?.includes('ALL')) {
+      for (const cat of categories) {
+        if (response == '') {
+          response += '?categories=' + cat;
+        } else {
+          response += '&categories=' + cat;
+        }
+      }
+    }
+    if (availability !== null && availability !== undefined && availability !== 'ALL') {
+      if (response == '') {
+        response += '?availability=' + availability;
+      } else {
+        response += '&availability=' + availability;
       }
     }
 

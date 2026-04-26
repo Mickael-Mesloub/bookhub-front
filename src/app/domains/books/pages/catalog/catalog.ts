@@ -1,51 +1,97 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, computed, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { BookCard } from '../../components/book-card/book-card';
 import { BookService } from '../../services/book-service';
-import { Book, PageOfBooks } from '../../models/book-models';
+import { PageOfBooks } from '../../models/book-models';
 import { ApiResponse } from '../../../../config/api/api';
-import { Button } from '../../../../components/shared/button/button';
 import { BookSearch } from '../../components/book-search/book-search';
-
+import { NotificationService } from '../../../../components/shared/notification/service/notification-service';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-catalog',
-  imports: [BookCard, Button, BookSearch],
+  imports: [BookCard, BookSearch],
   templateUrl: './catalog.html',
   styleUrl: './catalog.scss',
 })
 export class Catalog implements OnInit {
   bookService: BookService = inject(BookService);
-  books: Book[] = [];
-  bookPage!: PageOfBooks;
-  currentPage: number = 0;
+  notificationService: NotificationService = inject(NotificationService);
+
+  // déclaration des signaux
+  protected bookPage: WritableSignal<PageOfBooks | null> = signal(null);
+  readonly books = computed(() => this.bookPage()?.content ?? []);
+  readonly currentPage = computed(() => this.bookPage()?.number ?? 0);
+
+  // récupération des filtres en cours via un signal
+  private currentFiltersAndSorts = signal<{
+    search?: string,
+    categories?: string[],
+    availability?: string,
+    sort?: string,
+  }>({});
 
   ngOnInit() {
-    this.fetchAllBooks();
+    // this.fetchAllBooks(); -- à voir si on peut le suppr ? sinon plusieurs requêtes simultanées
   }
 
-  fetchAllBooks(page?: number, size?: number, sort?: string): void {
-    this.bookService.getAllBooks(page, size, sort).subscribe({
+  // Rôle : appeler le service et stocker les résultats
+  fetchAllBooks(page: number = 0, size: number = 20): void {
+    // avant un async: écran de chargement...
+    this.notificationService.openNotification({
+      type: 'loading',
+      message: "Nous recherchons les livres en rayons..."})
+    // async
+    this.bookService.getAllBooks(
+      page, size,
+      this.currentFiltersAndSorts().sort,
+      this.currentFiltersAndSorts().search,
+      this.currentFiltersAndSorts().categories,
+      this.currentFiltersAndSorts().availability).pipe(
+        delay(900) // ← attend au minimum 500ms avant de traiter la réponse (réponse trop rapide en local, pas le temps de voir la modale)
+    ).subscribe({
       next: (response: ApiResponse<PageOfBooks>) => {
-        this.bookPage = response.data;
-        this.books = response.data.content;
-        this.currentPage = this.bookPage.number;
+        this.bookPage.set(response.data);
+        // à la fin de l'appel API (success ou error) : fermer écran de chargement
+        this.notificationService.closeNotification();
       },
-      error: (err) => console.error('Failed to fetch books: ', err),
+      error: (err) => {
+        console.error('Failed to fetch books: ', err);
+        // à la fin de l'appel API (success ou error) : fermer écran de chargement
+        this.notificationService.closeNotification();
+      },
     });
   }
 
+  // il faut que le clic sur next / previous page on récupère les filtres en cours => via le signal booPage()
+
   nextPage(): void {
-    if (this.currentPage < this.bookPage.totalPages) {
-      this.currentPage++;
-      this.fetchAllBooks(this.currentPage);
+    const page = this.bookPage();
+    if (!page) return;
+    if (page.number < page.totalPages - 1) {
+      this.fetchAllBooks(page.number + 1);
     }
   }
 
   previousPage(): void {
-    if (this.currentPage > 0) {
-      this.currentPage--;
-      this.fetchAllBooks(this.currentPage);
+    const page = this.bookPage();
+    if (!page) return;
+    if (page.number > 0) {
+      this.fetchAllBooks(page.number - 1);
     }
+  }
+
+  // Si undefined → le paramètre n'est pas envoyé dans l'URL → Spring applique sa defaultValue.
+  // Rôle : recevoir les données et appeler fetchAllBooks
+  // je garde handleSearch car sinon je dois insérer event dans fetchAllBook et il doit fonctionner sans aussi
+  handleSearch(event: { search: string, categories: string[], availability: string, sort: string }) {
+    // on mémorise les filtres
+    this.currentFiltersAndSorts.set({
+      search: event.search,
+      categories: event.categories,
+      availability: event.availability,
+      sort: event.sort
+    });
+    this.fetchAllBooks(0); // on affiche la 1ère page des résultats de recherche à chaque nouvelle recherche
   }
 }
 

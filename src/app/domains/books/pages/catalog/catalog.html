@@ -1,16 +1,16 @@
 <h2>Notre Catalogue</h2>
 
-<app-book-search />
+<app-book-search (searchTriggered)="handleSearch($event)" />
 
-@if (bookPage.totalElements > bookPage.size) {
+@if (bookPage() && bookPage()!.totalElements > bookPage()!.size) {
   <div class="grid grid-cols-3 gap-8 p-8">
-    @if (currentPage != 0) {
+    @if (currentPage() != 0) {
       <p (click)="previousPage()" class="text-center underline">Page Précédente</p>
     } @else {
       <p></p>
     }
-    <p class="text-center">{{ currentPage + 1 }} / {{ bookPage.totalPages }}</p>
-    @if (currentPage != bookPage.totalPages) {
+    <p class="text-center">{{ currentPage() + 1 }} / {{ bookPage()!.totalPages }}</p>
+    @if (!bookPage()?.last) {
       <p class="text-center underline" (click)="nextPage()">Page Suivante</p>
     } @else {
       <p></p>
@@ -22,26 +22,30 @@
   <div
     class="grid grid-cols-1 gap-8 p-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
   >
-    @for (book of books; track book.isbn) {
+    @for (book of books(); track book.isbn) {
       <app-book-card
         class="transform cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105"
         [book]="book"
       ></app-book-card>
+    } @empty {
+      <p class="text-gray-50 col-span-4 text-center">
+        Aucun livre trouvé pour votre recherche.
+      </p>
     }
   </div>
 } @placeholder {
   <p class="text-gray-50">LOADING...</p>
 }
 
-@if (bookPage.totalElements > bookPage.size) {
+@if (bookPage() && bookPage()!.totalElements > bookPage()!.size) {
   <div class="grid grid-cols-3 gap-8 p-8">
-    @if (currentPage != 0) {
+    @if (currentPage() != 0) {
       <p (click)="previousPage()" class="text-center underline">Page Précédente</p>
     } @else {
       <p></p>
     }
-    <p class="text-center">{{ currentPage + 1 }} / {{ bookPage.totalPages }}</p>
-    @if (currentPage != bookPage.totalPages) {
+    <p class="text-center">{{ currentPage() + 1 }} / {{ bookPage()!.totalPages }}</p>
+    @if (!bookPage()?.last) {
       <p class="text-center underline" (click)="nextPage()">Page Suivante</p>
     } @else {
       <p></p>
