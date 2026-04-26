@@ -79,14 +79,14 @@ export class Auth {
   private login(data: RegisterForm) {
     this.authService.login(data.username, data.password).subscribe({
       next: (response) => {
-        this.notificationService.show({
+        this.notificationService.openNotification({
           type: 'alert-success',
           message: 'Connexion réussie',
         });
         this.router.navigate(['/books']);
       },
       error: (err) => {
-        this.notificationService.show({
+        this.notificationService.openNotification({
           type: 'alert-error',
           message: 'Erreur de login',
         });
@@ -97,14 +97,14 @@ export class Auth {
   private register(data: RegisterForm) {
     this.authService.register(data).subscribe({
       next: () => {
-        this.notificationService.show({
+        this.notificationService.openNotification({
           type: 'alert-success',
           message: 'Compte créé avec succès',
         });
         this.router.navigate(['/auth/login']);
       },
       error: () => {
-        this.notificationService.show({
+        this.notificationService.openNotification({
           type: 'alert-error',
           message: "Erreur lors de l'inscription",
         });
