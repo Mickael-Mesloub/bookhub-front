@@ -9,15 +9,13 @@ import { BookService } from './book-service';
 @Injectable({
   providedIn: 'root',
 })
-export class CreateBookService {
+export class UpdateBookService {
   private readonly bookService: BookService = inject(BookService);
   private readonly notificationService: NotificationService = inject(NotificationService);
   private readonly router: Router = inject(Router);
 
-  book: WritableSignal<Book | undefined> = signal<Book | undefined>(undefined);
-
-  createBook(bookData: BookFormData): void {
-    this.bookService.createBook(bookData).subscribe({
+  updateBook(bookId: number, bookData: BookFormData): void {
+    this.bookService.updateBook(bookId, bookData).subscribe({
       next: (response: ApiResponse<Book>) => {
         this.notificationService.show({
           type: 'alert-success',

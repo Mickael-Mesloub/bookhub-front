@@ -51,6 +51,6 @@ export class Catalog implements OnInit {
   }
 
   goToEditBook(book: Book): void {
-    this.router.navigateByUrl(`/detail/${book.isbn}/edit`);
+    this.router.navigateByUrl(`/books/${book.id}/update`);
   }
 }

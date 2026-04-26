@@ -13,13 +13,18 @@ const ISBN_MIN_LENGTH: number = 10;
 const ISBN_MAX_LENGTH: number = 13;
 
 // ********** TYPE FOR BOOK FORM DATA ********** \\
-export type CreateBookFormData = Pick<Book, 'title' | 'author' | 'description' | 'isbn'> & {
+export type BookFormData = Pick<Book, 'title' | 'author' | 'description' | 'isbn'> & {
   category: BookCategory | '';
 };
 
-// ********** MODEL ********** \\
-export function createBookModel(): WritableSignal<CreateBookFormData> {
-  return signal<CreateBookFormData>({
+export type BookCategoryOption = {
+  key: string;
+  value: BookCategory;
+}
+
+// ********** CREATE BOOK FORM MODEL ********** \\
+export function createBookModel(): WritableSignal<BookFormData> {
+  return signal<BookFormData>({
     title: '',
     author: '',
     category: '',
@@ -28,8 +33,19 @@ export function createBookModel(): WritableSignal<CreateBookFormData> {
   });
 }
 
+// ********** UPDATE BOOK FORM MODEL ********** \\
+export function updateBookModel(book: Book): WritableSignal<BookFormData> {
+  return signal<BookFormData>({
+    title: book.title,
+    author: book.author,
+    category: book.category.category ?? '',
+    description: book.description ?? '',
+    isbn: book.isbn,
+  });
+}
+
 // ********** SCHEMA FOR FORM VALIDATION ********** \\
-export function createBookFormSchema(schema: SchemaPathTree<CreateBookFormData>) {
+export function createBookFormSchema(schema: SchemaPathTree<BookFormData>) {
   required(schema.title, { message: 'Le titre est obligatoire' });
   minLength(schema.title, TITLE_MIN_LENGTH, {
     message: `Le titre doit contenir ${TITLE_MIN_LENGTH} caractères minimum`,

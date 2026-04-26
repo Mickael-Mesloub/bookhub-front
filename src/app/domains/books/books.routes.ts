@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { UpdateBookPage } from './pages/update-book-page/update-book-page';
+import { bookResolver } from './resolvers/bookResolver';
 
 export const BOOK_ROUTES: Routes = [
   { path: '', loadComponent: () => import('./pages/catalog/catalog').then((c) => c.Catalog) },
@@ -11,9 +13,11 @@ export const BOOK_ROUTES: Routes = [
     loadComponent: () =>
       import('./pages/create-book-page/create-book-page').then((c) => c.CreateBookPage),
   },
-  // {
-  //   path: 'detail/:isbn/edit',
-  //   loadComponent: () =>
-  //     import('./pages/create-book-page/create-book-page').then((c) => c.SaveBookPage),
-  // },
+  {
+    path: 'books/:id/update',
+    component: UpdateBookPage,
+    resolve: {
+      book: bookResolver,
+    },
+  },
 ];

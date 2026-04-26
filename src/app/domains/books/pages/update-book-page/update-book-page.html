@@ -1,0 +1,96 @@
+<section class="flex w-full flex-col items-center justify-center">
+  <article class="w-full rounded-2xl bg-gray-800/80 p-8 md:max-w-140 md:p-12">
+    <h2 class="mb-6">Modifier le livre</h2>
+
+    <form class="flex flex-col gap-6">
+      <!-- docs: https://angular.love/signal-forms-in-angular-21-complete-guide -->
+      <!------- ISBN ------->
+      <app-custom-input
+        id="isbn"
+        label="ISBN"
+        [formField]="form.isbn"
+        placeholder="ISBN du livre"
+      />
+
+      <!------- TITLE ------->
+      <app-custom-input
+        id="title"
+        label="Titre"
+        [formField]="form.title"
+        placeholder="Titre du livre"
+      />
+
+      <!------- AUTHOR ------->
+      <app-custom-input
+        id="author"
+        label="Auteur"
+        [formField]="form.author"
+        placeholder="Auteur du livre"
+      />
+
+      <!------- DESCRIPTION ------->
+      <div class="flex flex-col gap-2">
+        <label for="description" class="font-bold">Description</label>
+        <textarea
+          [formField]="form.description"
+          class="block w-full rounded-lg border border-gray-700 bg-gray-700 p-3.5 text-base text-gray-50 shadow-xs placeholder:text-gray-400 focus:border-gray-50 focus:ring-gray-50"
+          type="text"
+          id="description"
+          placeholder="De quoi parle ce livre..."
+          rows="6"
+          [ngClass]="{
+            'border-2 border-red-500':
+              form.description().invalid() &&
+              (form.description().dirty() || form.description().touched()),
+            'border-2 border-green-700':
+              !form.description().invalid() && form.description().dirty(),
+          }"
+        ></textarea>
+        @if (form.description().touched() && form.description().invalid()) {
+          <ul>
+            @for (error of form.description().errors(); track error.kind) {
+              <li class="pl-2 text-sm text-red-400">{{ error.message }}</li>
+            }
+          </ul>
+        }
+      </div>
+
+      <!------- CATEGORY ------->
+      <div class="flex flex-col gap-2">
+        <label for="category" class="font-bold"
+          >Catégorie
+          <span class="text-red-400">&#42;</span>
+        </label>
+        <select
+          [formField]="form.category"
+          id="category"
+          class="block w-full rounded-lg bg-gray-700 p-3.5 text-base text-gray-50 shadow-xs placeholder:text-gray-400 focus:border-gray-50 focus:ring-gray-50"
+          [ngClass]="{
+            'border-2 border-red-500':
+              form.category().invalid() && (form.category().dirty() || form.category().touched()),
+            'border-2 border-green-700': !form.category().invalid() && form.category().dirty(),
+          }"
+        >
+          <option disabled selected value="">Choisissez une catégorie</option>
+          @for (c of categoryOptions; track c.key) {
+            <option [value]="c.value">{{ c.key }}</option>
+          }
+        </select>
+        @if (form.category().touched() && form.category().invalid()) {
+          <ul>
+            @for (error of form.category().errors(); track error.kind) {
+              <li class="pl-2 text-sm text-red-400">{{ error.message }}</li>
+            }
+          </ul>
+        }
+      </div>
+
+      <!-- TODO : responsive -->
+      <!------- BACK BUTTON ------->
+      <app-button label="Retour" [goBackButton]="true" />
+
+      <!------- SUBMIT BUTTON ------->
+      <app-button label="Enregistrer" (clickAction)="onSubmit()" [disabled]="form().invalid()" />
+    </form>
+  </article>
+</section>
