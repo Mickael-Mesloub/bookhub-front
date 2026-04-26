@@ -1,4 +1,4 @@
-import { inject, Injectable, signal, WritableSignal } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotificationService } from '../../../components/shared/notification/service/notification-service';
 import { ApiErrorResponse, ApiResponse } from '../../../config/api/api';
@@ -21,7 +21,7 @@ export class UpdateBookService {
           type: 'alert-success',
           message: response.message,
         });
-        this.router.navigate(['/dashboard']);
+        this.router.navigateByUrl(`/detail/${bookData.isbn}`);
       },
       error: (response: ApiErrorResponse) => {
         console.error('ERROR IN createBook() : ', response);
