@@ -1,0 +1,40 @@
+@if (isAuthenticated()) {
+  <form class="flex flex-col gap-6">
+    <!-- docs: https://angular.love/signal-forms-in-angular-21-complete-guide -->
+
+    <!------- SCORE ------->
+    <div>
+      <span>Note: </span>
+      <input type="number" [formField]="form.score" />
+      <span> / 10</span>
+    </div>
+    <!------- COMMENT ------->
+    <div class="flex flex-col gap-2">
+      <label for="description" class="font-bold">Commentaire</label>
+      <textarea
+        [formField]="form.comment"
+        class="block w-full rounded-lg border border-gray-700 bg-gray-700 p-3.5 text-base text-gray-50 shadow-xs placeholder:text-gray-400 focus:border-gray-50 focus:ring-gray-50"
+        type="text"
+        id="description"
+        placeholder="Qu'avez vous pensé de ce roman?"
+        rows="6"
+        [ngClass]="{
+          'border-2 border-red-500':
+            form.comment().invalid() && (form.comment().dirty() || form.comment().touched()),
+          'border-2 border-green-700': !form.comment().invalid() && form.comment().dirty(),
+        }"
+      ></textarea>
+      @if (form.comment().touched() && form.comment().invalid()) {
+        <ul>
+          @for (error of form.comment().errors(); track error.kind) {
+            <li class="pl-2 text-sm text-red-400">{{ error.message }}</li>
+          }
+        </ul>
+      }
+    </div>
+    <app-button label="Enregistrer" (clickAction)="onSubmit()" [disabled]="form().invalid()" />
+  </form>
+} @else {
+  <p>Vous devez être connecté pour pouvoir laisser un commentaire.</p>
+  <app-button label="Se Connecter" (clickAction)="goToLogin()" [disabled]="false"></app-button>
+}

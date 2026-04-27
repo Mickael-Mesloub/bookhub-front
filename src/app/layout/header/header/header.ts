@@ -26,8 +26,8 @@ export class Header {
   readonly isAuthenticated = this.authService.isAuthenticated;
   readonly currentUser = this.authService.currentUser;
 
-    // le simple fait d'aller sur la page Catalog déclenche this.fetchAllBooks(); qui est dans ngOnInit
- links: HeaderLink[] = [
+  // le simple fait d'aller sur la page Catalog déclenche this.fetchAllBooks(); qui est dans ngOnInit
+  links: HeaderLink[] = [
     { label: 'Catalogue', path: '/', exact: true, restricted: false, isAuthenticated: false },
     {
       label: "S'inscrire",
@@ -42,13 +42,6 @@ export class Header {
       exact: true,
       restricted: true,
       isAuthenticated: false,
-    },
-    {
-      label: 'Mon profil',
-      path: '/profile',
-      exact: true,
-      restricted: true,
-      isAuthenticated: true,
     },
     {
       label: 'Se déconnecter',
