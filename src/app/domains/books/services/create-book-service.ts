@@ -19,7 +19,7 @@ export class CreateBookService {
   createBook(bookData: BookFormData): void {
     this.bookService.createBook(bookData).subscribe({
       next: (response: ApiResponse<Book>) => {
-        this.notificationService.show({
+        this.notificationService.openNotification({
           type: 'alert-success',
           message: response.message,
         });
@@ -27,7 +27,7 @@ export class CreateBookService {
       },
       error: (response: ApiErrorResponse) => {
         console.error('ERROR IN createBook() : ', response);
-        this.notificationService.show({
+        this.notificationService.openNotification({
           type: 'alert-error',
           message: response.error.message,
         });
