@@ -58,7 +58,7 @@ export const BookCategoryOptionLabels: Record<BookCategory, string> = {
 
 export enum AvailabilityCategory{
   NOW = "Actuellement disponible",
-  RESA = "Disponible à la réservation"
+  RESA = "Disponible sur liste d'attente"
 }
 
 // -------------------------------------------------------------------------------------------
@@ -78,7 +78,7 @@ export enum SortCategory{
   TITLE_ATOZ       = "Titre A->Z",
   TITLE_ZTOA       = "Titre Z->A",
   BEST_NOTE        = "Mieux notés",
-  MOST_RECENT_DATE = "Date de parution récente",
+  // MOST_RECENT_DATE = "Date de parution récente",
 }
 
 export enum BookState {
