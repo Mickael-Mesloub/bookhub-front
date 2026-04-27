@@ -12,6 +12,7 @@ import { LoanService } from '../../../loans/services/loan-service';
 import { ApiResponse, ApiErrorResponse } from '../../../../config/api/api';
 import { Book } from '../../../books/models/book-models';
 import { NgClass } from '@angular/common';
+import { UserService } from '../../../users/services/user-service';
 
 @Component({
   selector: 'app-review-form',
@@ -23,6 +24,7 @@ export class ReviewForm {
   book: InputSignal<Book> = input.required<Book>();
   authService: AuthService = inject(AuthService);
   loanService: LoanService = inject(LoanService);
+  userService: UserService = inject(UserService);
   readonly currentUser = this.authService.currentUser;
   readonly isAuthenticated = this.authService.isAuthenticated;
   private readonly notificationService: NotificationService = inject(NotificationService);
@@ -47,7 +49,7 @@ export class ReviewForm {
     if (!this.isAuthenticated()) {
       this.goToLogin();
     }
-    reviewFormData.username = this.loanService.checkUsernameValid(this.currentUser()?.username);
+    reviewFormData.username = this.userService.checkUsernameValid(this.currentUser()?.username);
     if (reviewFormData.username != '') {
       reviewFormData.bookISBN = this.book().isbn;
       this.reviewService.createReview(reviewFormData).subscribe({
