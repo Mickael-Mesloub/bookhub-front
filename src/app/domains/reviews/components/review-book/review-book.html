@@ -1,33 +1,44 @@
-<div class="bg-neutral-primary-soft block max-w-sm p-6 border border-default rounded-base shadow-xs">
-<div class="bg-neutral-primary-soft block max-w-sm p-6 border border-default rounded-base shadow-xs">
-  <h6>TODO: AJOUTER COMMENTAIRE IF CONNECTE</h6>
-</div>
-@if(reviewPage.totalElements > reviewPage.size){
-<div class="grid grid-cols-3 p-8 gap-8">
-    <p (click)="previousPage()" class="text-center underline">Page Précédente</p>
-    <p class="text-center">{{ currentPage + 1 }} / {{ reviewPage.totalPages }}</p>
-    <p class="text-center underline" (click)="nextPage()">Page Suivante</p>
-</div>
-}
+<div
+  class="bg-neutral-primary-soft border-default rounded-base block max-w-sm border p-6 shadow-xs"
+>
+  <div
+    class="bg-neutral-primary-soft border-default rounded-base block max-w-sm border p-6 shadow-xs"
+  >
+    <!-- TODO: afficher form uniquement si l'utilisateur a déjà emprunté le livre -->
+    <app-review-form [book]="book()"></app-review-form>
+  </div>
+  @if (reviewPage.numberOfElements > 1) {
+    <div
+      class="bg-neutral-primary-soft border-default rounded-base block max-w-sm border p-6 shadow-xs"
+    >
+      Note moyenne du livre: TODO
+    </div>
+  }
 
-@defer (on timer(1000)) {
-@if(bookReviews.length > 0){
-    @for (review of bookReviews; track review.id) {
-      <app-review-card [review]="review"></app-review-card>
+  @if (reviewPage.totalElements > reviewPage.size) {
+    <div class="grid grid-cols-3 gap-8 p-8">
+      <p (click)="previousPage()" class="text-center underline">Page Précédente</p>
+      <p class="text-center">{{ currentPage + 1 }} / {{ reviewPage.totalPages }}</p>
+      <p class="text-center underline" (click)="nextPage()">Page Suivante</p>
+    </div>
+  }
+  @defer (on timer(1000)) {
+    @if (reviewPage.content.length > 0) {
+      @for (review of reviewPage.content; track review.id) {
+        <app-review-card [review]="review"></app-review-card>
+      }
+    } @else {
+      <div>Il n'y a pas encore de reviews pour ce livre</div>
     }
-}
-@else {
-    <div>Il n'y a pas encore de reviews pour ce livre</div>
-}
-}
- @placeholder {
-  <p class="text-gray-50">LOADING...</p>
-}
+  } @placeholder {
+    <p class="text-gray-50">LOADING...</p>
+  }
 </div>
-@if(reviewPage.totalElements > reviewPage.size){
-<div class="grid grid-cols-3 p-8 gap-8">
+
+@if (reviewPage.totalElements > reviewPage.size) {
+  <div class="grid grid-cols-3 gap-8 p-8">
     <p (click)="previousPage()" class="text-center underline">Page Précédente</p>
     <p class="text-center">{{ currentPage + 1 }} / {{ reviewPage.totalPages }}</p>
     <p class="text-center underline" (click)="nextPage()">Page Suivante</p>
-</div>
+  </div>
 }

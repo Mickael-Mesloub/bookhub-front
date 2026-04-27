@@ -1,22 +1,20 @@
-import { Book, Pageable, Sort } from "../../books/models/book-models";
-import { User } from "../../users/models/user-models";
+import { Book, Pageable, Sort } from '../../books/models/book-models';
+import { User } from '../../users/models/user-models';
 
-export interface ReviewModels {
-
-}
+export interface ReviewModels {}
 
 export interface PageOfReviews {
-      content: Review[];
-      pageable: Pageable;
-      last: boolean;
-      totalPages: number;
-      totalElements: number;
-      size: number;
-      number: number;
-      sort: Sort;
-      numberOfElements: number;
-      first: boolean;
-      empty: boolean;
+  content: Review[];
+  pageable: Pageable;
+  last: boolean;
+  totalPages: number;
+  totalElements: number;
+  size: number;
+  number: number;
+  sort: Sort;
+  numberOfElements: number;
+  first: boolean;
+  empty: boolean;
 }
 
 export interface Review {
@@ -25,5 +23,12 @@ export interface Review {
   score: number;
   book: Book;
   user: User;
-  datePublished: Date
+  datePublished: Date;
+}
+
+export interface ReviewFormData {
+  comment: string;
+  score: number;
+  bookISBN: string;
+  username: string;
 }
