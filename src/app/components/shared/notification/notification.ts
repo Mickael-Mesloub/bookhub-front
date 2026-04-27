@@ -8,6 +8,6 @@ import { NotificationService } from './service/notification-service';
   styleUrl: './notification.scss',
 })
 export class Notification {
-  private notificationService = inject(NotificationService);
+  private readonly notificationService = inject(NotificationService);
   notifMsg = this.notificationService.notifMsg;
 }
