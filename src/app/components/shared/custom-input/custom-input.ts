@@ -1,12 +1,12 @@
 import { NgClass } from '@angular/common';
 import { Component, input, model } from '@angular/core';
-import { FormField, FormValueControl, ValidationError } from '@angular/forms/signals';
+import { FormValueControl, ValidationError } from '@angular/forms/signals';
 
 type TextInputType = "text" | "email" | "password";
 
 @Component({
   selector: 'app-custom-input',
-  imports: [FormField, NgClass],
+  imports: [NgClass],
   templateUrl: './custom-input.html',
   styleUrl: './custom-input.scss',
 })
