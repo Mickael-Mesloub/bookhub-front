@@ -13,13 +13,6 @@ export class LoanService {
   bookCopyService: BookCopyService = inject(BookCopyService);
   constructor(private readonly http: HttpClient) {}
 
-  checkUsernameValid(username: string | undefined): string {
-    if (username != undefined) {
-      return username;
-    }
-    return '';
-  }
-
   checkAvailable(copies: BookCopy[]): boolean {
     return this.bookCopyService.checkAvailable(copies);
   }

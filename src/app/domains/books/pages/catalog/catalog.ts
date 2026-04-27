@@ -24,10 +24,10 @@ export class Catalog implements OnInit {
 
   // récupération des filtres en cours via un signal
   private currentFiltersAndSorts = signal<{
-    search?: string,
-    categories?: string[],
-    availability?: string,
-    sort?: string,
+    search?: string;
+    categories?: string[];
+    availability?: string;
+    sort?: string;
   }>({});
 
   ngOnInit() {
@@ -39,27 +39,33 @@ export class Catalog implements OnInit {
     // avant un async: écran de chargement...
     this.notificationService.openNotification({
       type: 'loading',
-      message: "Nous recherchons les livres en rayons..."})
-    // async
-    this.bookService.getAllBooks(
-      page, size,
-      this.currentFiltersAndSorts().sort,
-      this.currentFiltersAndSorts().search,
-      this.currentFiltersAndSorts().categories,
-      this.currentFiltersAndSorts().availability).pipe(
-        // delay(900) // ← attend au minimum 500ms avant de traiter la réponse (réponse trop rapide en local, pas le temps de voir la modale)
-    ).subscribe({
-      next: (response: ApiResponse<PageOfBooks>) => {
-        this.bookPage.set(response.data);
-        // à la fin de l'appel API (success ou error) : fermer écran de chargement
-        this.notificationService.closeNotification();
-      },
-      error: (err) => {
-        console.error('Failed to fetch books: ', err);
-        // à la fin de l'appel API (success ou error) : fermer écran de chargement
-        this.notificationService.closeNotification();
-      },
+      message: 'Nous recherchons les livres en rayons...',
     });
+    // async
+    this.bookService
+      .getAllBooks(
+        page,
+        size,
+        this.currentFiltersAndSorts().sort,
+        this.currentFiltersAndSorts().search,
+        this.currentFiltersAndSorts().categories,
+        this.currentFiltersAndSorts().availability,
+      )
+      .pipe
+      // delay(900) // ← attend au minimum 500ms avant de traiter la réponse (réponse trop rapide en local, pas le temps de voir la modale)
+      ()
+      .subscribe({
+        next: (response: ApiResponse<PageOfBooks>) => {
+          this.bookPage.set(response.data);
+          // à la fin de l'appel API (success ou error) : fermer écran de chargement
+          this.notificationService.closeNotification();
+        },
+        error: (err) => {
+          console.error('Failed to fetch books: ', err);
+          // à la fin de l'appel API (success ou error) : fermer écran de chargement
+          this.notificationService.closeNotification();
+        },
+      });
   }
 
   // il faut que le clic sur next / previous page on récupère les filtres en cours => via le signal booPage()
@@ -83,16 +89,19 @@ export class Catalog implements OnInit {
   // Si undefined → le paramètre n'est pas envoyé dans l'URL → Spring applique sa defaultValue.
   // Rôle : recevoir les données et appeler fetchAllBooks
   // je garde handleSearch car sinon je dois insérer event dans fetchAllBook et il doit fonctionner sans aussi
-  handleSearch(event: { search: string, categories: string[], availability: string, sort: string }) {
+  handleSearch(event: {
+    search: string;
+    categories: string[];
+    availability: string;
+    sort: string;
+  }) {
     // on mémorise les filtres
     this.currentFiltersAndSorts.set({
       search: event.search,
       categories: event.categories,
       availability: event.availability,
-      sort: event.sort
+      sort: event.sort,
     });
     this.fetchAllBooks(0); // on affiche la 1ère page des résultats de recherche à chaque nouvelle recherche
   }
-
 }
-
