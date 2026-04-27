@@ -1,15 +1,11 @@
-import { Component, computed, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { BookService } from '../../services/book-service';
-import { PageOfBooks } from '../../models/book-models';
-import { ApiResponse } from '../../../../config/api/api';
-import { Component, inject, OnInit, signal } from '@angular/core';
-import { ApiResponse } from '../../../../config/api/api';
+import { Component, computed, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { BookCard } from '../../components/book-card/book-card';
 import { BookSearch } from '../../components/book-search/book-search';
 import { NotificationService } from '../../../../components/shared/notification/service/notification-service';
+import { PageOfBooks } from '../../models/book-models';
 import { delay } from 'rxjs';
-import { Book, PageOfBooks } from '../../models/book-models';
-import { BookService } from '../../services/book-service';
+import { ApiResponse } from '../../../../config/api/api';
 
 @Component({
   selector: 'app-catalog',
