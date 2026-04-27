@@ -47,7 +47,7 @@ export class Catalog implements OnInit {
       this.currentFiltersAndSorts().search,
       this.currentFiltersAndSorts().categories,
       this.currentFiltersAndSorts().availability).pipe(
-        delay(900) // ← attend au minimum 500ms avant de traiter la réponse (réponse trop rapide en local, pas le temps de voir la modale)
+        // delay(900) // ← attend au minimum 500ms avant de traiter la réponse (réponse trop rapide en local, pas le temps de voir la modale)
     ).subscribe({
       next: (response: ApiResponse<PageOfBooks>) => {
         this.bookPage.set(response.data);
