@@ -9,5 +9,5 @@ import { Review } from '../../models/review-models';
   styleUrl: './review-card.scss',
 })
 export class ReviewCard {
-  review = input<Review>()
+  review = input<Review>();
 }

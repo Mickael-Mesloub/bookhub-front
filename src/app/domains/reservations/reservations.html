@@ -1,0 +1,16 @@
+<section>
+<!--  @if (isAuthenticated()) {-->
+    <h3>Mes réservations</h3>
+    <div>
+      @for (resa of reservationList()?.reservations; track resa.id) {
+        <p>Titre du livre : {{ resa.bookTitle }}</p>
+        <p>Date de la réservation : {{ resa.dateResa }}</p>
+        <p>Date de la réservation : {{ resa.dateResa }}</p>
+        <p>Rang sur la liste d'attente : {{ resa.rank }} </p>
+        <p>Statut de la réservation : {{ resa.status }}</p>
+      }
+    </div>
+<!--  } @else {-->
+    <p>Aucune réservation à afficher</p>
+<!--  }-->
+</section>

@@ -1,13 +1,15 @@
 import { Component, inject, input, InputSignal, OnInit } from '@angular/core';
 import { Book, BookCopy } from '../../../books/models/book-models';
 import { BookCopyService } from '../../../books/services/book-copy-service';
-import { API_BASE_URL, ApiResponse } from '../../../../config/api/api';
+import { ApiErrorResponse, ApiResponse } from '../../../../config/api/api';
 import { Button } from '../../../../components/shared/button/button';
 import { AuthService } from '../../../users/services/auth-service';
 import { Router } from '@angular/router';
 import { Loan, LoanDTO } from '../../loan-models';
 import { LoanService } from '../../services/loan-service';
 import { HttpClient } from '@angular/common/http';
+import { NotificationService } from '../../../../components/shared/notification/service/notification-service';
+import { ReservationService } from '../../../reservations/services/reservation-service';
 
 @Component({
   selector: 'app-loan-book',
@@ -17,6 +19,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class LoanBook implements OnInit {
   bookCopyService: BookCopyService = inject(BookCopyService);
+  reservationService: ReservationService = inject(ReservationService);
   router: Router = inject(Router);
   authService: AuthService = inject(AuthService);
   loanService: LoanService = inject(LoanService);
@@ -26,8 +29,9 @@ export class LoanBook implements OnInit {
 
   readonly isAuthenticated = this.authService.isAuthenticated;
   readonly currentUser = this.authService.currentUser;
+  private readonly notificationService: NotificationService = inject(NotificationService);
 
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
 
   ngOnInit() {
     this.fetchAllCopies(this.book().isbn);
@@ -42,25 +46,31 @@ export class LoanBook implements OnInit {
     });
   }
 
-  addToWishlist() {
-    console.log('AJOUT A LA WISHLIST, UN JOUR');
+  addToWishlist(): void {
+    this.reservationService.addToWishlist(this.book().id)
   }
 
-  loanBook() {
-    let loanDTO!: LoanDTO;
+  loanBook(): void {
+    let loanDTO: LoanDTO = { username: '', isbn: '' };
     // TODO: remplacer par un token (un jour)
     loanDTO.username = this.loanService.checkUsernameValid(this.currentUser()?.username);
     loanDTO.isbn = this.book().isbn;
     if (loanDTO.username != '') {
-      this.http
-        .post<any>(`${API_BASE_URL} + /books/loan`, { title: 'Loan Book' })
-        .subscribe((data) => {
-          console.log('CA VA MARCHER BIENTOT');
-          // this.loan.copyId = data.copyId;
-          // this.loan.dateLoaned = data.dateLoaned;
-          // this.loan.id = data.id
-          // this.loan.userId = data.userId
-        });
+      this.loanService.createLoan(loanDTO).subscribe({
+        next: (response: ApiResponse<Loan>) => {
+          this.notificationService.openNotification({
+            type: 'alert-success',
+            message: response.message,
+          });
+        },
+        error: (response: ApiErrorResponse) => {
+          console.error('ERROR IN loanBook() : ', response);
+          this.notificationService.openNotification({
+            type: 'alert-error',
+            message: response.error.message,
+          });
+        },
+      });
     } else {
       this.goToLogin();
     }

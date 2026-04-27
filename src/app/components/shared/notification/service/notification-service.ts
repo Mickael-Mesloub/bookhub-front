@@ -3,7 +3,6 @@ import { NotificationModel } from '../models/notification-model';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService {
-
   private notifSignal = signal<NotificationModel | null>(null);
   readonly notifMsg = this.notifSignal.asReadonly();
   private timeout?: any;

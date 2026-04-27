@@ -1,5 +1,4 @@
 @if (notifMsg(); as notif) {
-
   @if (notif.type === 'loading') {
     <div class="loading-overlay">
       <div class="loading-modal">
@@ -9,7 +8,6 @@
         <div class="spinner"></div>
       </div>
     </div>
-
   } @else {
     <div class="alert" [class]="notif.type">
       {{ notif.message }}
