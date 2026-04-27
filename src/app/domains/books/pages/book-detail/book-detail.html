@@ -1,7 +1,7 @@
-<app-book-description [book]="book"></app-book-description>
+<app-book-description [book]="book()"></app-book-description>
 <div class="grid grid-cols-1 gap-8 p-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
-  <app-loan-book [book]="book"></app-loan-book>
-  <app-review-book [book]="book"></app-review-book>
+  <app-loan-book [book]="book()"></app-loan-book>
+  <app-review-book [book]="book()"></app-review-book>
 </div>
 <!-- TODO : Afficher le bouton si rôle currentUser == Librarian -->
 <app-button label="Modifier ce livre" (clickAction)="goToEditBook()" />

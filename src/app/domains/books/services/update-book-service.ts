@@ -21,7 +21,7 @@ export class UpdateBookService {
           type: 'alert-success',
           message: response.message,
         });
-        this.router.navigateByUrl(`/detail/${bookData.isbn}`);
+        this.router.navigateByUrl(`/detail/${bookId.toString()}`);
       },
       error: (response: ApiErrorResponse) => {
         console.error('ERROR IN createBook() : ', response);

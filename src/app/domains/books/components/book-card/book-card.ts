@@ -14,7 +14,7 @@ export class BookCard {
   book: InputSignal<Book> = input.required<Book>();
   bookService: BookService = inject(BookService);
 
-  navigateToDetails(isbn: string): void {
-    this.router.navigateByUrl(`/detail/${isbn}`, { state: this.book() });
+  navigateToDetails(id: string): void {
+    this.router.navigateByUrl(`/detail/${id}`);
   }
 }
