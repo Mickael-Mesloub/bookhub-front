@@ -9,11 +9,11 @@ import {
   AvailabilityCategory,
   SortCategory,
   TypeCreatedFromEnum,
+  BookCategoryOptionLabels,
 } from '../../models/book-models';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { debounceTime } from 'rxjs';
 import { Component, signal } from '@angular/core';
-import { BookCategory } from '../../models/book-models';
 
 @Component({
   selector: 'app-book-search',
@@ -72,11 +72,9 @@ export class BookSearch{
   // -------------------------------- Signals d'origine ------------------------------------
   //---> initialisation des signals de filtres
   // typeof = capture la forme de l'objet pour l'utiliser comme type
-  protected categoryFilters: WritableSignal<TypeCreatedFromEnumWithALL<typeof BookCategory>> =
-    signal(this.buildInitialFiltersAndSorts(BookCategory, 'ALL'));
+  protected categoryFilters: WritableSignal<TypeCreatedFromEnumWithALL<typeof BookCategoryOptionLabels>> = signal(this.buildInitialFiltersAndSorts(BookCategoryOptionLabels, 'ALL'));
 
-  protected availabilityFilters: WritableSignal<TypeCreatedFromEnumWithALL<typeof AvailabilityCategory>> =
-    signal(this.buildInitialFiltersAndSorts(AvailabilityCategory, 'ALL'));
+  protected availabilityFilters: WritableSignal<TypeCreatedFromEnumWithALL<typeof AvailabilityCategory>> = signal(this.buildInitialFiltersAndSorts(AvailabilityCategory, 'ALL'));
 
   protected sorts: WritableSignal<TypeCreatedFromEnumWithALL<typeof SortCategory>> =
     signal(this.buildInitialFiltersAndSorts(SortCategory, 'TITLE_ATOZ'));
@@ -86,9 +84,9 @@ export class BookSearch{
   readonly categoryFiltersList = computed(() =>
     Object.entries(this.categoryFilters())
       .map(([key, value]) => ({
-        key: key as keyof TypeCreatedFromEnumWithALL<typeof BookCategory>, // on cast ici, le template n'a plus besoin de s'en occuper !
+        key: key as keyof TypeCreatedFromEnumWithALL<typeof BookCategoryOptionLabels>, // on cast ici, le template n'a plus besoin de s'en occuper !
         value,
-        label: BookCategory[key as keyof typeof BookCategory] ?? "Toutes les catégories" // pour pouvoir afficher le libellé
+        label: BookCategoryOptionLabels[key as keyof typeof BookCategoryOptionLabels] ?? "Toutes les catégories" // pour pouvoir afficher le libellé
       }))
   );
   readonly availabilityFiltersList = computed(() =>
