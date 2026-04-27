@@ -9,6 +9,7 @@ import { Loan, LoanDTO } from '../../loan-models';
 import { LoanService } from '../../services/loan-service';
 import { HttpClient } from '@angular/common/http';
 import { NotificationService } from '../../../../components/shared/notification/service/notification-service';
+import { ReservationService } from '../../../reservations/services/reservation-service';
 
 @Component({
   selector: 'app-loan-book',
@@ -18,6 +19,7 @@ import { NotificationService } from '../../../../components/shared/notification/
 })
 export class LoanBook implements OnInit {
   bookCopyService: BookCopyService = inject(BookCopyService);
+  reservationService: ReservationService = inject(ReservationService);
   router: Router = inject(Router);
   authService: AuthService = inject(AuthService);
   loanService: LoanService = inject(LoanService);
@@ -45,7 +47,7 @@ export class LoanBook implements OnInit {
   }
 
   addToWishlist(): void {
-    console.log('AJOUT A LA WISHLIST, UN JOUR');
+    this.reservationService.addToWishlist(this.book().id)
   }
 
   loanBook(): void {
