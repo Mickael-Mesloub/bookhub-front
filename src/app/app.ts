@@ -1,6 +1,5 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { AppLayout } from './layout/app-layout/app-layout/app-layout';
-import { AuthService } from './domains/users/services/auth-service';
 
 @Component({
   selector: 'app-root',
@@ -9,11 +8,4 @@ import { AuthService } from './domains/users/services/auth-service';
   styleUrl: './app.scss',
 })
 export class App {
-
-  private readonly authService = inject(AuthService); // injecter mon service
-
-  clickBtn(): void {
-    console.log('Button clicked!');
-  }
-
 }
