@@ -1,13 +1,13 @@
 <button
   type="button"
-  (click)="goBackButton() ? onGoBack() : onClick()"
+  (click)="variant() === 'back' ? onGoBack() : onClick()"
   [disabled]="disabled()"
   class="box-border w-full cursor-pointer rounded-lg border border-transparent px-4 py-2.5 text-base leading-5 font-semibold shadow-xs focus:outline-none disabled:bg-gray-500 disabled:text-gray-700"
-  [ngClass]="
-    goBackButton()
-      ? 'bg-violet-100 text-gray-900 hover:bg-violet-100/75'
-      : 'bg-violet-800 text-violet-50 hover:bg-violet-800/75'
-  "
+  [ngClass]="{
+    'bg-violet-100 text-gray-900 hover:bg-violet-100/75': variant() === 'back',
+    'bg-violet-800 text-violet-50 hover:bg-violet-800/75': variant() === 'default',
+    'bg-red-600 text-whte hover:bg-red-600/75': variant() === 'danger',
+  }"
 >
   {{ label() }}
 </button>

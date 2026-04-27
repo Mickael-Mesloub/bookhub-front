@@ -1,6 +1,8 @@
 import { Location, NgClass } from '@angular/common';
 import { Component, inject, input, output } from '@angular/core';
 
+type Variant = "default" | "danger" | "back";
+
 @Component({
   selector: 'app-button',
   imports: [NgClass],
@@ -13,7 +15,7 @@ export class Button {
   label = input.required<string>();
   disabled = input<boolean>();
   clickAction = output<void>();
-  goBackButton = input<boolean>(false);
+  variant = input<Variant>("default");
 
   onClick(): void  {
     this.clickAction.emit();

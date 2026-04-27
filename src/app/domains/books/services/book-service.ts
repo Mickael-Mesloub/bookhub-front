@@ -23,9 +23,17 @@ export class BookService {
   // Autre possibilité : HttpParams permet de construire des URLs en Angular — il gère l'encodage et le formatage automatiquement
 
   // Rôle : construire l'URL et faire la requête HTTP
-  getAllBooks(page?: number, size?: number, sort?: string, search?: string, categories?: string[], availability?: string): Observable<ApiResponse<PageOfBooks>> {
+  getAllBooks(
+    page?: number,
+    size?: number,
+    sort?: string,
+    search?: string,
+    categories?: string[],
+    availability?: string,
+  ): Observable<ApiResponse<PageOfBooks>> {
     let response: string = '';
-    if (page != null) { // != null car sinon page=0 ne rentrera pas dans la condition
+    if (page != null) {
+      // != null car sinon page=0 ne rentrera pas dans la condition
       if (response == '') {
         response += '?page=' + page;
       } else {
@@ -91,5 +99,9 @@ export class BookService {
       `${API_BASE_URL}/books/${id.toString()}/update`,
       updateBookFormData,
     );
+  }
+
+  deleteBook(id: number): Observable<ApiResponse<Book>> {
+    return this.http.delete<ApiResponse<Book>>(`${API_BASE_URL}/books/${id.toString()}/delete`);
   }
 }

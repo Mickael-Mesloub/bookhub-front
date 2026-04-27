@@ -1,29 +1,26 @@
-import { inject, Injectable, signal, WritableSignal } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotificationService } from '../../../components/shared/notification/service/notification-service';
 import { ApiErrorResponse, ApiResponse } from '../../../config/api/api';
-import { BookFormData } from '../models/book-form-model';
 import { Book } from '../models/book-models';
 import { BookService } from './book-service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CreateBookService {
+export class DeleteBookService {
   private readonly bookService: BookService = inject(BookService);
   private readonly notificationService: NotificationService = inject(NotificationService);
   private readonly router: Router = inject(Router);
 
-  book: WritableSignal<Book | undefined> = signal<Book | undefined>(undefined);
-
-  createBook(bookData: BookFormData): void {
-    this.bookService.createBook(bookData).subscribe({
+  deleteBook(bookId: number): void {
+    this.bookService.deleteBook(bookId).subscribe({
       next: (response: ApiResponse<Book>) => {
         this.notificationService.openNotification({
           type: 'alert-success',
           message: response.message,
         });
-        this.router.navigateByUrl(`/detail/${response.data.id.toString()}`);
+        this.router.navigateByUrl("/");
       },
       error: (response: ApiErrorResponse) => {
         console.error('ERROR IN createBook() : ', response);
