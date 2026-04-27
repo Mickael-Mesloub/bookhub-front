@@ -1,19 +1,19 @@
-  <div class="flex flex-col p-7">
-    <div class="flex flex-row">
-<div 
-  (click)="navigateToDetails(book().isbn)"
-  class="bg-neutral-primary-soft border-default rounded-base block border shadow-xs"
->
-  @if(book().coverUrl){
-  <img class="rounded-t-base" [src]="book().coverUrl" alt="book cover" />
-  }
-  @else{
-  <img class="rounded-t-base" src="images/empty-cover-img.png" alt="no cover available" />
-  }
-  <div class="p-6 text-center">
-    <h5 class="text-heading mt-3 mb-6 font-semibold tracking-tight">
-      {{ book().author }} - {{ book().title }}
-    </h5>
+<div class="flex flex-col p-7">
+  <div class="flex flex-row">
+    <div
+      (click)="navigateToDetails(book().isbn)"
+      class="bg-neutral-primary-soft border-default rounded-base block border shadow-xs"
+    >
+      @if (book().coverUrl) {
+        <img class="rounded-t-base" [src]="book().coverUrl" alt="book cover" />
+      } @else {
+        <img class="rounded-t-base" src="images/empty-cover-img.png" alt="no cover available" />
+      }
+      <div class="p-6 text-center">
+        <h5 class="text-heading mt-3 mb-6 font-semibold tracking-tight">
+          {{ book().author }} - {{ book().title }}
+        </h5>
+      </div>
+    </div>
   </div>
 </div>
-

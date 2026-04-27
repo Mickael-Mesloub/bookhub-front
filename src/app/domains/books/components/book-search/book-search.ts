@@ -1,20 +1,19 @@
 import {
-  Component,
   computed,
   EventEmitter,
   Output,
-  signal,
   WritableSignal,
 } from '@angular/core';
 import {
   TypeCreatedFromEnumWithALL,
-  BookCategory,
   AvailabilityCategory,
   SortCategory,
   TypeCreatedFromEnum,
 } from '../../models/book-models';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { debounceTime } from 'rxjs';
+import { Component, signal } from '@angular/core';
+import { BookCategory } from '../../models/book-models';
 
 @Component({
   selector: 'app-book-search',

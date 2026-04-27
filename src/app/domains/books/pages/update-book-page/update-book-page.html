@@ -1,12 +1,9 @@
 <section class="flex w-full flex-col items-center justify-center">
   <article class="w-full rounded-2xl bg-gray-800/80 p-8 md:max-w-140 md:p-12">
-    <h2 class="mb-6">Créer un livre</h2>
+    <h2 class="mb-6">Modifier le livre</h2>
 
     <form class="flex flex-col gap-6">
-      <!-- TODO : Refactor validation state and errors dynamically (reusable functions / component) -->
-
       <!-- docs: https://angular.love/signal-forms-in-angular-21-complete-guide -->
-
       <!------- ISBN ------->
       <app-custom-input
         id="isbn"
@@ -32,7 +29,6 @@
       />
 
       <!------- DESCRIPTION ------->
-      <!-- TODO : Custom textarea -->
       <div class="flex flex-col gap-2">
         <label for="description" class="font-bold">Description</label>
         <textarea
@@ -60,7 +56,6 @@
       </div>
 
       <!------- CATEGORY ------->
-      <!-- TODO : Custom Select -->
       <div class="flex flex-col gap-2">
         <label for="category" class="font-bold"
           >Catégorie
@@ -71,13 +66,14 @@
           id="category"
           class="block w-full rounded-lg bg-gray-700 p-3.5 text-base text-gray-50 shadow-xs placeholder:text-gray-400 focus:border-gray-50 focus:ring-gray-50"
           [ngClass]="{
-            'border-2 border-red-500': form.category().invalid() && (form.category().dirty() || form.category().touched()),
+            'border-2 border-red-500':
+              form.category().invalid() && (form.category().dirty() || form.category().touched()),
             'border-2 border-green-700': !form.category().invalid() && form.category().dirty(),
           }"
         >
           <option disabled selected value="">Choisissez une catégorie</option>
           @for (c of categoryOptions; track c.key) {
-            <option [value]="c.value">{{ c.value }}</option>
+            <option [value]="c.value">{{ c.key }}</option>
           }
         </select>
         @if (form.category().touched() && form.category().invalid()) {

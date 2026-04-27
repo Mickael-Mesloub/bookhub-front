@@ -1,11 +1,15 @@
 import { Component, computed, inject, OnInit, signal, WritableSignal } from '@angular/core';
-import { BookCard } from '../../components/book-card/book-card';
 import { BookService } from '../../services/book-service';
 import { PageOfBooks } from '../../models/book-models';
 import { ApiResponse } from '../../../../config/api/api';
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { ApiResponse } from '../../../../config/api/api';
+import { BookCard } from '../../components/book-card/book-card';
 import { BookSearch } from '../../components/book-search/book-search';
 import { NotificationService } from '../../../../components/shared/notification/service/notification-service';
 import { delay } from 'rxjs';
+import { Book, PageOfBooks } from '../../models/book-models';
+import { BookService } from '../../services/book-service';
 
 @Component({
   selector: 'app-catalog',
@@ -93,5 +97,6 @@ export class Catalog implements OnInit {
     });
     this.fetchAllBooks(0); // on affiche la 1ère page des résultats de recherche à chaque nouvelle recherche
   }
+
 }
 

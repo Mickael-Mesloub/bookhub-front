@@ -2,14 +2,23 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { API_BASE_URL, ApiResponse } from '../../../config/api/api';
-import { Book, PageOfBooks } from '../models/book-models';
-import { BookFormData } from '../models/book-form-model';
+import { BookCategoryOption, BookFormData } from '../models/book-form-model';
+import { Book, BookCategory, BookCategoryOptionLabels, PageOfBooks } from '../models/book-models';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BookService {
   private readonly http = inject(HttpClient);
+
+  // Labels for category select options
+  BookCategoryOptionLabels: Record<BookCategory, string> = BookCategoryOptionLabels;
+
+  // List of category options (label and value) for select input
+  categoryOptions: BookCategoryOption[] = Object.entries(BookCategory).map(([_, value]) => ({
+    key: BookCategoryOptionLabels[value],
+    value,
+  }));
 
   // Autre possibilité : HttpParams permet de construire des URLs en Angular — il gère l'encodage et le formatage automatiquement
 
@@ -62,14 +71,25 @@ export class BookService {
       }
     }
 
-    return this.http.get<ApiResponse<PageOfBooks>>(`${API_BASE_URL}/books` + response);
-  }
-
-  saveBook(bookFormData: BookFormData): Observable<ApiResponse<Book>> {
-    return this.http.post<ApiResponse<Book>>(`${API_BASE_URL}/books/new`, bookFormData);
+    return this.http.get<ApiResponse<PageOfBooks>>(`${API_BASE_URL}/books${response}`);
   }
 
   getBookDetail(isbn: string): Observable<ApiResponse<Book>> {
-    return this.http.get<ApiResponse<Book>>(`${API_BASE_URL}/books` + '/' + isbn);
+    return this.http.get<ApiResponse<Book>>(`${API_BASE_URL}/books/${isbn}`);
+  }
+
+  getBookById(id: number): Observable<ApiResponse<Book>> {
+    return this.http.get<ApiResponse<Book>>(`${API_BASE_URL}/books/id/${id.toString()}`);
+  }
+
+  createBook(createBookFormData: BookFormData): Observable<ApiResponse<Book>> {
+    return this.http.post<ApiResponse<Book>>(`${API_BASE_URL}/books/new`, createBookFormData);
+  }
+
+  updateBook(id: number, updateBookFormData: BookFormData): Observable<ApiResponse<Book>> {
+    return this.http.put<ApiResponse<Book>>(
+      `${API_BASE_URL}/books/${id.toString()}/update`,
+      updateBookFormData,
+    );
   }
 }

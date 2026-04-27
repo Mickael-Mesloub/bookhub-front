@@ -1,4 +1,4 @@
-import { Review } from "../../reviews/models/review-models";
+import { Review } from '../../reviews/models/review-models';
 
 export interface Book {
   id: number;
@@ -20,8 +20,6 @@ export interface BookCopy {
   book: Book;
 }
 
-
-
 export interface WaitingList {
   id: number;
   dateAdded: Date;
@@ -29,19 +27,34 @@ export interface WaitingList {
 }
 
 export enum BookCategory {
-  ACTION = "Action",
-  ADVENTURE = "Aventure",
-  ANIMATION = "Animation",
-  COMEDY = "Comédie",
-  CRIME = "Crime",
-  DOCUMENTARY = "Documentaire",
-  DRAMA = "Drame",
-  MUSICAL = "Musical",
-  ROMANCE = "Romance",
-  SCI_FI = "Science-Fiction",
-  THRILLER = "Thriller",
-  WAR = "Guerre",
+  ACTION = 'Action',
+  ADVENTURE = 'Adventure',
+  ANIMATION = 'Animation',
+  COMEDY = 'Comedy',
+  CRIME = 'Crime',
+  DOCUMENTARY = 'Documentary',
+  DRAMA = 'Drama',
+  MUSICAL = 'Musical',
+  ROMANCE = 'Romance',
+  SCI_FI = 'Sci-Fi',
+  THRILLER = 'Thriller',
+  WAR = 'War',
 }
+
+export const BookCategoryOptionLabels: Record<BookCategory, string> = {
+  [BookCategory.ACTION]: 'Action',
+  [BookCategory.ADVENTURE]: 'Aventure',
+  [BookCategory.ANIMATION]: 'Animation',
+  [BookCategory.COMEDY]: 'Comédie',
+  [BookCategory.CRIME]: 'Crime',
+  [BookCategory.DOCUMENTARY]: 'Documentaire',
+  [BookCategory.DRAMA]: 'Drame',
+  [BookCategory.MUSICAL]: 'Musical',
+  [BookCategory.ROMANCE]: 'Romance',
+  [BookCategory.SCI_FI]: 'Science-Fiction',
+  [BookCategory.THRILLER]: 'Thriller',
+  [BookCategory.WAR]: 'Guerre',
+};
 
 export enum AvailabilityCategory{
   NOW = "Actuellement disponible",
@@ -69,12 +82,12 @@ export enum SortCategory{
 }
 
 export enum BookState {
-  NEW,
-  GOOD,
-  ACCEPTABLE,
-  USED,
-  MISSING,
-  RETIRED,
+  NEW = 'Neuf',
+  GOOD = 'Bon',
+  ACCEPTABLE = 'Acceptable',
+  USED = 'Usé',
+  MISSING = 'Perdu',
+  RETIRED = 'Retiré',
 }
 
 export interface PageOfBooks {
@@ -109,4 +122,3 @@ export interface Sort {
   sorted: boolean;
   unsorted: boolean;
 }
-

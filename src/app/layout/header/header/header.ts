@@ -4,6 +4,14 @@ import { AuthService } from '../../../domains/users/services/auth-service';
 import { NotificationService } from '../../../components/shared/notification/service/notification-service';
 import { SlicePipe, UpperCasePipe } from '@angular/common';
 
+type HeaderLink = {
+  label: string;
+  path: string;
+  exact?: boolean;
+  restricted: boolean;
+  isAuthenticated: boolean;
+};
+
 @Component({
   selector: 'app-header',
   imports: [RouterLink, RouterLinkActive, SlicePipe, UpperCasePipe],
@@ -18,9 +26,9 @@ export class Header {
   readonly isAuthenticated = this.authService.isAuthenticated;
   readonly currentUser = this.authService.currentUser;
 
-  links = [
     // le simple fait d'aller sur la page Catalog déclenche this.fetchAllBooks(); qui est dans ngOnInit
-    { label: 'Catalogue', path: '/', exact: true, restricted: false },
+ links: HeaderLink[] = [
+    { label: 'Catalogue', path: '/', exact: true, restricted: false, isAuthenticated: false },
     {
       label: "S'inscrire",
       path: '/auth/signup',
@@ -49,7 +57,12 @@ export class Header {
       restricted: true,
       isAuthenticated: true,
     },
-    { label: 'Dashboard', path: '/dashboard' },
+
+    // TODO : Restreindre la route /dashboard
+    { label: 'Dashboard', path: '/dashboard', restricted: false, isAuthenticated: false },
+
+    // TODO : Supprimer la route /books/new
+    { label: 'Save book', path: '/books/new', restricted: false, isAuthenticated: false },
   ];
 
   isMenuOpen = signal(false);
