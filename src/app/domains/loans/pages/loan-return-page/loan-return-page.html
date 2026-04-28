@@ -1,0 +1,21 @@
+<article class="flex flex-col gap-4 p-8">
+  <h2>Enregistrer un retour</h2>
+  <div>Searchbar - Rechercher un utilisateur</div>
+  <div>
+    <input
+      id="search"
+      type="text"
+      name="search"
+      placeholder="Rechercher un utilisateur..."
+      class="block w-full rounded-lg bg-gray-50 px-3 py-2.5 text-gray-700 shadow-xs placeholder:text-gray-500"
+      #searchField
+      [value]="search()"
+      (input)="handleSearch(searchField.value)"
+    />
+  </div>
+  <p class="mt-8">Utilisateur recherché : {{ userFound()?.firstName }}</p>
+
+  <div>Boucle sur les emprunts de l'utilisateur et afficher une card pour chaque emprunt</div>
+  <div>Si 0 emprunts, afficher un message Cet utilisateur n'a pas d'emprunts en cours</div>
+  <app-button label="Enregistrer" />
+</article>
