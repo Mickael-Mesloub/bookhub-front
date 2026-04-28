@@ -1,7 +1,8 @@
 <div class="bg-neutral-primary-soft border-default rounded-base block max-w-sm border shadow-xs">
-  <h2>JE SUIS BIBLIOTHECAIRE</h2>
-  <h2>Nombre de livres: {{ totalBooks() }}</h2>
-  <h2>Emprunts actifs</h2>
+  <h2>Nombre de livres:</h2>
+  <p>{{ dashboardSignal().values() }}</p>
+
+  <!-- <h2>Emprunts actifs</h2>
   <ul>
     @for (loan of allOpenLoans(); track loan.id) {
       <li>{{ loan.bookCopy.book.title }}</li>
@@ -15,8 +16,8 @@
   </ul>
   <h2>Livres les plus empruntés</h2>
   <ul>
-    @for (book of mostLoanedBooks(); track book.id) {
-      <li>{{ book.title }}</li>
+    @for (loanedBook of mostLoanedBooks(); track loanedBook) {
+      <li>zazz{{ loanedBook.id }}</li>
     }
-  </ul>
+  </ul> -->
 </div>

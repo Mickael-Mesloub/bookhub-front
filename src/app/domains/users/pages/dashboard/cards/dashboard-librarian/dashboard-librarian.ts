@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
+import { Component, inject, OnInit, Signal, signal, WritableSignal } from '@angular/core';
 import { Loan } from '../../../../../loans/loan-models';
 import { NotificationService } from '../../../../../../components/shared/notification/service/notification-service';
 import { AuthService } from '../../../../services/auth-service';
@@ -20,12 +20,13 @@ export class DashboardLibrarian implements OnInit {
   loanService: LoanService = inject(LoanService);
   bookService: BookService = inject(BookService);
   notificationService: NotificationService = inject(NotificationService);
-  totalBooks: WritableSignal<number> = signal(0);
-  allOpenLoans: WritableSignal<Loan[] | []> = signal([]);
-  allLateLoans: WritableSignal<Loan[] | []> = signal([]);
-  mostLoanedBooks: WritableSignal<Book[]> = signal([]);
+  dashboardSignal = signal<any>({});
 
   ngOnInit(): void {
+    this.getDashboardSignal();
+  }
+
+  getDashboardSignal() {
     this.fetchTotalBookCount();
     this.fetchActiveLoans();
     this.fetchAllLateLoans();
@@ -39,7 +40,11 @@ export class DashboardLibrarian implements OnInit {
     });
     this.bookService.getBookCount().subscribe({
       next: (response: ApiResponse<number>) => {
-        this.totalBooks.set(response.data);
+        let truc = {};
+        this.dashboardSignal.update((values) => {
+          return { ...values, bookCount: response.data };
+        });
+        console.log(this.dashboardSignal);
         // à la fin de l'appel API (success ou error) : fermer écran de chargement
         this.notificationService.closeNotification();
       },
@@ -58,7 +63,9 @@ export class DashboardLibrarian implements OnInit {
     });
     this.loanService.getAllOpenLoans().subscribe({
       next: (response: ApiResponse<Loan[]>) => {
-        this.allOpenLoans.set(response.data);
+        this.dashboardSignal.update((values) => {
+          return { ...values, openLoans: response.data };
+        });
         // à la fin de l'appel API (success ou error) : fermer écran de chargement
         this.notificationService.closeNotification();
       },
@@ -77,7 +84,9 @@ export class DashboardLibrarian implements OnInit {
     });
     this.loanService.getAllLateLoans().subscribe({
       next: (response: ApiResponse<Loan[]>) => {
-        this.allLateLoans.set(response.data);
+        this.dashboardSignal.update((values) => {
+          return { ...values, lateLoans: response.data };
+        });
         // à la fin de l'appel API (success ou error) : fermer écran de chargement
         this.notificationService.closeNotification();
       },
@@ -96,7 +105,9 @@ export class DashboardLibrarian implements OnInit {
     });
     this.bookService.getMostReadBooks().subscribe({
       next: (response: ApiResponse<Book[]>) => {
-        this.mostLoanedBooks.set(response.data);
+        this.dashboardSignal.update((values) => {
+          return { ...values, mostRead: response.data };
+        });
         // à la fin de l'appel API (success ou error) : fermer écran de chargement
         this.notificationService.closeNotification();
       },
