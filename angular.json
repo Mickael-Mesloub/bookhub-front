@@ -8,6 +8,9 @@
   "newProjectRoot": "projects",
   "projects": {
     "bookhub-front": {
+      "i18n": {
+        "sourceLocale": "fr"
+      },
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {

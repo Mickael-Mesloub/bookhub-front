@@ -1,10 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { API_BASE_URL, ApiResponse } from '../../../config/api/api';
 import { BookCopy } from '../../books/models/book-models';
 import { BookCopyService } from '../../books/services/book-copy-service';
 import { Loan, LoanDTO } from '../loan-models';
-import { Observable } from 'rxjs';
-import { ApiResponse, API_BASE_URL } from '../../../config/api/api';
-import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -19,5 +19,11 @@ export class LoanService {
 
   createLoan(loanDTO: LoanDTO): Observable<ApiResponse<Loan>> {
     return this.http.post<ApiResponse<Loan>>(`${API_BASE_URL}/books/loan`, loanDTO);
+  }
+
+  getAllOpenLoans(): Observable<ApiResponse<Loan[]>> {
+    return this.http.get<ApiResponse<Loan[]>>(
+      `${API_BASE_URL}/dashboard/dashboardBiblioLoanOngoing`,
+    );
   }
 }

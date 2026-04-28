@@ -8,7 +8,6 @@ import {
   createBookCopyFormSchema,
   createBookCopyModel,
 } from '../../models/book-copy-form-model';
-import { BookService } from '../../services/book-service';
 import { CreateCopyService } from '../../services/create-copy-service';
 
 @Component({
@@ -19,7 +18,6 @@ import { CreateCopyService } from '../../services/create-copy-service';
 })
 export class CreateBookCopyForm implements OnInit {
   private readonly createBookCopyService: CreateCopyService = inject(CreateCopyService);
-  private readonly bookService: BookService = inject(BookService);
 
   bookId = input.required<number>();
   stateOptions!: BookCopyStateOption[];

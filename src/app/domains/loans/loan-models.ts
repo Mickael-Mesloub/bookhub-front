@@ -5,8 +5,8 @@ export interface Loan {
   id: number;
   dateLoaned: Date;
   dateReturned: Date;
-  copyId: BookCopy['id'];
-  userId: User['id'];
+  bookCopy: BookCopy;
+  user: User;
 }
 
 export interface LoanDTO {
