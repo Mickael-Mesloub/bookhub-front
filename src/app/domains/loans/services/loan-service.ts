@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { BookCopy } from '../../books/models/book-models';
+import { Book, BookCopy } from '../../books/models/book-models';
 import { BookCopyService } from '../../books/services/book-copy-service';
 import { Loan, LoanDTO } from '../loan-models';
 import { Observable } from 'rxjs';
@@ -24,19 +24,19 @@ export class LoanService {
   // TODO: add correct api calls
   getAllOpenLoans(userID: number): Observable<ApiResponse<Loan[]>> {
     return this.http.get<ApiResponse<Loan[]>>(
-      `${API_BASE_URL}/dashboard/openloans?userID=` + userID,
+      `${API_BASE_URL}/dashboard/dashboardUserLoanOngoing?userID=` + userID,
     );
   }
 
   getAllLateLoans(userID: number): Observable<ApiResponse<Loan[]>> {
     return this.http.get<ApiResponse<Loan[]>>(
-      `${API_BASE_URL}/dashboard/lateloans?userID=` + userID,
+      `${API_BASE_URL}/dashboard/dashboardUserLoanRetards?userID=` + userID,
     );
   }
 
   getAllLoans(userID: number): Observable<ApiResponse<Loan[]>> {
     return this.http.get<ApiResponse<Loan[]>>(
-      `${API_BASE_URL}/dashboard/allloans?userID=` + userID,
+      `${API_BASE_URL}/dashboard/dashboardUserBookReadByUser?userID=` + userID,
     );
   }
 }
