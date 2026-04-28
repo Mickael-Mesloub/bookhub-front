@@ -6,7 +6,7 @@ import { DashboardAdmin } from './cards/dashboard-admin/dashboard-admin';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [Reservations],
+  imports: [Reservations, DashboardUser, DashboardLibrarian, DashboardAdmin],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })

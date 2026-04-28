@@ -6,7 +6,9 @@
     <p>Nom : {{ currentUser()?.lastname }}</p>
     <p>Prénom : {{ currentUser()?.firstname }}</p>
     <p>Role : {{ currentUser()?.role }}</p>
+    <app-button label="Modifier mon profil" (clickAction)="goToEditProfile()"></app-button>
   </div>
 } @else {
   <p>Chargement...</p>
 }
+<div><app-reservations /></div>

@@ -4,10 +4,13 @@ import { UserService } from '../../../../services/user-service';
 import { NotificationService } from '../../../../../../components/shared/notification/service/notification-service';
 import { ApiResponse } from '../../../../../../config/api/api';
 import { Book } from '../../../../../books/models/book-models';
+import { Reservations } from '../../../../../reservations/reservations';
+import { Button } from '../../../../../../components/shared/button/button';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard-user',
-  imports: [],
+  imports: [Reservations, Button],
   templateUrl: './dashboard-user.html',
   styleUrl: './dashboard-user.scss',
 })
@@ -17,8 +20,10 @@ export class DashboardUser implements OnInit {
   readonly currentUser = this.authService.currentUser;
   userService: UserService = inject(UserService);
   notificationService: NotificationService = inject(NotificationService);
+  router: Router = inject(Router);
 
   loanedBooks: Book[] = [];
+  showUpdate: boolean = false;
 
   ngOnInit() {
     this.getAllLoanedBooks();
@@ -45,5 +50,9 @@ export class DashboardUser implements OnInit {
           this.notificationService.closeNotification();
         },
       });
+  }
+
+  goToEditProfile() {
+    this.router.navigate(['/auth/profile/edit']);
   }
 }
