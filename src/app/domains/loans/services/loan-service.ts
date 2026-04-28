@@ -1,5 +1,5 @@
+import { BookCopy } from '../../books/models/book-models';
 import { inject, Injectable } from '@angular/core';
-import { Book, BookCopy } from '../../books/models/book-models';
 import { BookCopyService } from '../../books/services/book-copy-service';
 import { Loan, LoanDTO } from '../loan-models';
 import { Observable } from 'rxjs';
