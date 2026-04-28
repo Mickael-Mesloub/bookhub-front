@@ -75,9 +75,9 @@ export type TypeCreatedFromEnum<E> = {
 export type TypeCreatedFromEnumWithALL<E> = { ALL: boolean; } & TypeCreatedFromEnum<E>;
 
 export enum SortCategory{
-  TITLE_ATOZ       = "Titre A->Z",
-  TITLE_ZTOA       = "Titre Z->A",
-  BEST_NOTE        = "Mieux notés",
+  TITLE_ATOZ       = "Titre A → Z",
+  TITLE_ZTOA       = "Titre Z → A",
+  BEST_NOTE        = "Mieux notés ↓",
   // MOST_RECENT_DATE = "Date de parution récente",
 }
 
