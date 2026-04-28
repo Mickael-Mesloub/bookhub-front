@@ -61,6 +61,24 @@ export enum AvailabilityCategory{
   RESA = "Disponible sur liste d'attente"
 }
 
+export enum BookState {
+  NEW = 'NEW',
+  GOOD = 'GOOD',
+  ACCEPTABLE = 'ACCEPTABLE',
+  USED = 'USED',
+  MISSING = 'MISSING',
+  RETIRED = 'RETIRED',
+}
+
+export const BookCopyStateOptionLabels: Record<BookState, string> = {
+  [BookState.NEW]: 'Neuf',
+  [BookState.GOOD]: 'Bon',
+  [BookState.ACCEPTABLE]: 'Acceptable',
+  [BookState.USED]: 'Usé',
+  [BookState.MISSING]: 'Perdu',
+  [BookState.RETIRED]: 'Retiré',
+};
+
 // -------------------------------------------------------------------------------------------
 // Création d'un MAPPED TYPE - clés dynamiques, calculées depuis E
 // -------------------------------------------------------------------------------------------
@@ -79,15 +97,6 @@ export enum SortCategory{
   TITLE_ZTOA       = "Titre Z → A",
   BEST_NOTE        = "Mieux notés ↓",
   // MOST_RECENT_DATE = "Date de parution récente",
-}
-
-export enum BookState {
-  NEW = 'Neuf',
-  GOOD = 'Bon',
-  ACCEPTABLE = 'Acceptable',
-  USED = 'Usé',
-  MISSING = 'Perdu',
-  RETIRED = 'Retiré',
 }
 
 export interface PageOfBooks {

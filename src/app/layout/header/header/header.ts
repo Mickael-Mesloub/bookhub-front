@@ -55,7 +55,7 @@ export class Header {
     { label: 'Tableau de bord', path: '/dashboard', restricted: false, isAuthenticated: false },
 
     // TODO : Supprimer la route /books/new
-    { label: 'Save book', path: '/books/new', restricted: false, isAuthenticated: false },
+    { label: 'Créer un livre', path: '/books/new', restricted: false, isAuthenticated: false },
   ];
 
   isMenuOpen = signal(false);
