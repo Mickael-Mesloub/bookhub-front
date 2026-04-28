@@ -20,4 +20,23 @@ export class LoanService {
   createLoan(loanDTO: LoanDTO): Observable<ApiResponse<Loan>> {
     return this.http.post<ApiResponse<Loan>>(`${API_BASE_URL}/books/loan`, loanDTO);
   }
+
+  // TODO: add correct api calls
+  getAllOpenLoans(userID: number): Observable<ApiResponse<Loan[]>> {
+    return this.http.get<ApiResponse<Loan[]>>(
+      `${API_BASE_URL}/dashboard/openloans?userID=` + userID,
+    );
+  }
+
+  getAllLateLoans(userID: number): Observable<ApiResponse<Loan[]>> {
+    return this.http.get<ApiResponse<Loan[]>>(
+      `${API_BASE_URL}/dashboard/lateloans?userID=` + userID,
+    );
+  }
+
+  getAllLoans(userID: number): Observable<ApiResponse<Loan[]>> {
+    return this.http.get<ApiResponse<Loan[]>>(
+      `${API_BASE_URL}/dashboard/allloans?userID=` + userID,
+    );
+  }
 }

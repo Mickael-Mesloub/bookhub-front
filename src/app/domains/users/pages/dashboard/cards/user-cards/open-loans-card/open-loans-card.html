@@ -1,0 +1,13 @@
+<h2>Mes Emprunts en cours</h2>
+
+@if (openLoans().length > 0) {
+  <ul>
+    @for (loan of openLoans(); track loan.id) {
+      <li>
+        {{ loan.dateLoaned }} - {{ loan.bookCopy.book.title }} - {{ loan.bookCopy.book.author }}
+      </li>
+    }
+  </ul>
+} @else {
+  <p>Vous n'avez pas d'emprunts en cours.</p>
+}

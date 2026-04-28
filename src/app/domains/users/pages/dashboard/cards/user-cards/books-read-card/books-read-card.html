@@ -1,0 +1,14 @@
+<h2>Livres empruntés par le passé</h2>
+
+@if (allLoans().length > 0) {
+  <ul>
+    @for (loan of allLoans(); track loan.id) {
+      <li>
+        {{ loan.dateLoaned | date: 'dd/MM/yyyy' }} - {{ loan.bookCopy.book.title }} -
+        {{ loan.bookCopy.book.author }}
+      </li>
+    }
+  </ul>
+} @else {
+  <p>Vous n'avez pas encore emprunté de livre.</p>
+}

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { AuthService } from '../../../../services/auth-service';
 import { UserService } from '../../../../services/user-service';
 import { NotificationService } from '../../../../../../components/shared/notification/service/notification-service';
@@ -7,10 +7,13 @@ import { Book } from '../../../../../books/models/book-models';
 import { Reservations } from '../../../../../reservations/reservations';
 import { Button } from '../../../../../../components/shared/button/button';
 import { Router } from '@angular/router';
+import { OpenLoansCard } from '../user-cards/open-loans-card/open-loans-card';
+import { BooksReadCard } from '../user-cards/books-read-card/books-read-card';
+import { LateLoansCard } from '../user-cards/late-loans-card/late-loans-card';
 
 @Component({
   selector: 'app-dashboard-user',
-  imports: [Reservations, Button],
+  imports: [Reservations, Button, BooksReadCard, LateLoansCard, OpenLoansCard],
   templateUrl: './dashboard-user.html',
   styleUrl: './dashboard-user.scss',
 })
@@ -22,7 +25,7 @@ export class DashboardUser implements OnInit {
   notificationService: NotificationService = inject(NotificationService);
   router: Router = inject(Router);
 
-  loanedBooks: Book[] = [];
+  loanedBooks: WritableSignal<Book[] | null> = signal(null);
   showUpdate: boolean = false;
 
   ngOnInit() {
@@ -40,7 +43,7 @@ export class DashboardUser implements OnInit {
       .getAllLoanedBooksByUser(this.userService.checkUsernameValid(this.currentUser()?.username))
       .subscribe({
         next: (response: ApiResponse<Book[]>) => {
-          this.loanedBooks = response.data;
+          this.loanedBooks.set(response.data);
           // à la fin de l'appel API (success ou error) : fermer écran de chargement
           this.notificationService.closeNotification();
         },

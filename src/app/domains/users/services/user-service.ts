@@ -17,6 +17,13 @@ export class UserService {
     return '';
   }
 
+  checkUserID(userID: number | undefined): number {
+    if (userID != undefined) {
+      return userID;
+    }
+    return 0;
+  }
+
   getAllLoanedBooksByUser(username: string): Observable<ApiResponse<Book[]>> {
     return this.http.get<ApiResponse<Book[]>>(
       `${API_BASE_URL}/dashboard/loaned?username=` + username,
