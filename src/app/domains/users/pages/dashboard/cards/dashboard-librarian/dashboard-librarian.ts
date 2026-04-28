@@ -21,9 +21,9 @@ export class DashboardLibrarian implements OnInit {
   bookService: BookService = inject(BookService);
   notificationService: NotificationService = inject(NotificationService);
   totalBooks: WritableSignal<number> = signal(0);
-  allOpenLoans: WritableSignal<Loan[] | []> = signal([]);
-  allLateLoans: WritableSignal<Loan[] | []> = signal([]);
-  mostLoanedBooks: WritableSignal<Book[]> = signal([]);
+  allOpenLoans: WritableSignal<Loan[] | null> = signal(null);
+  allLateLoans: WritableSignal<Loan[] | null> = signal(null);
+  mostLoanedBooks: WritableSignal<Book[] | null> = signal(null);
 
   ngOnInit(): void {
     this.fetchTotalBookCount();
