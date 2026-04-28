@@ -7,10 +7,11 @@ import { ReviewBook } from '../../../reviews/components/review-book/review-book'
 import { BookDescription } from '../../components/book-description/book-description';
 import { Book } from '../../models/book-models';
 import { DeleteBookService } from '../../services/delete-book-service';
+import { CreateBookCopyForm } from "../../components/create-book-copy-form/create-book-copy-form";
 
 @Component({
   selector: 'app-book-detail',
-  imports: [BookDescription, LoanBook, ReviewBook, Button],
+  imports: [BookDescription, LoanBook, ReviewBook, Button, CreateBookCopyForm],
   templateUrl: './book-detail.html',
   styleUrl: './book-detail.scss',
 })
@@ -31,5 +32,9 @@ export class BookDetail {
   // TODO : Add confirmation modal
   deleteBook(): void {
     this.deleteBookService.deleteBook(this.book().id);
+  }
+
+  addBookCopy(): void {
+    console.log("ADD BOOK COPY");
   }
 }

@@ -1,8 +1,19 @@
 <app-book-description [book]="book()"></app-book-description>
-<div class="grid grid-cols-1 gap-8 p-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
+<article
+  class="grid grid-cols-1 gap-8 p-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2"
+>
   <app-loan-book [book]="book()"></app-loan-book>
   <app-review-book [book]="book()"></app-review-book>
+</article>
+
+<!-- TODO : Pour tout ce qu'il y a en dessous :  Afficher que si role != USER -->
+<div class="mx-auto my-6 h-0.5 w-[95%] bg-gray-400"></div>
+
+<app-create-book-copy-form [bookId]="book().id" />
+
+<div class="mx-auto my-6 h-0.5 w-[95%] bg-gray-400"></div>
+
+<div class="flex justify-between p-8">
+  <app-button label="Modifier ce livre" (clickAction)="goToEditBook()" />
+  <app-button label="Supprimer ce livre" variant="danger" (clickAction)="deleteBook()" />
 </div>
-<!-- TODO : Afficher le bouton si rôle currentUser == Librarian -->
-<app-button label="Modifier ce livre" (clickAction)="goToEditBook()" />
-<app-button label="Supprimer ce livre" variant="danger" (clickAction)="deleteBook()" />
