@@ -15,10 +15,10 @@ import { DatePipe } from '@angular/common';
 })
 export class BooksReadCard implements OnInit {
   private readonly authService = inject(AuthService);
-  readonly isAuthenticated = this.authService.isAuthenticated;
-  readonly currentUser = this.authService.currentUser;
   loanService: LoanService = inject(LoanService);
   userService: UserService = inject(UserService);
+  readonly isAuthenticated = this.authService.isAuthenticated;
+  readonly currentUser = this.authService.currentUser;
   notificationService: NotificationService = inject(NotificationService);
   allLoans: WritableSignal<Loan[] | []> = signal([]);
 
@@ -34,7 +34,7 @@ export class BooksReadCard implements OnInit {
     // async
     const userID = this.userService.checkUserID(this.currentUser()?.id);
     if (userID != 0) {
-      this.loanService.getAllLoans(userID).subscribe({
+      this.loanService.getAllLoansByUser(userID).subscribe({
         next: (response: ApiResponse<Loan[]>) => {
           this.allLoans.set(response.data);
           // à la fin de l'appel API (success ou error) : fermer écran de chargement

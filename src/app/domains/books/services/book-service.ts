@@ -104,4 +104,12 @@ export class BookService {
   deleteBook(id: number): Observable<ApiResponse<Book>> {
     return this.http.delete<ApiResponse<Book>>(`${API_BASE_URL}/books/${id.toString()}/delete`);
   }
+
+  getMostReadBooks(): Observable<ApiResponse<Book[]>> {
+    return this.http.get<ApiResponse<Book[]>>(`${API_BASE_URL}/dashboard/dashboardMostReadBooks`);
+  }
+
+  getBookCount(): Observable<ApiResponse<number>> {
+    return this.http.get<ApiResponse<number>>(`${API_BASE_URL}/dashboard/dashboardNbTotalBook`);
+  }
 }

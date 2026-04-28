@@ -34,7 +34,7 @@ export class LateLoansCard implements OnInit {
     // async
     const userID = this.userService.checkUserID(this.currentUser()?.id);
     if (userID != 0) {
-      this.loanService.getAllLateLoans(userID).subscribe({
+      this.loanService.getAllLateLoansByUser(userID).subscribe({
         next: (response: ApiResponse<Loan[]>) => {
           this.lateLoans.set(response.data);
           // à la fin de l'appel API (success ou error) : fermer écran de chargement

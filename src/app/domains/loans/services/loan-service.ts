@@ -21,22 +21,33 @@ export class LoanService {
     return this.http.post<ApiResponse<Loan>>(`${API_BASE_URL}/books/loan`, loanDTO);
   }
 
-  // TODO: add correct api calls
-  getAllOpenLoans(userID: number): Observable<ApiResponse<Loan[]>> {
+  getAllOpenLoansByUser(userID: number): Observable<ApiResponse<Loan[]>> {
     return this.http.get<ApiResponse<Loan[]>>(
-      `${API_BASE_URL}/dashboard/dashboardUserLoanOngoing?userID=` + userID,
+      `${API_BASE_URL}/dashboard/dashboardUserLoanOngoing?userId=` + userID,
     );
   }
 
-  getAllLateLoans(userID: number): Observable<ApiResponse<Loan[]>> {
+  getAllLateLoansByUser(userID: number): Observable<ApiResponse<Loan[]>> {
     return this.http.get<ApiResponse<Loan[]>>(
-      `${API_BASE_URL}/dashboard/dashboardUserLoanRetards?userID=` + userID,
+      `${API_BASE_URL}/dashboard/dashboardUserLoanRetards?userId=` + userID,
     );
   }
 
-  getAllLoans(userID: number): Observable<ApiResponse<Loan[]>> {
+  getAllLoansByUser(userID: number): Observable<ApiResponse<Loan[]>> {
     return this.http.get<ApiResponse<Loan[]>>(
-      `${API_BASE_URL}/dashboard/dashboardUserBookReadByUser?userID=` + userID,
+      `${API_BASE_URL}/dashboard/dashboardUserBookReadByUser?userId=` + userID,
+    );
+  }
+
+  getAllOpenLoans(): Observable<ApiResponse<Loan[]>> {
+    return this.http.get<ApiResponse<Loan[]>>(
+      `${API_BASE_URL}/dashboard/dashboardBiblioLoanOngoing`,
+    );
+  }
+
+  getAllLateLoans(): Observable<ApiResponse<Loan[]>> {
+    return this.http.get<ApiResponse<Loan[]>>(
+      `${API_BASE_URL}/dashboard/dashboardBiblioLoanRetards`,
     );
   }
 }
