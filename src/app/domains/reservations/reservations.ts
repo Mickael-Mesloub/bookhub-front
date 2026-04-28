@@ -1,6 +1,6 @@
 import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { AuthService } from '../users/services/auth-service';
-import { ReservationListDto } from './models/reservation-models';
+import { ReservationDto, ReservationListDto } from './models/reservation-models';
 import { ReservationService } from './services/reservation-service';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 
@@ -21,11 +21,15 @@ export class Reservations {
 
   // Au chargement du composant, appelle l’API.
   // Quand la réponse arrive, stocke les données dans un signal pour mettre à jour l’interface.”
-  ngOnInit() {
-    this.resaService.getWishListOfCurrentUser()
-      .pipe(takeUntilDestroyed()).subscribe((response) => {
-      this.reservationList.set(response.data);
-    });
-  }
+  // ngOnInit() {
+  //   this.resaService.getReservationListOfCurrentUser()
+  //     .pipe(takeUntilDestroyed()).subscribe((response) => {
+  //     this.reservationList.set(response.data);
+  //   });
+  // }
+
+  // cancelReservation(resaToCancel: ReservationDto) {
+  //   this.resaService.cancelReservation(resaToCancel);
+  // }
 
 }

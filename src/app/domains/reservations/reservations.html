@@ -3,11 +3,13 @@
     <h3>Mes réservations</h3>
     <div>
       @for (resa of reservationList()?.reservations; track resa.id) {
-        <p>Titre du livre : {{ resa.bookTitle }}</p>
-        <p>Date de la réservation : {{ resa.dateResa }}</p>
+        <p>Titre du livre : {{ resa.title }}</p>
         <p>Date de la réservation : {{ resa.dateResa }}</p>
         <p>Rang sur la liste d'attente : {{ resa.rank }} </p>
         <p>Statut de la réservation : {{ resa.status }}</p>
+<!--        <span style="color: red;" (click)="cancelReservation(resa)">-->
+<!--          X-->
+<!--        </span>-->
       }
     </div>
 <!--  } @else {-->

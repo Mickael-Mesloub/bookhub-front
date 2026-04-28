@@ -15,6 +15,7 @@ export interface LoginResponse {
 }
 
 export interface LimitedUserData {
+  id: number;
   username: string;
   email: string;
   firstname: string;

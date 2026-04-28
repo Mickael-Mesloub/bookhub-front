@@ -16,10 +16,11 @@
                 Voulez vous être notifié quand il sera disponible? Mettez vous sur la liste
                 d'attente!
               </p>
+              <br>
               <app-button
                 label="Liste dattente"
                 [disabled]="false"
-                (clickAction)="addToWishlist()"
+                (clickAction)="addReservation(book().id, currentUser()!.id)"
               ></app-button>
             }
           } @else {

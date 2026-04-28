@@ -4,6 +4,7 @@ import { API_BASE_URL, ApiResponse } from '../../../config/api/api';
 import { HttpClient } from '@angular/common/http';
 import { ReservationDto, ReservationListDto } from '../models/reservation-models';
 import { AuthService } from '../../users/services/auth-service';
+import { Book } from '../../books/models/book-models';
 
 @Injectable({
   providedIn: 'root',
@@ -11,11 +12,17 @@ import { AuthService } from '../../users/services/auth-service';
 export class ReservationService {
   private readonly http = inject(HttpClient);
 
-  addToWishlist(id: number): Observable<ApiResponse<ReservationDto>> {
-    return this.http.post<ApiResponse<ReservationDto>>(`${API_BASE_URL}/reservations`, id);
+  addReservation(idBookToResa: number, idUser: number): Observable<ApiResponse<ReservationDto>> {
+    return this.http.post<ApiResponse<ReservationDto>>(
+      `${API_BASE_URL}/reservations`,
+      { bookId: idBookToResa, userId: idUser });
   }
 
-  getWishListOfCurrentUser(): Observable<ApiResponse<ReservationListDto>> {
-    return this.http.get<ApiResponse<ReservationListDto>>(`${API_BASE_URL}/reservations/my`);
-  }
+  // getReservationListOfCurrentUser(): Observable<ApiResponse<ReservationListDto>> {
+  //   return this.http.get<ApiResponse<ReservationListDto>>(`${API_BASE_URL}/reservations/my`);
+  // }
+  //
+  // cancelReservation(resaId: number): Observable<ApiResponse<ReservationDto>> {
+  //   return this.http.post<ApiResponse<ReservationDto>>(`${API_BASE_URL}/reservations`, resaId);
+  // }
 }

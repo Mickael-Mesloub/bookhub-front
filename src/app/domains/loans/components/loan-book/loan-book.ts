@@ -11,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
 import { NotificationService } from '../../../../components/shared/notification/service/notification-service';
 import { ReservationService } from '../../../reservations/services/reservation-service';
 import { UserService } from '../../../users/services/user-service';
+import { ReservationDto } from '../../../reservations/models/reservation-models';
 
 @Component({
   selector: 'app-loan-book',
@@ -48,8 +49,29 @@ export class LoanBook implements OnInit {
     });
   }
 
-  addToWishlist(): void {
-    this.reservationService.addToWishlist(this.book().id);
+  addReservation(idBookToResa: number, idUser: number): void {
+    console.log('CLICK idBookToResa:', idBookToResa);
+    console.log('CLICK idUser:', idUser);
+
+    if (!this.isAuthenticated() || !idUser) {
+      this.goToLogin();
+      return;
+    }
+    this.reservationService.addReservation(idBookToResa, idUser).subscribe({
+      next: (response: ApiResponse<ReservationDto>) => {
+        this.notificationService.openNotification({
+          type: 'alert-success',
+          message: response.message,
+        });
+      },
+      error: (response: ApiErrorResponse) => {
+        console.error('RESERVATION HAS FAILED : ', response);
+        this.notificationService.openNotification({
+          type: 'alert-error',
+          message: response.error.message,
+        });
+      },
+    });
   }
 
   loanBook(): void {
