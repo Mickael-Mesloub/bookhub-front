@@ -12,6 +12,7 @@ import { NotificationService } from '../../../../components/shared/notification/
 import { ReservationService } from '../../../reservations/services/reservation-service';
 import { UserService } from '../../../users/services/user-service';
 import { ReservationDto } from '../../../reservations/models/reservation-models';
+import { UserRole } from '../../../users/models/user-models';
 
 @Component({
   selector: 'app-loan-book',
@@ -32,6 +33,7 @@ export class LoanBook implements OnInit {
 
   readonly isAuthenticated = this.authService.isAuthenticated;
   readonly currentUser = this.authService.currentUser;
+
   private readonly notificationService: NotificationService = inject(NotificationService);
 
   constructor(private readonly http: HttpClient) {}
