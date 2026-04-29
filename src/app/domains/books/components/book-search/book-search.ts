@@ -5,7 +5,6 @@ import {
   AvailabilityCategory,
   BookCategoryOptionLabels,
   SortCategory,
-  TypeCreatedFromEnum,
   TypeCreatedFromEnumWithALL,
 } from '../../models/book-models';
 
@@ -16,6 +15,7 @@ import {
   styleUrl: './book-search.scss',
 })
 export class BookSearch {
+
   // pas besoin d'injecter de service car on remonte toutes les infos au parent via un event emitter
 
   // va permettre d'écouter les modifs dans la barre de recherche
@@ -50,16 +50,10 @@ export class BookSearch {
     source: E,
     defaultValue: S = 'ALL' as S,
   ): TypeCreatedFromEnumWithALL<E> {
-    return {
-      ALL: defaultValue === 'ALL', // on met ALL à true si c'est bien la default value
-      ...Object.keys(source).reduce(
-        (result: TypeCreatedFromEnum<E>, key: string): TypeCreatedFromEnum<E> => {
-          result[key as keyof E] = (key === defaultValue) as TypeCreatedFromEnum<E>[keyof E]; // on met la clé à true si c'est la default value
-          return result;
-        },
-        {} as TypeCreatedFromEnumWithALL<E>,
-      ),
-    } as TypeCreatedFromEnumWithALL<E>;
+    const entries = Object.fromEntries(
+      Object.keys(source).map((key) => [key, key === defaultValue]),
+    );
+    return { ALL: defaultValue === 'ALL', ...entries } as TypeCreatedFromEnumWithALL<E>;
   }
 
   // -------------------------------- Signals d'origine ------------------------------------
@@ -117,33 +111,17 @@ export class BookSearch {
     filtersSignal.update((filters) => {
       const hasAll = 'ALL' in filters; // ← on détecte dynamiquement si ALL existe
 
+      // CAS 1 : on met à false toutes les autres clés dès lors qu'on a coché ALL
       if (hasAll && targetKey === 'ALL') {
-        // CAS 1 : on met à false toutes les autres clés dès lors qu'on a coché ALL
-        const resetFilters = Object.keys(filters).reduce(
-          (result, key) => {
-            result[key as keyof typeof filters] = false as (typeof filters)[keyof E]; // tous mis à false
-            return result;
-          },
-          {} as typeof filters,
-        );
-        return {
-          ...resetFilters,
-          ALL: true, // ALL seul à true
-        } as typeof filters;
+        return Object.fromEntries(
+          Object.keys(filters).map((key) => [key, key === 'ALL']),
+        ) as typeof filters;
       }
       // CAS 2 : filtres exclusifs (availabilityFilters, sort)
       if (exclusive) {
-        const resetFilters = Object.keys(filters).reduce(
-          (result, key) => {
-            result[key as keyof typeof filters] = false as (typeof filters)[keyof E];
-            return result;
-          },
-          {} as typeof filters,
-        );
         return {
-          ...resetFilters,
-          [targetKey]: true, // uniquement la clé cliquée à true
-          ALL: false,
+          ...Object.fromEntries(Object.keys(filters).map((key) => [key, false])),
+          [targetKey]: true,
         } as typeof filters;
       }
       // CAS 3 : filtres inclusifs (categoryFilters)
