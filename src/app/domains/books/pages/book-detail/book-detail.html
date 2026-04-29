@@ -6,14 +6,15 @@
   <app-review-book [book]="book()"></app-review-book>
 </article>
 
-<!-- TODO : Pour tout ce qu'il y a en dessous :  Afficher que si role != USER -->
-<div class="mx-auto my-6 h-0.5 w-[95%] bg-gray-400"></div>
+@if (isAuthenticated() && currentUser()?.role !== roles.USER) {
+  <div class="mx-auto my-6 h-0.5 w-[95%] bg-gray-400"></div>
 
-<app-create-book-copy-form [bookId]="book().id" />
+  <app-create-book-copy-form [bookId]="book().id" />
 
-<div class="mx-auto my-6 h-0.5 w-[95%] bg-gray-400"></div>
+  <div class="mx-auto my-6 h-0.5 w-[95%] bg-gray-400"></div>
 
-<div class="flex justify-between p-8">
-  <app-button label="Modifier ce livre" (clickAction)="goToEditBook()" />
-  <app-button label="Supprimer ce livre" variant="danger" (clickAction)="deleteBook()" />
-</div>
+  <div class="flex justify-between p-8">
+    <app-button label="Modifier ce livre" (clickAction)="goToEditBook()" />
+    <app-button label="Supprimer ce livre" variant="danger" (clickAction)="deleteBook()" />
+  </div>
+}

@@ -7,16 +7,16 @@ import {
   BookCopyStateOption,
   createBookCopyFormSchema,
   createBookCopyModel,
-} from '../../models/book-copy-form-model';
-import { CreateCopyService } from '../../services/create-copy-service';
+} from '../../../books/models/book-copy-form-model';
+import { CreateCopyService } from '../../../books/services/create-copy-service';
 
 @Component({
-  selector: 'app-create-book-copy-form',
+  selector: 'app-return-book-form',
   imports: [FormField, NgClass, Button],
-  templateUrl: './create-book-copy-form.html',
-  styleUrl: './create-book-copy-form.scss',
+  templateUrl: './return-book-form.html',
+  styleUrl: './return-book-form.scss',
 })
-export class CreateBookCopyForm implements OnInit {
+export class ReturnBookForm implements OnInit {
   private readonly createBookCopyService: CreateCopyService = inject(CreateCopyService);
 
   bookId = input.required<number>();

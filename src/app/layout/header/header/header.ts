@@ -51,11 +51,12 @@ export class Header {
       isAuthenticated: true,
     },
 
-    // TODO : Restreindre la route /dashboard
     { label: 'Tableau de bord', path: '/dashboard', restricted: false, isAuthenticated: false },
 
-    // TODO : Supprimer la route /books/new
+    // TODO : Restreindre la route /books/new si role !== UserRole.USER
     { label: 'Créer un livre', path: '/books/new', restricted: false, isAuthenticated: false },
+     // TODO : Restreindre la route /loans/return si role !== UserRole.USER
+    { label: "Retour d'emprunt", path: '/loans/return', restricted: false, isAuthenticated: false}
   ];
 
   isMenuOpen = signal(false);
