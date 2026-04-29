@@ -3,7 +3,6 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { API_BASE_URL, ApiResponse } from '../../../config/api/api';
 import { BookCopy } from '../../books/models/book-models';
-import { inject, Injectable } from '@angular/core';
 import { BookCopyService } from '../../books/services/book-copy-service';
 import { Loan, LoanDTO, LoanReturnDTO } from '../loan-models';
 
@@ -37,12 +36,6 @@ export class LoanService {
   getAllLoansByUser(userID: number): Observable<ApiResponse<Loan[]>> {
     return this.http.get<ApiResponse<Loan[]>>(
       `${API_BASE_URL}/dashboard/dashboardUserBookReadByUser?userId=` + userID,
-    );
-  }
-
-  getAllOpenLoans(): Observable<ApiResponse<Loan[]>> {
-    return this.http.get<ApiResponse<Loan[]>>(
-      `${API_BASE_URL}/dashboard/dashboardBiblioLoanOngoing`,
     );
   }
 
