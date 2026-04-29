@@ -1,8 +1,9 @@
-import { Component, inject, signal } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { AuthService } from '../../../domains/users/services/auth-service';
-import { NotificationService } from '../../../components/shared/notification/service/notification-service';
-import { SlicePipe, UpperCasePipe } from '@angular/common';
+import {Component, inject, signal} from '@angular/core';
+import {Router, RouterLink, RouterLinkActive} from '@angular/router';
+import {AuthService} from '../../../domains/users/services/auth-service';
+import {NotificationService} from '../../../components/shared/notification/service/notification-service';
+import {SlicePipe, UpperCasePipe} from '@angular/common';
+import {UserRole} from '../../../domains/users/models/user-models';
 
 type HeaderLink = {
   label: string;
@@ -10,6 +11,7 @@ type HeaderLink = {
   exact?: boolean;
   restricted: boolean;
   isAuthenticated: boolean;
+  roles?: UserRole[] | undefined;
 };
 
 @Component({
@@ -43,6 +45,25 @@ export class Header {
       restricted: true,
       isAuthenticated: false,
     },
+
+    { label: 'Tableau de bord', path: '/dashboard', restricted: true, isAuthenticated: true },
+    // TODO : Restreindre la route /books/new si role !== UserRole.USER
+    {
+      label: 'Créer un livre',
+      path: '/books/new',
+      restricted: true,
+      isAuthenticated: true,
+      roles: [UserRole.ADMIN, UserRole.LIBRARIAN],
+    },
+    // TODO : Restreindre la route /loans/return si role !== UserRole.USER
+    {
+      label: "Retour d'emprunt",
+      path: '/loans/return',
+      restricted: true,
+      isAuthenticated: true,
+      roles: [UserRole.ADMIN, UserRole.LIBRARIAN],
+    },
+
     {
       label: 'Se déconnecter',
       path: '/auth/logout',
@@ -50,13 +71,6 @@ export class Header {
       restricted: true,
       isAuthenticated: true,
     },
-
-    { label: 'Tableau de bord', path: '/dashboard', restricted: false, isAuthenticated: false },
-
-    // TODO : Restreindre la route /books/new si role !== UserRole.USER
-    { label: 'Créer un livre', path: '/books/new', restricted: false, isAuthenticated: false },
-     // TODO : Restreindre la route /loans/return si role !== UserRole.USER
-    { label: "Retour d'emprunt", path: '/loans/return', restricted: false, isAuthenticated: false}
   ];
 
   isMenuOpen = signal(false);
@@ -79,4 +93,6 @@ export class Header {
       this.router.navigate(['/']);
     }
   }
+
+  protected readonly UserRole = UserRole;
 }
