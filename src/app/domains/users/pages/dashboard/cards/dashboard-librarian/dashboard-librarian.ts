@@ -1,5 +1,4 @@
-import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
-import { Loan } from '../../../../../loans/loan-models';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { NotificationService } from '../../../../../../components/shared/notification/service/notification-service';
 import { AuthService } from '../../../../services/auth-service';
 import { Book } from '../../../../../books/models/book-models';
@@ -7,7 +6,6 @@ import { LoanService } from '../../../../../loans/services/loan-service';
 import { ApiResponse } from '../../../../../../config/api/api';
 import { BookService } from '../../../../../books/services/book-service';
 import { DashboardService } from '../../services/dashboard-service';
-import { DashboardDTO } from '../../../../models/user-models';
 
 @Component({
   selector: 'app-dashboard-librarian',
