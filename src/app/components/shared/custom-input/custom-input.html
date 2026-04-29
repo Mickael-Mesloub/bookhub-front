@@ -14,7 +14,7 @@
     class="block w-full rounded-lg bg-gray-700 px-3 py-2.5 text-gray-50 shadow-xs placeholder:text-gray-400"
     placeholder="{{ placeholder() }}"
     [value]="value()"
-    (input)="value.set($any($event.target).value)"
+    (input)="value.set($event.target.value)"
     (blur)="touched.set(true)"
     [ngClass]="{
       'border-2 border-red-500': invalid() && (dirty() || touched()),
