@@ -1,5 +1,6 @@
 import { Book } from '../../books/models/book-models';
 import { Loan } from '../../loans/loan-models';
+import { LimitedUserData } from './auth-models';
 
 export enum UserRole {
   USER,
@@ -20,7 +21,13 @@ export interface User {
 
 export interface DashboardDTO {
   bookCount: number;
-  lateLoans: Loan[];
-  openLoans: Loan[];
+  lateLoans: DashboardLoanDTO[];
+  openLoans: DashboardLoanDTO[];
   mostRead: Book[];
+}
+
+export interface DashboardLoanDTO {
+  dateLoaned: Date;
+  bookTitle: string;
+  user: LimitedUserData;
 }

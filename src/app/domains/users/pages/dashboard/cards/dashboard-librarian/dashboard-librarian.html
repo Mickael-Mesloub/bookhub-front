@@ -1,23 +1,23 @@
 <div class="bg-neutral-primary-soft border-default rounded-base block max-w-sm border shadow-xs">
-  <h2>Nombre de livres: {{ dashboardDTO().bookCount }}</h2>
+  <h2>Nombre de livres: {{ dashboardDTO()?.bookCount }}</h2>
   <p></p>
 
   <h2>Emprunts actifs</h2>
   <ul>
-    @for (loan of dashboardDTO().openLoans; track loan.id) {
-      <li>{{ loan.bookCopy.book.title }}</li>
+    @for (activeLoan of dashboardDTO()?.openLoans; track activeLoan) {
+      <li>{{ activeLoan.dateLoaned }} - {{ activeLoan.bookTitle }}</li>
     }
   </ul>
   <h2>Retards</h2>
   <ul>
-    @for (loan of dashboardDTO().lateLoans; track loan.id) {
-      <li>{{ loan.bookCopy.book.title }}</li>
+    @for (lateLoan of dashboardDTO()?.lateLoans; track lateLoan) {
+      <li>{{ lateLoan.dateLoaned }} - {{ lateLoan.bookTitle }} - {{ lateLoan.user.username }}</li>
     }
   </ul>
   <h2>Livres les plus empruntés</h2>
   <ul>
-    @for (loanedBook of dashboardDTO().mostRead; track loanedBook) {
-      <li>zazz{{ loanedBook.id }}</li>
+    @for (loanedBook of dashboardDTO()?.mostRead; track loanedBook) {
+      <li>{{ loanedBook.title }} - {{ loanedBook.author }}</li>
     }
   </ul>
 </div>

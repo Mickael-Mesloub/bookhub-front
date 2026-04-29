@@ -6,6 +6,7 @@ import { LoanService } from '../../../../../loans/services/loan-service';
 import { ApiResponse } from '../../../../../../config/api/api';
 import { BookService } from '../../../../../books/services/book-service';
 import { DashboardService } from '../../services/dashboard-service';
+import { DashboardDTO } from '../../../../models/user-models';
 
 @Component({
   selector: 'app-dashboard-librarian',
@@ -20,7 +21,7 @@ export class DashboardLibrarian implements OnInit {
   loanService: LoanService = inject(LoanService);
   bookService: BookService = inject(BookService);
   notificationService: NotificationService = inject(NotificationService);
-  dashboardDTO = signal<any>({});
+  dashboardDTO = signal<DashboardDTO | null>(null);
   dashboardService: DashboardService = inject(DashboardService);
 
   ngOnInit(): void {
@@ -33,7 +34,7 @@ export class DashboardLibrarian implements OnInit {
       message: 'Nous recherchons les infos pour les bibliothécaires',
     });
     this.dashboardService.getAllInfo().subscribe({
-      next: (response: ApiResponse<Book[]>) => {
+      next: (response: ApiResponse<DashboardDTO>) => {
         this.dashboardDTO.set(response.data);
         // à la fin de l'appel API (success ou error) : fermer écran de chargement
         this.notificationService.closeNotification();
