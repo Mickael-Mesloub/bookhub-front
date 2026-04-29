@@ -1,5 +1,7 @@
 <h2>Notre Catalogue</h2>
 
+<!-- Quand l'événement est reçu, appelle la méthode handleSearch() du composant parent -->
+<!-- $event est le mot-clé Angular qui désigne la valeur passée à .emit() — ici l'objet { search, categories, availability, sort }. -->
 <app-book-search (searchTriggered)="handleSearch($event)" />
 
 @if (bookPage() && bookPage()!.totalElements > bookPage()!.size) {
