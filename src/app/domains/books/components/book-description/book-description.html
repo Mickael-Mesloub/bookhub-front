@@ -1,14 +1,13 @@
 <div >
   <div class="grid grid-cols-1 p-8 gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
-    <div>
+    <div class="max-h-100 max-w-60">
       @if(book().coverUrl){
-      <img class="rounded-t-base" [src]="book().coverUrl" alt="book cover" />
+      <img class="h-full w-full rounded-t-base" [src]="book().coverUrl" alt="book cover" />
       }
       @else{
-      <img class="rounded-t-base" src="images/empty-cover-img.png" alt="no cover available" />
+      <img class="h-full w-full rounded-t-base" src="images/empty-cover-img.png" alt="no cover available" />
       }
     </div>
-    <p>{{ book().coverUrl }}</p>
     <div class="p-6 text-center">
       <p class="text-heading mt-3 mb-6 text-2xl font-semibold tracking-tight text-left">
         Category: {{ book().category.category }}
