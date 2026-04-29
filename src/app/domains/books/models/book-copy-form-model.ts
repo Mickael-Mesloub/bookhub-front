@@ -17,9 +17,9 @@ export function createBookCopyModel(): WritableSignal<BookCopyFormData> {
   });
 }
 
-export function updateBookCopyModel(bookCopy: BookCopy): WritableSignal<BookCopyFormData> {
+export function updateBookCopyModel(bookCopy: BookCopy | undefined): WritableSignal<BookCopyFormData> {
   return signal<BookCopyFormData>({
-    state: bookCopy.state,
+    state: bookCopy?.state ?? BookState.NEW,
   });
 }
 

@@ -5,12 +5,13 @@ import { Button } from '../../../../components/shared/button/button';
 import { NotificationService } from '../../../../components/shared/notification/service/notification-service';
 import { User } from '../../../users/models/user-models';
 import { UserService } from '../../../users/services/user-service';
+import { ReturnBookForm } from '../../components/return-book-form/return-book-form';
 import { Loan } from '../../loan-models';
 import { LoanReturnResolverData } from '../../resolvers/loan-return-resolver';
 
 @Component({
   selector: 'app-loan-return-page',
-  imports: [Button, DatePipe],
+  imports: [DatePipe, ReturnBookForm, Button],
   templateUrl: './loan-return-page.html',
   styleUrl: './loan-return-page.scss',
 })
@@ -19,7 +20,9 @@ export class LoanReturnPage {
   private readonly userService: UserService = inject(UserService);
   private readonly notificationService: NotificationService = inject(NotificationService);
 
-  data: LoanReturnResolverData | undefined = this.route.snapshot.data['data'] as LoanReturnResolverData;
+  data: LoanReturnResolverData | undefined = this.route.snapshot.data[
+    'data'
+  ] as LoanReturnResolverData;
 
   users: Signal<User[]> = computed(() => this.data?.['users'] as User[]);
   loans: Signal<Loan[]> = computed(() => this.data?.['openedLoans'] as Loan[]);
@@ -36,10 +39,7 @@ export class LoanReturnPage {
     this.search.set(search);
   }
 
-  handleClick(): void {
-    console.log(this.users());
-    console.log(this.loans());
-  }
+  handleClick(): void {}
 
   addDays(date: Date, days: number): Date {
     const newDate = new Date(date);

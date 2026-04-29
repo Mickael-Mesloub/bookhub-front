@@ -1,54 +1,60 @@
 <article class="flex flex-col gap-4 p-8">
   <h2>Enregistrer un retour</h2>
 
-  <div>Searchbar - Rechercher un utilisateur</div>
-  <div>
-    <input
-      id="search"
-      type="text"
-      name="search"
-      placeholder="Rechercher un utilisateur..."
-      class="block w-full rounded-lg bg-gray-50 px-3 py-2.5 text-gray-700 shadow-xs placeholder:text-gray-500"
-      #searchField
-      [value]="search()"
-      (input)="handleSearch(searchField.value)"
-    />
+  <div class="md:max-w140 rounded-2xl bg-gray-800/80 p-8 md:p-12">
+    <label class="mb-2 block font-bold" for="search">Rechercher un utilisateur</label>
+    <div>
+      <input
+        id="search"
+        type="text"
+        name="search"
+        placeholder="Rechercher un utilisateur..."
+        class="block w-full rounded-lg bg-gray-50 px-3 py-2.5 text-gray-700 shadow-xs placeholder:text-gray-500"
+        #searchField
+        [value]="search()"
+        (input)="handleSearch(searchField.value)"
+      />
+    </div>
   </div>
-  <p class="mt-8">Utilisateur recherché : {{ userFound()?.firstname }}</p>
 
-  <div>Boucle sur les emprunts de l'utilisateur et afficher une card pour chaque emprunt</div>
+  <div
+    class="grid grid-cols-1 gap-8 p-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+  >
+    @if (loans().length == 0) {
+      <p>Il n'y a aucun emprunt en cours !</p>
+    }
+    @for (loan of loans(); track loan.id) {
+      <div class="flex flex-col gap-6 rounded-md bg-gray-700 p-6">
+        <h3 class="w-full text-gray-50">Emprunt n°{{ loan.id }}</h3>
 
-  @if (loans().length == 0) {
-    <p>Il n'y a aucun emprunt en cours !</p>
-  }
-  @for (loan of loans(); track loan.id) {
-    <div class="flex flex-col gap-6 rounded-md bg-gray-700 p-6">
-      <h3 class="w-full text-gray-50">Emprunt n°{{ loan.id }}</h3>
+        <div class="h-0.5 w-[95%] bg-gray-400"></div>
 
-      <div class="h-0.5 w-[95%] bg-gray-400"></div>
+        @if (addDays(loan.dateLoaned, 14) < today) {
+          <div class="rounded-md bg-amber-700 p-4">
+            <h3 class="text-center text-amber-300 italic">
+              ⚠ La date limite de retour est dépassée.
+            </h3>
+            <p class="block text-center text-amber-300 italic">
+              Des frais de retard seront à régler.
+            </p>
+          </div>
+        }
 
-      @if (addDays(loan.dateLoaned, 14) < today) {
-        <div class="rounded-md bg-amber-700 p-4">
-          <h3 class="text-center text-amber-300 italic">
-            ⚠ La date limite de retour est dépassée.
-          </h3>
-          <p class="block text-center text-amber-300 italic">
-            Des frais de retard seront à régler.
+        <div class="flex flex-col gap-4">
+          <h4 class="text-gray-300">Client : {{ loan.user.firstname }} {{ loan.user.lastname }}</h4>
+          <!-- <h4 class="text-gray-300">Livre emprunté : {{ loan.bookCopy.book.title }}</h4> -->
+          <p>Date d'emprunt : {{ loan.dateLoaned | date: 'dd/MM/yyyy' : '' : 'fr-FR' }}</p>
+          <p>
+            Date limite de retour :
+            {{ addDays(loan.dateLoaned, 14) | date: 'dd/MM/yyyy' : '' : 'fr-FR' }}
           </p>
         </div>
-      }
 
-      <div class="flex flex-col gap-4">
-        <h4 class="text-gray-300">Client : {{ loan.user.firstname }} {{ loan.user.lastname }}</h4>
-        <p>Date d'emprunt : {{ loan.dateLoaned | date: 'dd/MM/yyyy' : '' : 'fr-FR' }}</p>
-        <p>
-          Date limite de retour :
-          {{ addDays(loan.dateLoaned, 14) | date: 'dd/MM/yyyy' : '' : 'fr-FR' }}
-        </p>
+        <div class="h-0.5 w-[95%] bg-gray-400"></div>
+
+        <app-return-book-form [data]="loan" />
       </div>
-    </div>
-  }
-
-  <div>Si 0 emprunts, afficher un message Cet utilisateur n'a pas d'emprunts en cours</div>
-  <app-button label="Enregistrer" (clickAction)="handleClick()" />
+    }
+  </div>
+  <!-- <app-button label="Enregistrer" (clickAction)="handleClick()" /> -->
 </article>
