@@ -1,0 +1,36 @@
+<article class="p-8 pt-4">
+  <form class="flex flex-col gap-6">
+    <h2>Ajouter un exemplaire de ce livre</h2>
+
+    <!------- BOOK STATE ------->
+    <div class="flex flex-col gap-2">
+      <label for="state" class="font-bold"
+        >État de l'exemplaire
+        <span class="text-red-400">&#42;</span>
+      </label>
+      <select
+        [formField]="form.state"
+        id="state"
+        class="block w-full rounded-lg bg-gray-700 p-3.5 text-base text-gray-50 shadow-xs placeholder:text-gray-400 focus:border-gray-50 focus:ring-gray-50"
+        [ngClass]="{
+          'border-2 border-red-500':
+            form.state().invalid() && (form.state().dirty() || form.state().touched()),
+          'border-2 border-green-700': !form.state().invalid() && form.state().dirty(),
+        }"
+      >
+        <option disabled selected value="">Choisissez un état</option>
+        @for (c of stateOptions; track c.key) {
+          <option [value]="c.value">{{ c.key }}</option>
+        }
+      </select>
+      @if (form.state().touched() && form.state().invalid()) {
+        <ul>
+          @for (error of form.state().errors(); track error.kind) {
+            <li class="pl-2 text-sm text-red-400">{{ error.message }}</li>
+          }
+        </ul>
+      }
+    </div>
+    <app-button label="Créer la copie" (clickAction)="onSubmit()" [disabled]="form().invalid()" />
+  </form>
+</article>

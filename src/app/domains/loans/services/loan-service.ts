@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { API_BASE_URL, ApiResponse } from '../../../config/api/api';
 import { BookCopy } from '../../books/models/book-models';
 import { BookCopyService } from '../../books/services/book-copy-service';
-import { Loan, LoanDTO } from '../loan-models';
+import { Loan, LoanDTO, LoanReturnDTO } from '../loan-models';
 
 @Injectable({
   providedIn: 'root',
@@ -25,5 +25,9 @@ export class LoanService {
     return this.http.get<ApiResponse<Loan[]>>(
       `${API_BASE_URL}/dashboard/dashboardBiblioLoanOngoing`,
     );
+  }
+
+  returnBook(loanReturnDTO: LoanReturnDTO):  Observable<ApiResponse<Loan>> {
+    return this.http.post<ApiResponse<Loan>>(`${API_BASE_URL}/loans/return`, loanReturnDTO);
   }
 }

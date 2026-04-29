@@ -19,13 +19,10 @@ export class LoanReturnPage {
   private readonly userService: UserService = inject(UserService);
   private readonly notificationService: NotificationService = inject(NotificationService);
 
-  data: LoanReturnResolverData | undefined = this.route.snapshot.data[
-    'data'
-  ] as LoanReturnResolverData;
+  data: LoanReturnResolverData | undefined = this.route.snapshot.data['data'] as LoanReturnResolverData;
 
   users: Signal<User[]> = computed(() => this.data?.['users'] as User[]);
   loans: Signal<Loan[]> = computed(() => this.data?.['openedLoans'] as Loan[]);
-  selectedLoanIds: number[] = [];
 
   today: Date = new Date();
 
@@ -53,7 +50,7 @@ export class LoanReturnPage {
   // TODO :
   // ✅ Récupérer toutes les loans en cours
   // les afficher dans un tableau ou une liste paginée ?
-  // Récupérer tous les users
+  // ✅ Récupérer tous les users
   // Lorsqu'on commence à taper un nom d'utilisateur, filtrer sur les users pour récupérer celui dont le nom ou prenom ou email ou username like this.search()
   // Afficher que les loans de cet utilisateur
   // Si date du jour > date emprunt + 14 jours => Retard. Afficher message.

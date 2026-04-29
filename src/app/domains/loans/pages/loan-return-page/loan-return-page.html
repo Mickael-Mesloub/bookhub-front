@@ -17,6 +17,10 @@
   <p class="mt-8">Utilisateur recherché : {{ userFound()?.firstname }}</p>
 
   <div>Boucle sur les emprunts de l'utilisateur et afficher une card pour chaque emprunt</div>
+
+  @if (loans().length == 0) {
+    <p>Il n'y a aucun emprunt en cours !</p>
+  }
   @for (loan of loans(); track loan.id) {
     <div class="flex flex-col gap-6 rounded-md bg-gray-700 p-6">
       <h3 class="w-full text-gray-50">Emprunt n°{{ loan.id }}</h3>
@@ -36,9 +40,10 @@
 
       <div class="flex flex-col gap-4">
         <h4 class="text-gray-300">Client : {{ loan.user.firstname }} {{ loan.user.lastname }}</h4>
-        <p>Date d'emprunt : {{ loan.dateLoaned | date: 'medium' : '' : 'fr-FR' }}</p>
+        <p>Date d'emprunt : {{ loan.dateLoaned | date: 'dd/MM/yyyy' : '' : 'fr-FR' }}</p>
         <p>
-          Date limite de retour : {{ addDays(loan.dateLoaned, 14) | date: 'medium' : '' : 'fr-FR' }}
+          Date limite de retour :
+          {{ addDays(loan.dateLoaned, 14) | date: 'dd/MM/yyyy' : '' : 'fr-FR' }}
         </p>
       </div>
     </div>

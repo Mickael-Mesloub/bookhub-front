@@ -13,3 +13,8 @@ export interface LoanDTO {
   username: string;
   isbn: string;
 }
+
+export interface LoanReturnDTO {
+  loan: Loan,
+  bookCopy: BookCopy
+}
