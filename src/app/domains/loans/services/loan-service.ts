@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { API_BASE_URL, ApiResponse } from '../../../config/api/api';
 import { BookCopy } from '../../books/models/book-models';
+import { inject, Injectable } from '@angular/core';
 import { BookCopyService } from '../../books/services/book-copy-service';
 import { Loan, LoanDTO, LoanReturnDTO } from '../loan-models';
 
@@ -19,6 +20,36 @@ export class LoanService {
 
   createLoan(loanDTO: LoanDTO): Observable<ApiResponse<Loan>> {
     return this.http.post<ApiResponse<Loan>>(`${API_BASE_URL}/books/loan`, loanDTO);
+  }
+
+  getAllOpenLoansByUser(userID: number): Observable<ApiResponse<Loan[]>> {
+    return this.http.get<ApiResponse<Loan[]>>(
+      `${API_BASE_URL}/dashboard/dashboardUserLoanOngoing?userId=` + userID,
+    );
+  }
+
+  getAllLateLoansByUser(userID: number): Observable<ApiResponse<Loan[]>> {
+    return this.http.get<ApiResponse<Loan[]>>(
+      `${API_BASE_URL}/dashboard/dashboardUserLoanRetards?userId=` + userID,
+    );
+  }
+
+  getAllLoansByUser(userID: number): Observable<ApiResponse<Loan[]>> {
+    return this.http.get<ApiResponse<Loan[]>>(
+      `${API_BASE_URL}/dashboard/dashboardUserBookReadByUser?userId=` + userID,
+    );
+  }
+
+  getAllOpenLoans(): Observable<ApiResponse<Loan[]>> {
+    return this.http.get<ApiResponse<Loan[]>>(
+      `${API_BASE_URL}/dashboard/dashboardBiblioLoanOngoing`,
+    );
+  }
+
+  getAllLateLoans(): Observable<ApiResponse<Loan[]>> {
+    return this.http.get<ApiResponse<Loan[]>>(
+      `${API_BASE_URL}/dashboard/dashboardBiblioLoanRetards`,
+    );
   }
 
   getAllOpenLoans(): Observable<ApiResponse<Loan[]>> {

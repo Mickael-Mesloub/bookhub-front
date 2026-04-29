@@ -56,9 +56,9 @@ export const BookCategoryOptionLabels: Record<BookCategory, string> = {
   [BookCategory.WAR]: 'Guerre',
 };
 
-export enum AvailabilityCategory{
-  NOW = "Actuellement disponible",
-  RESA = "Disponible sur liste d'attente"
+export enum AvailabilityCategory {
+  NOW = 'Actuellement disponible',
+  RESA = "Disponible sur liste d'attente",
 }
 
 export enum BookState {
@@ -88,14 +88,14 @@ export const BookCopyStateOptionLabels: Record<BookState, string> = {
 // -------------------------------------------------------------------------------------------
 export type TypeCreatedFromEnum<E> = {
   [K in keyof E]: boolean;
-}
+};
 // On ajoute ALL par dessus -> TS interdit de mélanger les clés fixes et un mapped type dans le mm objet
-export type TypeCreatedFromEnumWithALL<E> = { ALL: boolean; } & TypeCreatedFromEnum<E>;
+export type TypeCreatedFromEnumWithALL<E> = { ALL: boolean } & TypeCreatedFromEnum<E>;
 
-export enum SortCategory{
-  TITLE_ATOZ       = "Titre A → Z",
-  TITLE_ZTOA       = "Titre Z → A",
-  BEST_NOTE        = "Mieux notés ↓",
+export enum SortCategory {
+  TITLE_ATOZ = 'Titre A → Z',
+  TITLE_ZTOA = 'Titre Z → A',
+  BEST_NOTE = 'Mieux notés ↓',
   // MOST_RECENT_DATE = "Date de parution récente",
 }
 

@@ -15,7 +15,7 @@ export class NotificationService {
     if (notif.type !== 'loading') {
       this.timeout = setTimeout(() => {
         this.notifSignal.set(null);
-      }, 3000);
+      }, 10000);
     }
     // pour 'loading' → closeNotification() sera appelé manuellement
   }

@@ -29,8 +29,7 @@ export class ReviewService {
 
   createReview(reviewFormData: ReviewFormData): Observable<ApiResponse<Review>> {
     // TODO: faire tout ça avec un token (un jour)
-
-    return this.http.post<ApiResponse<Review>>(`${API_BASE_URL}/books/review`, reviewFormData);
+    return this.http.post<ApiResponse<Review>>(`${API_BASE_URL}/books/reviews`, reviewFormData);
   }
 
   goToLogin() {

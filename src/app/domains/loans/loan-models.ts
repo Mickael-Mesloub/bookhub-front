@@ -1,12 +1,12 @@
 import { BookCopy } from '../books/models/book-models';
-import { User } from '../users/models/user-models';
+import { LimitedUserData } from '../users/models/auth-models';
 
 export interface Loan {
   id: number;
   dateLoaned: Date;
   dateReturned: Date;
   bookCopy: BookCopy;
-  user: User;
+  user: LimitedUserData;
 }
 
 export interface LoanDTO {

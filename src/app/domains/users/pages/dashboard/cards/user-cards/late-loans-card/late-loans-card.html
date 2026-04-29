@@ -1,0 +1,15 @@
+<h2>Mes Emprunts en retard</h2>
+
+@if (lateLoans().length > 0) {
+  <ul>
+    @for (loan of lateLoans(); track loan.id) {
+      <li>
+        {{ loan.dateLoaned | date: 'dd/MM/yyyy' }} - {{ loan.bookCopy.book.title }} -
+        {{ loan.bookCopy.book.author }}
+      </li>
+      <li>ATTENDU DEPUIS LE {{ loan.dateLoaned | date: 'dd/MM/yyyy' }}</li>
+    }
+  </ul>
+} @else {
+  <p>Vous n'avez pas de retards.</p>
+}
