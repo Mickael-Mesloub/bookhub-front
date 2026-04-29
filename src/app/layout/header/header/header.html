@@ -15,21 +15,20 @@
       <!-- Menu desktop -->
       <ul class="hidden md:flex md:items-center md:gap-1">
         @for (link of links; track link.path) {
-          @if (
-            link.restricted === false ||
-            (link.restricted === true && link.isAuthenticated === isAuthenticated())
-          ) {
-            <li>
-              <a
-                [routerLink]="link.path"
-                routerLinkActive="bg-white/10 text-white font-bold"
-                [routerLinkActiveOptions]="{ exact: !!link.exact }"
-                class="block rounded-md px-3 py-2 text-sm text-gray-300 transition hover:bg-white/10 hover:text-white"
-                (click)="link.path === '/auth/logout' ? logout() : null"
-              >
-                {{ link.label }}
-              </a>
-            </li>
+          @if (!link.restricted || (link.restricted && link.isAuthenticated === isAuthenticated())) {
+<!--            @if(link.roles?.length===0 || (!!link.roles?.length && link.roles?.includes(currentUser()?.role))){-->
+              <li>
+                <a
+                  [routerLink]="link.path"
+                  routerLinkActive="bg-white/10 text-white font-bold"
+                  [routerLinkActiveOptions]="{ exact: !!link.exact }"
+                  class="block rounded-md px-3 py-2 text-sm text-gray-300 transition hover:bg-white/10 hover:text-white"
+                  (click)="link.path === '/auth/logout' ? logout() : null"
+                >
+                  {{ link.label }}
+                </a>
+              </li>
+<!--            }-->
           }
         }
       </ul>
