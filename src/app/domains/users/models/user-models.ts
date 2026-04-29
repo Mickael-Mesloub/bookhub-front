@@ -17,14 +17,6 @@ export interface User {
   password: string;
   role: UserRole;
   loans: Loan[];
-  id: number;
-  username: string;
-  email: string;
-  firstname: string;
-  lastname: string;
-  password: string;
-  role: UserRole;
-  loans: Loan[];
 }
 
 export interface DashboardDTO {
