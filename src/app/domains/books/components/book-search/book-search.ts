@@ -35,7 +35,7 @@ export class BookSearch {
         debounceTime(300),
         takeUntilDestroyed(), // gère la désinscription automatiquement au moment de la destruction du composant
       )
-      .subscribe(() => this.onSearch());
+      .subscribe(() => this.onSearch()); // ← 1ERE EMISSION : émet searchTriggered
   }
 
   // gestion du reset du champ de recherche textuel -> clic sur la X
@@ -56,15 +56,17 @@ export class BookSearch {
     targetKey: string,
     exclusive: boolean = false,
   ): void {
+    // maj le signal contenant l'état des filtres : { ALL: false, ACTION: true, COMEDY: true, CRIME: false... }
     this.searchBookService.toggleFiltersAndSorts(filtersSignal, targetKey, exclusive);
-    this.onSearch(); // on lance une requête Http à chaque clic sur un filtre
+    this.onSearch(); // ← 2EME EMISSION : émet searchTriggered : on lance une requête Http à chaque clic sur un filtre
   }
 
   // ---------- ETAPE 2 : emit : on prévient le parent de l'émission de l'evt dans l'enfant --------
   // C'est la porte de sortie du composant — collecte l'état courant de tous les signals et l'envoie au composant parent catalog via l'@Output.
   // émission de l'évènement searchTriggered qui est capté par le parent
+  // Format de l'event envoyé : ex. pour la propriété categories = ['ACTION', 'COMEDY']
 
-  onSearch() {
+  onSearch() { // --> c'est l'appel à la méthode onSearch qui génère l'émission
     this.searchTriggered.emit({
       search: this.search() ?? '',
       categories: this.searchBookService.categories() ?? ['ALL'],
