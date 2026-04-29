@@ -1,0 +1,48 @@
+.card {
+  width: 230px;
+  height: 340px;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: #111;
+  border: none;
+  border-radius: 0.5rem;
+  overflow: hidden;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  transition: transform 0.2s ease;
+
+  margin: 0; // important pour éviter décalage
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+
+  img {
+    width: 100%;
+    height: 85%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .content {
+    height: 15%;
+    display: flex;
+    align-items: center;      // 🔥 centrage vertical
+    justify-content: center;  // 🔥 centrage horizontal
+    padding: 0.25rem;
+    text-align: center;
+  }
+
+  h5 {
+    color: white;
+    font-size: 0.75rem;
+    line-height: 1.1;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
