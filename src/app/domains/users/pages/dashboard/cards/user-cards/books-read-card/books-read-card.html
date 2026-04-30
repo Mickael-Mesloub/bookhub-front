@@ -4,8 +4,8 @@
   <ul>
     @for (loan of allLoans(); track loan.id) {
       <li>
-        {{ loan.dateLoaned | date: 'dd/MM/yyyy' }} - {{ loan.bookCopy.book.title }} -
-        {{ loan.bookCopy.book.author }}
+        {{ loan.dateLoaned | date: 'dd/MM/yyyy' }} - {{ loan.bookcopy.book.title }} -
+        {{ loan.bookcopy.book.author }}
       </li>
     }
   </ul>

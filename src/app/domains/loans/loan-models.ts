@@ -5,7 +5,7 @@ export interface Loan {
   id: number;
   dateLoaned: Date;
   dateReturned: Date;
-  bookCopy: BookCopy;
+  bookcopy: BookCopy;
   user: LimitedUserData;
 }
 
@@ -16,5 +16,5 @@ export interface LoanDTO {
 
 export interface LoanReturnDTO {
   loan: Loan,
-  bookCopy: BookCopy
+  bookcopy: BookCopy
 }

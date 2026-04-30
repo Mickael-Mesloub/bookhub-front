@@ -28,7 +28,7 @@ export class ReturnBookForm {
   stateOptions!: BookCopyStateOption[];
 
   // Model for create book copy form
-  model = signal<WritableSignal<BookCopyFormData>>(updateBookCopyModel(this.loan()?.bookCopy!));
+  model = signal<WritableSignal<BookCopyFormData>>(updateBookCopyModel(this.loan()?.bookcopy!));
 
   // Signal form with model (initial value) and schema (validation)
   form = form<BookCopyFormData>(this.model(), (schema) => {
