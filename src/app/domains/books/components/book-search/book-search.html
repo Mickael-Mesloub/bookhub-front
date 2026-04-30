@@ -2,6 +2,9 @@
 <section class="flex w-full flex-col items-center justify-center">
   <article class="rounded-2xl bg-gray-800/80 p-8 md:max-w140 md:p-12">
     <br>
+
+<!--    PARTIE 1 : LA BARRE DE RECHERCHE TEXTUELLE    -->
+
     <div class="search-bar" style="position: relative; width: 100%;">
       <input
         id="search"
@@ -12,11 +15,9 @@
         [value]="search()"
         (input)="search.set(searchField.value)"
       />
-      <!--        (keydown.enter)="onSearch()"-->
-      <!-- [value]="search()" : Signal → Input  (affichage) / Utile par exemple si tu veux réinitialiser le champ depuis le code -->
-      <!-- (input)="search.set(searchField.value)": Input → Signal (saisie) -->
-      <!-- La touche Entrée ne fonctionne nativement qu'à l'intérieur d'un <form>.
-      Sans formulaire, (keydown.enter) est la solution la plus simple — une seule ligne à ajouter sur l'input ! -->
+      <!-- [value]="search()" pour l'affichage : Signal → DOM  : ici, si l'utilisateur clique sur la croix, çà réinitialise le champ depuis le code -->
+      <!-- (input)="search.set(searchField.value)": pour récupérer la saisie : DOM → Signal -->
+      <!-- #searchField = donne un nom à l'élément HTML input pour pouvoir le manipuler directement dans le template ou le passer en paramètre à une méthode" -->
       @if (search()) {
         <span
           (click)="clearSearch(searchField)"
@@ -25,23 +26,26 @@
         </span>
       }
     </div>
+
+    <!--    PARTIE 2 : LES FILTRES ET TRIS    -->
+
     <div>
       <br>
       <h4>Filtrer par catégorie :</h4>
       <br>
       <div>
-        @for (categ of categoryFiltersList(); track categ.key) {
-          <span class="btn-filter-v2" (click)="toggleFiltersAndSorts(categoryFilters, categ.key)" [class.category-ticked]="categ.value">
-          {{ categ.label }}
-        </span>
+        @for (categ of searchBookService.categoryFiltersList(); track categ.key) {
+          <span class="btn-filter-v2" (click)="toggleFiltersAndSorts(searchBookService.categoryFilters, categ.key)" [class.category-ticked]="categ.value">
+            {{ categ.label }}
+          </span>
         }
       </div>
       <br>
       <h4>Filtrer par disponibilité :</h4>
       <br>
       <div>
-        @for (categ of availabilityFiltersList(); track categ.key) {
-          <span class="btn-filter-v2" (click)="toggleFiltersAndSorts(availabilityFilters, categ.key, true)" [class.category-ticked]="categ.value">
+        @for (categ of searchBookService.availabilityFiltersList(); track categ.key) {
+          <span class="btn-filter-v2" (click)="toggleFiltersAndSorts(searchBookService.availabilityFilters, categ.key, true)" [class.category-ticked]="categ.value">
             {{ categ.label }}
           </span>
         }
@@ -49,9 +53,9 @@
       <br>
       <h4>Trier par :</h4>
       <br>
-      @for (categ of sortList(); track categ.key) {
+      @for (categ of searchBookService.sortList(); track categ.key) {
         @if(categ.key !== "ALL"){
-          <span class="btn-filter-v2" (click)="toggleFiltersAndSorts(sorts, categ.key, true)" [class.category-ticked]="categ.value">
+          <span class="btn-filter-v2" (click)="toggleFiltersAndSorts(searchBookService.sorts, categ.key, true)" [class.category-ticked]="categ.value">
               {{ categ.label }}
           </span>
         }

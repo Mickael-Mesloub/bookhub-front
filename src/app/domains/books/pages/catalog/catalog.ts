@@ -13,7 +13,7 @@ import { ApiResponse } from '../../../../config/api/api';
   templateUrl: './catalog.html',
   styleUrl: './catalog.scss',
 })
-export class Catalog implements OnInit {
+export class Catalog {
   bookService: BookService = inject(BookService);
   notificationService: NotificationService = inject(NotificationService);
 
@@ -30,8 +30,24 @@ export class Catalog implements OnInit {
     sort?: string;
   }>({});
 
-  ngOnInit() {
-    // this.fetchAllBooks(); -- à voir si on peut le suppr ? sinon plusieurs requêtes simultanées
+  // Si undefined → le paramètre n'est pas envoyé dans l'URL → Spring applique sa defaultValue.
+  // Rôle : recevoir les données et appeler fetchAllBooks
+  // Je garde handleSearch => je dois mémoriser les filtres car event n'existe pas au-delà de handleSearch
+  handleSearch(event: {
+    search: string;
+    categories: string[];
+    availability: string;
+    sort: string;
+  }) {
+    // on mémorise les filtres dans notre signal global
+    // event n'existe que le temps de l'appel à handleSearch()
+    this.currentFiltersAndSorts.set({
+      search: event.search,
+      categories: event.categories,
+      availability: event.availability,
+      sort: event.sort,
+    });
+    this.fetchAllBooks(0); // on affiche la 1ère page des résultats de recherche à chaque nouvelle recherche
   }
 
   // Rôle : appeler le service et stocker les résultats
@@ -51,9 +67,9 @@ export class Catalog implements OnInit {
         this.currentFiltersAndSorts().categories,
         this.currentFiltersAndSorts().availability,
       )
-      .pipe
+      // .pipe
       // delay(900) // ← attend au minimum 500ms avant de traiter la réponse (réponse trop rapide en local, pas le temps de voir la modale)
-      ()
+      // ()
       .subscribe({
         next: (response: ApiResponse<PageOfBooks>) => {
           this.bookPage.set(response.data);
@@ -68,7 +84,7 @@ export class Catalog implements OnInit {
       });
   }
 
-  // il faut que le clic sur next / previous page on récupère les filtres en cours => via le signal booPage()
+  // il faut que le clic sur next / previous page on récupère les filtres en cours => via le signal bookPage()
 
   nextPage(): void {
     const page = this.bookPage();
@@ -86,22 +102,4 @@ export class Catalog implements OnInit {
     }
   }
 
-  // Si undefined → le paramètre n'est pas envoyé dans l'URL → Spring applique sa defaultValue.
-  // Rôle : recevoir les données et appeler fetchAllBooks
-  // je garde handleSearch car sinon je dois insérer event dans fetchAllBook et il doit fonctionner sans aussi
-  handleSearch(event: {
-    search: string;
-    categories: string[];
-    availability: string;
-    sort: string;
-  }) {
-    // on mémorise les filtres
-    this.currentFiltersAndSorts.set({
-      search: event.search,
-      categories: event.categories,
-      availability: event.availability,
-      sort: event.sort,
-    });
-    this.fetchAllBooks(0); // on affiche la 1ère page des résultats de recherche à chaque nouvelle recherche
-  }
 }
